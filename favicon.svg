@@ -1,0 +1,15 @@
+<!-- EnvKit app / tray icon (dark) — rounded square + mint gradient mark.
+     Source of truth for build/icon.png and build/icon.ico. -->
+<svg width="256" height="256" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="EnvKit">
+  <defs>
+    <linearGradient id="ek-mint" x1="20" y1="15" x2="45" y2="49" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#2dd4aa" />
+      <stop offset="1" stop-color="#0d9488" />
+    </linearGradient>
+  </defs>
+  <rect x="3" y="3" width="58" height="58" rx="15" fill="#0a0e13" />
+  <g stroke="url(#ek-mint)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M20 15 V49" />
+    <path d="M29 16 L45 32 L29 48" />
+  </g>
+</svg>
