@@ -1,15 +1,6 @@
-<!-- EnvKit app / tray icon (dark) — rounded square + mint gradient mark.
-     Source of truth for build/icon.png and build/icon.ico. -->
-<svg width="256" height="256" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="EnvKit">
-  <defs>
-    <linearGradient id="ek-mint" x1="20" y1="15" x2="45" y2="49" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#2dd4aa" />
-      <stop offset="1" stop-color="#0d9488" />
-    </linearGradient>
-  </defs>
-  <rect x="3" y="3" width="58" height="58" rx="15" fill="#0a0e13" />
-  <g stroke="url(#ek-mint)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M20 15 V49" />
-    <path d="M29 16 L45 32 L29 48" />
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="6 4 384 285" width="384" height="285" fill="none" role="img" aria-label="EnvKit">
+  <path d="M30.17,20.83 Q33.00,18.00 37.00,17.98 L244.00,17.02 Q248.00,17.00 245.51,20.13 L204.49,71.87 Q202.00,75.00 198.00,75.00 L86.00,75.00 Q82.00,75.00 79.88,78.39 L79.12,79.61 Q77.00,83.00 73.00,82.93 L23.00,82.07 Q19.00,82.00 19.08,78.00 L19.92,35.00 Q20.00,31.00 22.83,28.17 Z" fill="#FFFFFF"/>
+  <path d="M19.00,120.00 Q19.00,116.00 23.00,116.00 L171.00,116.00 Q175.00,116.00 172.54,119.15 L152.46,144.85 Q150.00,148.00 152.22,151.33 L165.78,171.67 Q168.00,175.00 164.00,175.00 L86.91,175.00 Q83.00,175.00 80.50,178.00 L80.50,178.00 Q78.00,181.00 74.09,181.00 L23.00,181.00 Q19.00,181.00 19.00,177.00 Z" fill="#FFFFFF"/>
+  <path d="M19.09,223.00 Q19.00,219.00 23.00,219.00 L196.00,219.00 Q200.00,219.00 202.37,222.22 L239.63,272.78 Q242.00,276.00 238.00,276.00 L38.00,276.00 Q34.00,276.00 31.07,273.28 L22.93,265.72 Q20.00,263.00 19.91,259.00 Z" fill="#FFFFFF"/>
+  <path d="M292.11,19.33 Q294.00,17.00 297.00,17.00 L372.00,17.00 Q375.00,17.00 373.10,19.33 L270.90,144.67 Q269.00,147.00 270.87,149.34 L370.13,273.66 Q372.00,276.00 369.00,276.00 L285.00,276.00 Q282.00,276.00 280.11,273.67 L184.89,156.33 Q183.00,154.00 184.89,151.67 Z" fill="#34B895"/>
 </svg>
