@@ -1,0 +1,18 @@
+{
+  "$comment": "Index of EnvKit's mirrored service binaries. The archives themselves are hosted as assets on the 'services' release (GitHub blocks files >100MB in git, so they cannot be committed here). EnvKit downloads from baseUrl with automatic upstream fallback. Regenerate with lib/download-all.mjs / scripts/mirror-services.mjs in the private app repo.",
+  "tag": "services",
+  "baseUrl": "https://github.com/Env-Kit/envkit-releases/releases/download/services",
+  "services": [
+    { "id": "nginx",      "version": "1.26.2",    "file": "nginx-1.26.2.zip",            "size": 2081815,   "sha256": "942638cc31c836fe429fde22e4c46e497f89d3c2bbce46cd2c8800854fd71409" },
+    { "id": "apache",     "version": "2.4.68",    "file": "apache-2.4.68.zip",           "size": 13602524,  "sha256": "eac38a9f8d21b6ba0817cd1576a3d291cc771afd3c6a210d120bdea6f4aa4aeb" },
+    { "id": "php",        "version": "8.5.6",     "file": "php-8.5.6.zip",               "size": 35885849,  "sha256": "e25cc9400a7d176f18074f677ef0159d6b04aecfb255c924d808b7144075092f" },
+    { "id": "mysql",      "version": "10.11.10",  "file": "mysql-10.11.10.zip",          "size": 89946517,  "sha256": "5626478891370011b568e3776ba76d840846c2a08261b14b82de97f0608311cf", "label": "MariaDB 10.11.10" },
+    { "id": "mysql",      "version": "8.0.40",    "file": "mysql-8.0.40.zip",            "size": 243740050, "sha256": "7c3f1c09ba1b4a82df32a8d889533fceaf2692383e386a04ee708a12de66f129", "label": "MySQL 8.0.40" },
+    { "id": "postgres",   "version": "17.2",      "file": "postgres-17.2.zip",           "size": 311277532, "sha256": "115eb69fa92430f162bdda2eced073b60fed538715fb3a19ce0bb8c2d8738d01" },
+    { "id": "mongodb",    "version": "7.0.14",    "file": "mongodb-7.0.14.zip",          "size": 620364514, "sha256": "59aa714af531e2b68ce01fa1be9999435fb9bc2b2002439f3271470113bdf7fe" },
+    { "id": "redis",      "version": "5.0.14.1",  "file": "redis-5.0.14.1.zip",          "size": 12617669,  "sha256": "018ea18a35876383cbb5f4cd0258adfc87747cf9d619bce1cf73a2e36f720ccf" },
+    { "id": "nodejs",     "version": "26.2.0",    "file": "nodejs-26.2.0.zip",           "size": 39038614,  "sha256": "371071a4f7e2c8a5dd280730049c685911feecc59f50ebc488d675dc1087c69c" },
+    { "id": "mailpit",    "version": "1.21.8",    "file": "mailpit-1.21.8.zip",          "size": 8581471,   "sha256": "934dbd469da0f61ec7d1619e2d3c5a8c6179b7beab4a6d1900c3916ee2d547fb" },
+    { "id": "phpmyadmin", "version": "5.2.3",     "file": "phpmyadmin-5.2.3.zip",         "size": 16431330,  "sha256": "2d2e13c735366d318425c78e4ee2cc8fc648d77faba3ddea2cd516e43885733f" }
+  ]
+}
