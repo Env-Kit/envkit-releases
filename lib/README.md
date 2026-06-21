@@ -26,6 +26,7 @@ The app downloads from these same URLs (mirror first, upstream fallback).
 | PHP | 8.5.6 | `php-8.5.6.zip` | 34 MB |
 | MariaDB | 10.11.10 | `mysql-10.11.10.zip` | 86 MB |
 | MySQL | 8.0.40 | `mysql-8.0.40.zip` | 232 MB |
+| MySQL | 8.4.3 (LTS) | `mysql-8.4.3.zip` | 248 MB |
 | PostgreSQL | 17.2 | `postgres-17.2.zip` | 297 MB |
 | MongoDB | 7.0.14 | `mongodb-7.0.14.zip` | 592 MB |
 | Redis | 5.0.14.1 | `redis-5.0.14.1.zip` | 12 MB |

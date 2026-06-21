@@ -8,6 +8,7 @@
     { "id": "php",        "version": "8.5.6",     "file": "php-8.5.6.zip",               "size": 35885849,  "sha256": "e25cc9400a7d176f18074f677ef0159d6b04aecfb255c924d808b7144075092f" },
     { "id": "mysql",      "version": "10.11.10",  "file": "mysql-10.11.10.zip",          "size": 89946517,  "sha256": "5626478891370011b568e3776ba76d840846c2a08261b14b82de97f0608311cf", "label": "MariaDB 10.11.10" },
     { "id": "mysql",      "version": "8.0.40",    "file": "mysql-8.0.40.zip",            "size": 243740050, "sha256": "7c3f1c09ba1b4a82df32a8d889533fceaf2692383e386a04ee708a12de66f129", "label": "MySQL 8.0.40" },
+    { "id": "mysql",      "version": "8.4.3",     "file": "mysql-8.4.3.zip",             "size": 259751071, "sha256": "e401d0420486d91bd14eda7b6b449498007863ca340991e529adff4787352e7e", "label": "MySQL 8.4.3 (LTS)" },
     { "id": "postgres",   "version": "17.2",      "file": "postgres-17.2.zip",           "size": 311277532, "sha256": "115eb69fa92430f162bdda2eced073b60fed538715fb3a19ce0bb8c2d8738d01" },
     { "id": "mongodb",    "version": "7.0.14",    "file": "mongodb-7.0.14.zip",          "size": 620364514, "sha256": "59aa714af531e2b68ce01fa1be9999435fb9bc2b2002439f3271470113bdf7fe" },
     { "id": "redis",      "version": "5.0.14.1",  "file": "redis-5.0.14.1.zip",          "size": 12617669,  "sha256": "018ea18a35876383cbb5f4cd0258adfc87747cf9d619bce1cf73a2e36f720ccf" },
