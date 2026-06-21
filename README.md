@@ -151,9 +151,9 @@ version, EnvKit version, and steps to reproduce.
 
 EnvKit is built and maintained by:
 
+- **Ziad Talaat** — [@zsnakeee](https://github.com/zsnakeee)
 - **Kirlos Osama** — [@ker00sama-dev](https://github.com/ker00sama-dev)
 - **Youssef Yasser** — [@7aWy11](https://github.com/7aWy11)
-- **Ziad Talaat** — [@zsnakeee](https://github.com/zsnakeee)
 
 ## License
 
