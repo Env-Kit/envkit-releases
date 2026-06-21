@@ -29,20 +29,42 @@ installed versions any time from the same dropdown.
 | **Redis** | ✅ | `5.0.14.1` | github.com/tporadowski/redis |
 | **Mailpit** | ✅ | `1.21.8` | github.com/axllent/mailpit |
 | **phpMyAdmin** | ✅ | `5.2.3` | files.phpmyadmin.net |
+| **PHP** | ✅ | `8.4.21`, `8.3.14` | windows.php.net |
 | **Node.js** | ➜ via **nvm** | `22.11.0` | Settings → Node / nvm |
-| **PHP** | ⤵ pick from list | — | windows.php.net (build-specific names) |
-| **PostgreSQL** | ⤵ pick from list | — | EnterpriseDB (build-suffix in URL) |
+| **PostgreSQL** | ⤵ list or manual | — | EnterpriseDB (build-suffix in URL) |
 | **Apache** | ⤵ pick from list | — | ApacheLounge (date-stamped builds) |
 | **Python** | auto-detected | — | system interpreter on PATH |
 
-### Why a few aren't free-form
+PHP works too: the field tries `php-<v>-nts-Win32-vs17-x64.zip` for 8.4+ (vs16 for
+8.0–8.3) and falls back to php.net's `/releases/archives/` for superseded patches.
 
-PHP, PostgreSQL, and Apache name their Windows archives with extra build
-metadata that can't be derived from the version number alone (PHP's
-`-nts-Win32-vs17-x64`, PostgreSQL's `-1` build suffix, Apache's date + VS tag).
-For those, use the dropdown and click **Refresh catalog** to pull the latest
-list. **Node.js** is managed through nvm in **Settings → Node**, where you can
-install any version.
+### Why a couple aren't free-form
+
+PostgreSQL and Apache name their Windows archives with build metadata that can't
+be derived from the version number alone (PostgreSQL's `-1` build suffix, Apache's
+date + VS tag). For those, use the dropdown + **Refresh catalog**, or the **manual
+method** below. **Node.js** is managed through nvm in **Settings → Node**.
+
+## Method 2 — add any version manually (Laragon-style)
+
+Works for **every** service, including PostgreSQL and Apache. Bring your own build
+from anywhere:
+
+1. Download a Windows build of the service (e.g. PHP from windows.php.net,
+   MySQL from dev.mysql.com, PostgreSQL from EnterpriseDB) and **extract** it.
+2. Move the extracted folder into EnvKit's services directory — **one folder per
+   version**, the folder name *is* the version:
+   ```
+   <DataDir>\services\<service>\<version>\
+   ```
+   e.g. `C:\ProgramData\envkit\services\php\8.4.21\` (with `php.exe` inside), or
+   `…\services\mysql\8.4.3\` (with `bin\mysqld.exe`).
+3. Open **Services → <service>** — the version now shows in the dropdown. Select it
+   and click **Switch to <version>**.
+
+EnvKit only counts a folder that contains the service's real binary (it checks for
+`php.exe`, `mysqld.exe`, …), so junk folders are ignored. The exact path to drop
+into is shown as a hint right under the version dropdown in the app.
 
 ## Notes
 
