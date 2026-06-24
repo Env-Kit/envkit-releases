@@ -18,13 +18,13 @@ Windsurf, VS Code, Zed, OpenCode, Gemini CLI) through a built-in MCP server.
 [![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS-0d9488)](#requirements)
 [![Price](https://img.shields.io/badge/price-Free-2563eb)](#install)
 [![Download](https://img.shields.io/badge/download-latest%20release-2dd4aa)](https://github.com/Env-Kit/envkit-releases/releases/latest)
-[![Website](https://img.shields.io/badge/website-env--kit.github.io-2dd4aa)](https://env-kit.github.io/envkit-releases/)
+[![Website](https://img.shields.io/badge/website-envkit.net-2dd4aa)](https://envkit.net/)
 
 </div>
 
 ---
 
-> **This repository is the public home for EnvKit releases & documentation.** Visit the [**website**](https://env-kit.github.io/envkit-releases/) for features, screenshots, and comparisons, or grab the
+> **This repository is the public home for EnvKit releases & documentation.** Visit the [**website**](https://envkit.net/) for features, screenshots, and comparisons, or grab the
 > installer from the [**Releases**](https://github.com/Env-Kit/envkit-releases/releases/latest)
 > page. The application source is maintained privately.
 
@@ -180,6 +180,8 @@ by default, and only works while EnvKit is running.
 Found a bug or have a feature request?
 [Open an issue](https://github.com/Env-Kit/envkit/issues). Please include your OS and
 version, EnvKit version, and steps to reproduce.
+
+For anything else, reach us at [info@envkit.net](mailto:info@envkit.net).
 
 ## Team
 
