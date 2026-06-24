@@ -11,7 +11,7 @@
 EnvKit is a desktop app that runs your entire local web-development stack — nginx **or**
 Apache, multiple PHP versions, MySQL/MariaDB, PostgreSQL, Redis, MongoDB, Mailpit, Node.js,
 Python, phpMyAdmin, trusted `.test` HTTPS, and PATH sync — from one modern tray app. Build
-Laravel, WordPress, PHP, and Node/React/Next.js sites locally with one-click services and
+Laravel, WordPress, PHP, and Node/React/Next.js/Angular sites locally with one-click services and
 trusted local SSL. It can even be **driven by an AI assistant** (Claude Code / Desktop, Cursor,
 Windsurf, VS Code, Zed, OpenCode, Gemini CLI) through a built-in MCP server.
 
@@ -30,6 +30,8 @@ Windsurf, VS Code, Zed, OpenCode, Gemini CLI) through a built-in MCP server.
 
 ## What's new
 
+- **Angular support** — Angular projects are auto-detected and served at trusted `.test`
+  HTTPS with live reload, joining Next.js, React/Vite, and any Node/Express app.
 - **macOS support** — EnvKit now ships a signed app for **Apple Silicon (arm64)** and
   **Intel (x64)** Macs, with the same one-click stack, `.test` HTTPS, and AI/MCP control.
 - **MySQL 8** — install Oracle MySQL 8 side-by-side with MariaDB; each version lives in its
@@ -113,7 +115,8 @@ Upgrading from a previous version? Your data directory, certificates, and settin
   installers.
 - **Custom versions** — install an arbitrary typed version of MySQL/MariaDB, nginx, Node.js,
   MongoDB, or Redis.
-- **Node / React / Next.js dev sites** reverse-proxied at `.test` HTTPS with **hot-reload**.
+- **Node / React / Next.js / Angular / Vite dev sites** reverse-proxied at `.test` HTTPS with
+  **hot-reload**, plus a **live dev-server output** viewer.
 - **Laravel Reverb (WebSockets)** — one-click install, supervise, and proxy per site.
 - **Import from Laragon** — projects **and** databases (incl. MySQL → MariaDB transfer).
 - **Diagnose & self-heal services** — find port conflicts / stale PIDs / bad configs and
@@ -147,7 +150,7 @@ A best-effort snapshot (mid-2026) against other popular local PHP stacks.
 | DB web admin UIs (Postgres/Mongo) | ✅ | ❌ | ❌ | ❌ | ❌ |
 | Mail catcher (Mailpit) | ✅ | 💲 Pro | ❌ | ❌ | 🟡 Mercury |
 | Node.js | ✅ | 🟡 | ✅ | ❌ | ❌ |
-| Node/React/Next.js dev sites | ✅ | 🟡 | 🟡 | ❌ | ❌ |
+| Node / React / Next.js / Angular dev sites | ✅ | 🟡 | 🟡 | ❌ | ❌ |
 | Laravel Reverb (WebSockets) | ✅ | 🟡 | ❌ | ❌ | ❌ |
 | nvm + per-project `.nvmrc` | ✅ | ❌ | ❌ | ❌ | ❌ |
 | Python | ✅ | ❌ | 🟡 | ❌ | ❌ |
