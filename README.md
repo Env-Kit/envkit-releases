@@ -32,8 +32,8 @@ Windsurf, VS Code, Zed, OpenCode, Gemini CLI) through a built-in MCP server.
 
 - **Angular support** — Angular projects are auto-detected and served at trusted `.test`
   HTTPS with live reload, joining Next.js, React/Vite, and any Node/Express app.
-- **macOS support** — EnvKit now ships a signed app for **Apple Silicon (arm64)** and
-  **Intel (x64)** Macs, with the same one-click stack, `.test` HTTPS, and AI/MCP control.
+- **macOS support** — EnvKit now ships a signed app for **Apple Silicon (arm64)** Macs,
+  with the same one-click stack, `.test` HTTPS, and AI/MCP control.
 - **MySQL 8** — install Oracle MySQL 8 side-by-side with MariaDB; each version lives in its
   own directory.
 - **Custom versions** — type any version of MySQL/MariaDB, nginx, Node.js, MongoDB, or Redis
@@ -51,17 +51,24 @@ Download the latest **`EnvKit-Setup-x.y.z.exe`** from the
 [releases page](https://github.com/Env-Kit/envkit-releases/releases/latest) and run it.
 (SmartScreen may warn on first run — **More info → Run anyway**; EnvKit is self-signed.)
 
-### macOS
+### macOS (Apple Silicon)
 
-Download the matching DMG for your Mac from the
-[releases page](https://github.com/Env-Kit/envkit-releases/releases/latest):
+One-line install (downloads the latest release, strips the Gatekeeper quarantine, opens it):
 
-- **Apple Silicon (M1/M2/M3/M4):** `EnvKit-x.y.z-arm64.dmg`
-- **Intel:** `EnvKit-x.y.z-x64.dmg`
+```bash
+curl -fsSL https://raw.githubusercontent.com/Env-Kit/envkit-releases/main/install.sh | bash
+```
 
-Open the DMG and drag **EnvKit** to Applications. On first launch, **right-click the app →
-Open** (or run `xattr -dr com.apple.quarantine /Applications/EnvKit.app`) to get past
-Gatekeeper — the app is Developer-ID signed; notarization is on the way.
+Run the same command again any time to update. To uninstall: add `-s -- --uninstall`.
+
+Or download **`EnvKit-x.y.z-arm64.dmg`** manually from the
+[releases page](https://github.com/Env-Kit/envkit-releases/releases/latest), open it, and
+drag **EnvKit** to Applications. On first launch, **right-click the app → Open** (or run
+`xattr -dr com.apple.quarantine /Applications/EnvKit.app`) to get past Gatekeeper — the app
+is Developer-ID signed but not yet notarized (notarization is pending on Apple's side; we'll
+switch it on as soon as it's available, no action needed on your end).
+
+EnvKit no longer supports Intel Macs — Apple Silicon (M-series) only.
 
 EnvKit **auto-updates** on both platforms: once installed, it checks GitHub for new releases
 and installs them in place (Settings → Updates lets you check/download manually). On first
@@ -75,7 +82,7 @@ Upgrading from a previous version? Your data directory, certificates, and settin
 ## Requirements
 
 - Windows 10 / 11, or
-- macOS 12 Monterey or later (Apple Silicon or Intel)
+- macOS 12 Monterey or later (Apple Silicon only)
 
 ## Screenshots
 
@@ -105,8 +112,7 @@ Upgrading from a previous version? Your data directory, certificates, and settin
 
 ## Highlights
 
-- **Windows _and_ macOS** — one app, the same stack on both (signed builds for Apple Silicon
-  + Intel).
+- **Windows _and_ macOS** — one app, the same stack on both (signed build for Apple Silicon).
 - **nginx _or_ Apache**, switchable in Settings — PHP via FastCGI on both.
 - **Trusted `.test` HTTPS** for every site via an auto-installed local CA.
 - **Multiple PHP versions** with **per-site isolation** and **Xdebug on-demand**.
