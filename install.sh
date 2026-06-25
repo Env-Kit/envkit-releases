@@ -106,7 +106,11 @@ cmd_install() {
   local asset="EnvKit-${version}-arm64.zip"
   local url="https://github.com/${REPO}/releases/download/v${version}/${asset}"
   local tmp; tmp="$(mktemp -d)"
-  trap 'rm -rf "$tmp"' EXIT
+  # Double-quoted so $tmp expands NOW (while still in scope) into a literal
+  # path baked into the trap command — a single-quoted trap defers the lookup
+  # to EXIT time, by which point this function (and its `local tmp`) has
+  # already returned, so $tmp is unset under `set -u` ("unbound variable").
+  trap "rm -rf '$tmp'" EXIT
 
   info "Downloading ${asset} ..."
   fetch "$url" "${tmp}/${asset}" || die "Download failed: ${url}"
