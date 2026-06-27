@@ -53,7 +53,7 @@ Download the latest **`EnvKit-Setup-x.y.z.exe`** from the
 
 ### macOS (Apple Silicon)
 
-One-line install (downloads the latest release, strips the Gatekeeper quarantine, opens it):
+One-line install (downloads the latest macOS build, strips the Gatekeeper quarantine, opens it):
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/Env-Kit/envkit-releases/main/install.sh | bash
@@ -61,8 +61,13 @@ curl -fsSL https://raw.githubusercontent.com/Env-Kit/envkit-releases/main/instal
 
 Run the same command again any time to update. To uninstall: add `-s -- --uninstall`.
 
+> The installer always fetches the newest release that ships a macOS build. Windows and
+> macOS are released independently, so the very latest tag is sometimes Windows-only — the
+> script (and the in-app updater) skip past it to the latest Mac build automatically.
+
 Or download **`EnvKit-x.y.z-arm64.dmg`** manually from the
-[releases page](https://github.com/Env-Kit/envkit-releases/releases/latest), open it, and
+[releases page](https://github.com/Env-Kit/envkit-releases/releases) (pick the newest release
+that lists an `-arm64.dmg` asset), open it, and
 drag **EnvKit** to Applications. On first launch, **right-click the app → Open** (or run
 `xattr -dr com.apple.quarantine /Applications/EnvKit.app`) to get past Gatekeeper — the app
 is Developer-ID signed but not yet notarized (notarization is pending on Apple's side; we'll

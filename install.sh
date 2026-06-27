@@ -81,6 +81,25 @@ latest_version() {
   echo "$location" | sed -E 's|.*/releases/tag/v?([^[:space:]]+).*|\1|' | tr -d '\r'
 }
 
+# ── Newest macOS arm64 asset, even when /releases/latest is a Windows-only build ──
+# We cut Windows and macOS releases independently — a Windows-only release becomes
+# /releases/latest with NO mac zip, so resolving the download from there 404s for
+# Mac users. Instead, ask the API for the releases list (newest first) and take the
+# first EnvKit-<ver>-arm64.zip we see. Mirrors the app's prepareFeedForPlatform().
+# Drafts are hidden from the unauthenticated API; prereleases (betas) are included.
+latest_mac_zip_url() {
+  local api="https://api.github.com/repos/${REPO}/releases?per_page=30" json
+  case "$(_dl)" in
+    curl) json="$(curl -fsSL -H 'User-Agent: envkit-installer' -H 'Accept: application/vnd.github+json' "$api" 2>/dev/null || true)" ;;
+    wget) json="$(wget -qO- --header 'User-Agent: envkit-installer' --header 'Accept: application/vnd.github+json' "$api" 2>/dev/null || true)" ;;
+  esac
+  [ -n "$json" ] || return 0
+  echo "$json" \
+    | grep -oE '"browser_download_url"[[:space:]]*:[[:space:]]*"[^"]*EnvKit-[^"]*-arm64\.zip"' \
+    | sed -E 's/.*"(https[^"]+)"$/\1/' \
+    | head -n1 | tr -d '\r'
+}
+
 installed_version() {
   local plist="${APP_PATH}/Contents/Info.plist"
   [ -f "$plist" ] || { echo ""; return; }
@@ -92,8 +111,21 @@ cmd_install() {
   header "Installing EnvKit"
   require_macos_arm64
 
-  local version; version="$(latest_version)"
-  [ -n "$version" ] || die "Could not resolve the latest release at https://github.com/${REPO}/releases/latest"
+  # Prefer the newest release that actually ships a mac arm64 zip (Windows-only
+  # releases don't), and derive the version from that asset. Fall back to the
+  # /releases/latest tag only if the API is unreachable (rate-limited/offline).
+  local url asset version
+  url="$(latest_mac_zip_url)"
+  if [ -n "$url" ]; then
+    asset="${url##*/}"                                              # EnvKit-<ver>-arm64.zip
+    version="$(echo "$asset" | sed -E 's/^EnvKit-(.+)-arm64\.zip$/\1/')"
+  else
+    warn "Couldn't query the releases API; falling back to /releases/latest."
+    version="$(latest_version)"
+    [ -n "$version" ] || die "Could not resolve a macOS release. Check https://github.com/${REPO}/releases"
+    asset="EnvKit-${version}-arm64.zip"
+    url="https://github.com/${REPO}/releases/download/v${version}/${asset}"
+  fi
 
   local current; current="$(installed_version)"
   if [ -n "$current" ] && [ "$current" = "$version" ]; then
@@ -103,8 +135,6 @@ cmd_install() {
 
   # electron-builder emits EnvKit-<ver>-arm64.zip (what the auto-updater uses); the
   # zip extracts straight to EnvKit.app with no hdiutil mounting.
-  local asset="EnvKit-${version}-arm64.zip"
-  local url="https://github.com/${REPO}/releases/download/v${version}/${asset}"
   local tmp; tmp="$(mktemp -d)"
   # Double-quoted so $tmp expands NOW (while still in scope) into a literal
   # path baked into the trap command — a single-quoted trap defers the lookup
