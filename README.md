@@ -30,14 +30,22 @@ Windsurf, VS Code, Zed, OpenCode, Gemini CLI) through a built-in MCP server.
 
 ## What's new
 
+- **Per-project Git panel** — each site has a full Git tab: staged/unstaged changes with
+  status colours, stage/unstage/discard, commit, branch switch + create, fetch/pull/push with
+  ahead/behind counts, and recent history (click a hash to copy).
+- **More PostgreSQL versions + custom install** — pick from more Postgres releases, or type any
+  version and EnvKit installs it.
+- **Broader AI/MCP control** — assistants can now drive far more of the app: create sites, run
+  Git actions, manage databases and cron jobs, install services, and change settings.
+- **Latest bundled tools** — Git 2.55, GitHub CLI 2.95, and Python 3.12.10.
 - **Angular support** — Angular projects are auto-detected and served at trusted `.test`
   HTTPS with live reload, joining Next.js, React/Vite, and any Node/Express app.
 - **macOS support** — EnvKit now ships a signed app for **Apple Silicon (arm64)** Macs,
   with the same one-click stack, `.test` HTTPS, and AI/MCP control.
 - **MySQL 8** — install Oracle MySQL 8 side-by-side with MariaDB; each version lives in its
   own directory.
-- **Custom versions** — type any version of MySQL/MariaDB, nginx, Node.js, MongoDB, or Redis
-  and EnvKit installs it for you.
+- **Custom versions** — type any version of MySQL/MariaDB, nginx, Node.js, MongoDB, Redis,
+  PostgreSQL, or Python and EnvKit installs it for you.
 - **Self-healing & resilient downloads** — service archives are mirrored on GitHub (no more
   broken installs when an upstream moves), and a corrupt services manifest repairs itself.
 - **Faster, cancellable installs** — non-blocking extraction (no UI freeze) and a **Stop**
@@ -125,7 +133,9 @@ Upgrading from a previous version? Your data directory, certificates, and settin
   **MongoDB**, **Mailpit**, Node.js, **Python**, phpMyAdmin, plus Composer/Git/gh/nvm/ngrok/Cmder
   installers.
 - **Custom versions** — install an arbitrary typed version of MySQL/MariaDB, nginx, Node.js,
-  MongoDB, or Redis.
+  MongoDB, Redis, PostgreSQL, or Python.
+- **Per-project Git** — a built-in Git panel per site: stage/commit, branches, fetch/pull/push,
+  and history, with bundled Git + GitHub CLI.
 - **Node / React / Next.js / Angular / Vite dev sites** reverse-proxied at `.test` HTTPS with
   **hot-reload**, plus a **live dev-server output** viewer.
 - **Laravel Reverb (WebSockets)** — one-click install, supervise, and proxy per site.
@@ -166,6 +176,7 @@ A best-effort snapshot (mid-2026) against other popular local PHP stacks.
 | nvm + per-project `.nvmrc` | ✅ | ❌ | ❌ | ❌ | ❌ |
 | Python | ✅ | ❌ | 🟡 | ❌ | ❌ |
 | Composer / Laravel scaffolding | ✅ | ✅ | ✅ | ❌ | ❌ |
+| Built-in Git panel (stage / commit / branches) | ✅ | ❌ | 🟡 | ❌ | ❌ |
 | Light / dark UI | ✅ | ✅ | 🟡 | ❌ | ❌ |
 | Multi-language UI (+ RTL) | ✅ | ❌ | 🟡 | ❌ | ❌ |
 | Import from Laragon (projects **+ databases**) | ✅ | ❌ | — | ❌ | ❌ |
