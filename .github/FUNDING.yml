@@ -1,0 +1,5 @@
+# EnvKit — support the project.
+# Sponsorships fund a code-signing (EV/OV) certificate, which builds publisher
+# reputation and removes the Windows SmartScreen / antivirus "unrecognized app"
+# warnings (see issues #25 and #43).
+github: [Env-Kit]

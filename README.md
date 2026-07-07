@@ -208,6 +208,12 @@ version, EnvKit version, and steps to reproduce.
 
 For anything else, reach us at [info@envkit.net](mailto:info@envkit.net).
 
+## Support the project
+
+EnvKit is free. If it saves you time, you can help fund a code-signing certificate —
+the thing that removes the Windows SmartScreen / antivirus "unrecognized app" warnings
+on first install. [Sponsor EnvKit on GitHub](https://github.com/sponsors/Env-Kit).
+
 ## Team
 
 EnvKit is built and maintained by:
