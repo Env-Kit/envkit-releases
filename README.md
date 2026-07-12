@@ -97,6 +97,36 @@ Upgrading from a previous version? Your data directory, certificates, and settin
 - Windows 10 / 11, or
 - macOS 12 Monterey or later (Apple Silicon only)
 
+## What EnvKit changes on your system
+
+EnvKit is designed to run side-by-side with whatever you already have installed. For
+developers who want the full picture, this is everything it touches (Windows):
+
+- **Windows Defender exclusions.** The installer excludes EnvKit's install folder
+  (real-time scanning otherwise locks the freshly installed exe and the first launch
+  fails), and the app excludes its own `services` and `tools` folders plus the bundled
+  service executables (php, nginx, mysqld, …) so scanning doesn't quarantine or slow
+  them. The installer's exclusion is removed on uninstall. Only Microsoft Defender is
+  affected; scoped to EnvKit's own folders.
+- **Trusted certificates.** Two certificates go into the Trusted Root store: EnvKit's
+  code-signing certificate (so auto-updates verify — there is no paid EV/OV cert yet),
+  and the local CA that signs the HTTPS certificates for your `.test` sites. The
+  code-signing cert is removed on uninstall.
+- **hosts file.** One `127.0.0.1 <site>.test` entry per site, removed when the site is
+  removed.
+- **PATH.** The bundled tools (php, composer, node, git, mysql, redis-cli, …) are added
+  to your user PATH (optionally machine PATH) and kept in sync. Settings → Environment
+  shows the exact folders and lets you re-sync or opt out.
+- **No Windows services, no firewall rules, no drivers.** Services (nginx, PHP, MySQL,
+  …) run as child processes of the app: they start when EnvKit starts and stop when it
+  quits.
+
+Existing software (PHP, Node, PostgreSQL, nginx installed on your machine) is never
+replaced, modified, or uninstalled — EnvKit installs its own copies inside its data
+directory and runs them side-by-side. Processes belonging to installed Windows services
+or Program Files software are left running; only portable dev stacks that hold the same
+ports/locks (Laragon, XAMPP, WAMP) are stopped during an install.
+
 ## Screenshots
 
 **Dashboard**
