@@ -13,7 +13,7 @@ Apache, multiple PHP versions, MySQL/MariaDB, PostgreSQL, Redis, MongoDB, Mailpi
 Python, phpMyAdmin, trusted `.test` HTTPS, and PATH sync — from one modern tray app. Build
 Laravel, WordPress, PHP, and Node/React/Next.js/Angular sites locally with one-click services and
 trusted local SSL. It can even be **driven by an AI assistant** (Claude Code / Desktop, Cursor,
-Windsurf, VS Code, Zed, OpenCode, Gemini CLI) through a built-in MCP server.
+Windsurf, VS Code, Zed, OpenCode, Gemini CLI, PhpStorm/JetBrains) through a built-in MCP server.
 
 [![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS-0d9488)](#requirements)
 [![Price](https://img.shields.io/badge/price-Free-2563eb)](#install)
@@ -30,6 +30,12 @@ Windsurf, VS Code, Zed, OpenCode, Gemini CLI) through a built-in MCP server.
 
 ## What's new
 
+- **A wave of community-reported fixes (0.32.0-beta.8)** — removed sites stay removed,
+  EnvKit never stops a PostgreSQL/MySQL you installed yourself, "Move data directory"
+  works across drives with progress, shared (ngrok/Cloudflare) URLs no longer redirect
+  back to `.test`, HeidiSQL opens properly, and install buttons show accurate progress.
+- **PhpStorm / JetBrains AI support** — "Set up detected clients" now configures Junie
+  automatically, so JetBrains IDEs can drive your stack over MCP like the other clients.
 - **Per-project Git panel** — each site has a full Git tab: staged/unstaged changes with
   status colours, stage/unstage/discard, commit, branch switch + create, fetch/pull/push with
   ahead/behind counts, and recent history (click a hash to copy).
@@ -173,8 +179,8 @@ ports/locks (Laragon, XAMPP, WAMP) are stopped during an install.
 - **Diagnose & self-heal services** — find port conflicts / stale PIDs / bad configs and
   repair them.
 - **AI control via MCP** — let Claude Code/Desktop, Cursor, Windsurf, VS Code, Zed, OpenCode,
-  or Gemini CLI operate your stack: add/remove sites, manage MySQL databases, start/stop and
-  diagnose services.
+  Gemini CLI, or PhpStorm/JetBrains (via Junie) operate your stack: add/remove sites, manage
+  MySQL databases, start/stop and diagnose services.
 - **Clean PATH, your way** — sync to the **user** or **system (Machine)** PATH, with stale
   entries pruned and **competing stacks (Laragon/XAMPP/WAMP/MAMP/Herd…) auto-removed** so
   nothing shadows EnvKit's `php`/`mysql`/`nginx`.
@@ -222,8 +228,10 @@ EnvKit ships an MCP server so AI assistants can operate your local stack.
 
 1. Open **Settings → AI** and toggle **Enable MCP server**.
 2. Click **Set up AI clients** — EnvKit registers itself **globally** with Claude Code /
-   Desktop, Cursor, Windsurf, VS Code, Zed, OpenCode, and Gemini CLI, and installs an
-   `envkit` skill. (Or copy the shown URL config into your client's `mcpServers` yourself.)
+   Desktop, Cursor, Windsurf, VS Code, Zed, OpenCode, Gemini CLI, and PhpStorm/JetBrains
+   (via Junie), and installs an `envkit` skill. (Or copy the shown URL config into your
+   client's `mcpServers` yourself — for the JetBrains AI Assistant chat, paste it in
+   Settings → Tools → AI Assistant → Model Context Protocol → Add.)
 3. **Restart your AI client**, then ask things like *"start redis"*, *"diagnose why mysql
    won't start, then repair it"*, or *"list my Laravel sites"*.
 
