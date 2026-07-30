@@ -20,6 +20,8 @@ Windsurf, VS Code, Zed, OpenCode, Gemini CLI, PhpStorm/JetBrains) through a buil
 [![Download](https://img.shields.io/badge/download-latest%20release-2dd4aa)](https://github.com/Env-Kit/envkit-releases/releases/latest)
 [![Website](https://img.shields.io/badge/website-envkit.net-2dd4aa)](https://envkit.net/)
 
+<img src="art/envkit-demo.gif" alt="EnvKit in action — dashboard, sites, and services" width="880" />
+
 </div>
 
 ---
