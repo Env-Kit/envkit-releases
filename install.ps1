@@ -108,8 +108,14 @@ function Invoke-Install {
 
     Write-Info "Running the installer (a UAC prompt will appear) ..."
     # perMachine install needs elevation; -Verb RunAs triggers UAC. /S = silent NSIS.
-    $args = if ($Silent) { '/S' } else { '' }
-    $proc = Start-Process -FilePath $dest -ArgumentList $args -Verb RunAs -PassThru -Wait
+    # /SOURCE (+ an optional /CAMPAIGN from $env:ENVKIT_CAMPAIGN) records where the
+    # install came from; build/installer.nsh writes it for the app's first launch.
+    $installerArgs = @('/SOURCE=script-ps1')
+    if ($Silent) { $installerArgs = @('/S') + $installerArgs }
+    if ($env:ENVKIT_CAMPAIGN -and $env:ENVKIT_CAMPAIGN -cmatch '^[a-z0-9][a-z0-9_-]{0,63}$') {
+        $installerArgs += "/CAMPAIGN=$($env:ENVKIT_CAMPAIGN)"
+    }
+    $proc = Start-Process -FilePath $dest -ArgumentList $installerArgs -Verb RunAs -PassThru -Wait
     if ($proc.ExitCode -ne 0) {
         Die "Installer exited with code $($proc.ExitCode)."
     }
