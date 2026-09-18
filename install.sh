@@ -164,6 +164,16 @@ cmd_install() {
   # first launch (otherwise the user must right-click → Open).
   xattr -dr com.apple.quarantine "$APP_PATH" 2>/dev/null || true
 
+  # Install-source note for the app's first launch, one line `script-sh[,campaign]`
+  # (campaign from $ENVKIT_CAMPAIGN). It goes in the app's data dir — lowercase
+  # `envkit`, not Electron's `EnvKit` userData above. Best-effort: never fails the install.
+  local source_line="script-sh" campaign="${ENVKIT_CAMPAIGN:-}"
+  local app_data="$HOME/Library/Application Support/envkit"
+  if [ -n "$campaign" ] && printf '%s' "$campaign" | grep -Eq '^[a-z0-9][a-z0-9_-]{0,63}$'; then
+    source_line="$source_line,$campaign"
+  fi
+  { mkdir -p "$app_data" && printf '%s\n' "$source_line" > "$app_data/install-source.txt"; } 2>/dev/null || true
+
   success "Installed EnvKit v${version} → ${APP_PATH}"
   info "Launching ..."
   open "$APP_PATH" || true
