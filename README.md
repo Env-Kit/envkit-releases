@@ -19,6 +19,7 @@ Windsurf, VS Code, Zed, OpenCode, Gemini CLI, PhpStorm/JetBrains) through a buil
 [![Price](https://img.shields.io/badge/price-Free-2563eb)](#install)
 [![Download](https://img.shields.io/badge/download-latest%20release-2dd4aa)](https://github.com/Env-Kit/envkit-releases/releases/latest)
 [![Website](https://img.shields.io/badge/website-envkit.net-2dd4aa)](https://envkit.net/)
+[![Review on Trustpilot](https://img.shields.io/badge/review%20us-Trustpilot-00b67a?logo=trustpilot&logoColor=white)](https://www.trustpilot.com/evaluate/envkit.net)
 
 <img src="art/envkit-demo.gif" alt="EnvKit in action — dashboard, sites, and services" width="880" />
 
