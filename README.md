@@ -20,6 +20,7 @@ Windsurf, VS Code, Zed, OpenCode, Gemini CLI, PhpStorm/JetBrains) through a buil
 [![Download](https://img.shields.io/badge/download-latest%20release-2dd4aa)](https://github.com/Env-Kit/envkit-releases/releases/latest)
 [![Website](https://img.shields.io/badge/website-envkit.net-2dd4aa)](https://envkit.net/)
 [![Review on Trustpilot](https://img.shields.io/badge/review%20us-Trustpilot-00b67a?logo=trustpilot&logoColor=white)](https://www.trustpilot.com/evaluate/envkit.net)
+[![Support on Ko-fi](https://img.shields.io/badge/support-Ko--fi-ff5e5b?logo=kofi&logoColor=white)](https://ko-fi.com/envkit)
 
 <img src="art/envkit-demo.gif" alt="EnvKit in action — dashboard, sites, and services" width="880" />
 
@@ -248,6 +249,18 @@ Found a bug or have a feature request?
 version, EnvKit version, and steps to reproduce.
 
 For anything else, reach us at [info@envkit.net](mailto:info@envkit.net).
+
+## Support EnvKit
+
+EnvKit is free. If it saves you time, you can support it on
+[Ko-fi](https://ko-fi.com/envkit). The current goal is $350 for two things:
+
+- a real Windows code-signing certificate, so installing no longer shows
+  "Windows protected your PC" and updates verify on every machine;
+- an Apple Developer membership, so the Mac app can be notarized and opens
+  without a warning.
+
+We post the receipts on [Discord](https://discord.gg/2ArBwMX8pV) once they're bought.
 
 ## Team
 
