@@ -24,7 +24,7 @@ A Laragon, XAMPP and Herd alternative.
 [Docs](https://envkit.net/docs) ·
 [Changelog](https://envkit.net/changelog)
 
-<img src="art/envkit-demo.gif" alt="EnvKit in action: dashboard, sites and services" width="880" />
+<a href="art/envkit-demo.mp4"><img src="art/envkit-demo.webp" alt="EnvKit in action: first-run site, sites, services, databases and the AI (MCP) assistant" width="880" /></a>
 
 </div>
 
@@ -230,16 +230,28 @@ holding your databases.
 
 <table>
   <tr>
+    <td><img src="art/onboarding-first-site.png" alt="First run: your first site" /><p align="center">First run: your first site</p></td>
     <td><img src="art/dashboard.png" alt="Dashboard" /><p align="center">Dashboard</p></td>
+  </tr>
+  <tr>
     <td><img src="art/sites.png" alt="Sites" /><p align="center">Sites</p></td>
+    <td><img src="art/site-detail.png" alt="Site detail" /><p align="center">Site detail</p></td>
   </tr>
   <tr>
     <td><img src="art/services.png" alt="Services" /><p align="center">Services</p></td>
-    <td><img src="art/tools.png" alt="Tools" /><p align="center">Tools</p></td>
+    <td><img src="art/databases.png" alt="Databases" /><p align="center">Databases</p></td>
+  </tr>
+  <tr>
+    <td><img src="art/logs.png" alt="Logs" /><p align="center">Logs</p></td>
+    <td><img src="art/cron.png" alt="Cron" /><p align="center">Cron</p></td>
   </tr>
   <tr>
     <td><img src="art/ai.png" alt="AI (MCP)" /><p align="center">AI (MCP)</p></td>
+    <td><img src="art/tools.png" alt="Tools" /><p align="center">Tools</p></td>
+  </tr>
+  <tr>
     <td><img src="art/settings.png" alt="Settings" /><p align="center">Settings</p></td>
+    <td></td>
   </tr>
 </table>
 
