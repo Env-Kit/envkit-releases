@@ -2,7 +2,7 @@
 
 <img src="brand/envkit-light.svg" alt="EnvKit logo" width="92" />
 
-<img src="brand/envkit-bannner.png" alt="EnvKit — Your local stack, one place." width="880" />
+<img src="brand/envkit-banner.webp" alt="EnvKit — Your local stack, one place." width="880" />
 
 # EnvKit — local development environment for Windows & macOS
 
@@ -32,34 +32,25 @@ Windsurf, VS Code, Zed, OpenCode, Gemini CLI, PhpStorm/JetBrains) through a buil
 > installer from the [**Releases**](https://github.com/Env-Kit/envkit-releases/releases/latest)
 > page. The application source is maintained privately.
 
+EnvKit is free, with no limit on the number of sites and no popup asking you to upgrade.
+Switching from another tool? See how it compares to
+[Laragon](https://envkit.net/laragon-alternative),
+[Herd](https://envkit.net/herd-alternative), and
+[XAMPP](https://envkit.net/xampp-alternative).
+
 ## What's new
 
-- **A wave of community-reported fixes (0.32.0-beta.8)** — removed sites stay removed,
-  EnvKit never stops a PostgreSQL/MySQL you installed yourself, "Move data directory"
-  works across drives with progress, shared (ngrok/Cloudflare) URLs no longer redirect
-  back to `.test`, HeidiSQL opens properly, and install buttons show accurate progress.
-- **PhpStorm / JetBrains AI support** — "Set up detected clients" now configures Junie
-  automatically, so JetBrains IDEs can drive your stack over MCP like the other clients.
-- **Per-project Git panel** — each site has a full Git tab: staged/unstaged changes with
-  status colours, stage/unstage/discard, commit, branch switch + create, fetch/pull/push with
-  ahead/behind counts, and recent history (click a hash to copy).
-- **More PostgreSQL versions + custom install** — pick from more Postgres releases, or type any
-  version and EnvKit installs it.
-- **Broader AI/MCP control** — assistants can now drive far more of the app: create sites, run
-  Git actions, manage databases and cron jobs, install services, and change settings.
-- **Latest bundled tools** — Git 2.55, GitHub CLI 2.95, and Python 3.12.10.
-- **Angular support** — Angular projects are auto-detected and served at trusted `.test`
-  HTTPS with live reload, joining Next.js, React/Vite, and any Node/Express app.
-- **macOS support** — EnvKit now ships a signed app for **Apple Silicon (arm64)** Macs,
-  with the same one-click stack, `.test` HTTPS, and AI/MCP control.
-- **MySQL 8** — install Oracle MySQL 8 side-by-side with MariaDB; each version lives in its
-  own directory.
-- **Custom versions** — type any version of MySQL/MariaDB, nginx, Node.js, MongoDB, Redis,
-  PostgreSQL, or Python and EnvKit installs it for you.
-- **Self-healing & resilient downloads** — service archives are mirrored on GitHub (no more
-  broken installs when an upstream moves), and a corrupt services manifest repairs itself.
-- **Faster, cancellable installs** — non-blocking extraction (no UI freeze) and a **Stop**
-  button on every install.
+In 0.33.0-beta.43 ([full notes](https://github.com/Env-Kit/envkit-releases/releases/latest)):
+
+- Apache starts again when the data folder path has spaces in it, and the update check
+  no longer hangs.
+- The site terminal uses the site's own PHP and Node versions, Cmder included.
+- Live reload can also refresh your other tabs after you save in WordPress admin or a
+  Laravel form.
+- Services → Node.js lists npm, pnpm, Yarn and Bun, and can install or update pnpm and Yarn.
+  Cron has templates for Node and NestJS sites.
+- `envkit.json` can list required PHP extensions and php.ini values, with a per-developer
+  `envkit.local.json` on top. Also: Adminer 6.1.2 and "Show in Finder" on macOS.
 
 ## Install
 
@@ -79,6 +70,12 @@ curl -fsSL https://raw.githubusercontent.com/Env-Kit/envkit-releases/main/instal
 
 Run the same command again any time to update. To uninstall: add `-s -- --uninstall`.
 
+Or with Homebrew:
+
+```bash
+brew install --cask env-kit/tap/envkit
+```
+
 > The installer always fetches the newest release that ships a macOS build. Windows and
 > macOS are released independently, so the very latest tag is sometimes Windows-only — the
 > script (and the in-app updater) skip past it to the latest Mac build automatically.
@@ -86,10 +83,16 @@ Run the same command again any time to update. To uninstall: add `-s -- --uninst
 Or download **`EnvKit-x.y.z-arm64.dmg`** manually from the
 [releases page](https://github.com/Env-Kit/envkit-releases/releases) (pick the newest release
 that lists an `-arm64.dmg` asset), open it, and
-drag **EnvKit** to Applications. On first launch, **right-click the app → Open** (or run
-`xattr -dr com.apple.quarantine /Applications/EnvKit.app`) to get past Gatekeeper — the app
-is Developer-ID signed but not yet notarized (notarization is pending on Apple's side; we'll
-switch it on as soon as it's available, no action needed on your end).
+drag **EnvKit** to Applications. The app is Developer-ID signed but not yet notarized, so
+macOS may block the first launch (right-click → Open no longer works on macOS 15). Any one
+of these gets past it:
+
+- open it once, then go to System Settings → Privacy & Security and click **Open Anyway**;
+- use the `curl` one-liner above, which clears the quarantine for you;
+- run `xattr -dr com.apple.quarantine /Applications/EnvKit.app`.
+
+Notarization is pending on Apple's side; we'll switch it on as soon as it's available, no
+action needed on your end.
 
 EnvKit no longer supports Intel Macs — Apple Silicon (M-series) only.
 
@@ -188,7 +191,8 @@ ports/locks (Laragon, XAMPP, WAMP) are stopped during an install.
 - **Clean PATH, your way** — sync to the **user** or **system (Machine)** PATH, with stale
   entries pruned and **competing stacks (Laragon/XAMPP/WAMP/MAMP/Herd…) auto-removed** so
   nothing shadows EnvKit's `php`/`mysql`/`nginx`.
-- **Light/dark, fully translated (EN + AR, RTL)** native UI in the tray.
+- **Light/dark UI in five languages** — English, العربية, Deutsch, فارسی, and Español, with
+  right-to-left layout where needed. Bahasa Indonesia is coming soon.
 - **Free to use** (proprietary — not open source) with **silent auto-update**.
 
 ## How EnvKit compares
