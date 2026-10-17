@@ -21,6 +21,13 @@ Windsurf, VS Code, Zed, OpenCode, Gemini CLI, PhpStorm/JetBrains) through a buil
 [![Website](https://img.shields.io/badge/website-envkit.net-2dd4aa)](https://envkit.net/)
 [![Review on Trustpilot](https://img.shields.io/badge/review%20us-Trustpilot-00b67a?logo=trustpilot&logoColor=white)](https://www.trustpilot.com/evaluate/envkit.net)
 [![Support on Ko-fi](https://img.shields.io/badge/support-Ko--fi-ff5e5b?logo=kofi&logoColor=white)](https://ko-fi.com/envkit)
+[![Discord](https://img.shields.io/badge/chat-Discord-5865f2?logo=discord&logoColor=white)](https://discord.gg/2ArBwMX8pV)
+
+**[Download for Windows](https://stats.envkit.net/d/win?c=gh-readme)** ·
+**[Download for macOS (Apple Silicon)](https://stats.envkit.net/d/mac?c=gh-readme)** ·
+[All releases](https://github.com/Env-Kit/envkit-releases/releases) ·
+[Docs](https://envkit.net/docs) ·
+[Report a bug](https://github.com/Env-Kit/envkit-releases/issues/new)
 
 <img src="art/envkit-demo.gif" alt="EnvKit in action — dashboard, sites, and services" width="880" />
 
@@ -40,25 +47,33 @@ Switching from another tool? See how it compares to
 
 ## What's new
 
-In 0.33.0-beta.43 ([full notes](https://github.com/Env-Kit/envkit-releases/releases/latest)):
+In 0.33.0-beta.44 ([full notes](https://github.com/Env-Kit/envkit-releases/releases/latest)):
 
-- Apache starts again when the data folder path has spaces in it, and the update check
-  no longer hangs.
-- The site terminal uses the site's own PHP and Node versions, Cmder included.
-- Live reload can also refresh your other tabs after you save in WordPress admin or a
-  Laravel form.
-- Services → Node.js lists npm, pnpm, Yarn and Bun, and can install or update pnpm and Yarn.
-  Cron has templates for Node and NestJS sites.
-- `envkit.json` can list required PHP extensions and php.ini values, with a per-developer
-  `envkit.local.json` on top. Also: Adminer 6.1.2 and "Show in Finder" on macOS.
+- First-run setup now ends with a working site. Pick a starter (a PHP or HTML page, a small
+  Node server, or a new Laravel or Vite app) or link a folder you already have, and EnvKit
+  opens it in your browser over HTTPS. If a port is busy or the certificate isn't trusted,
+  the wizard says so and offers the fix.
+- Bahasa Indonesia, and a first run opens in your system language when it's one of the
+  built-in ones.
+- If another program holds memcached's port or an extra PHP version's port (PhpStorm's
+  Xdebug uses 9003), EnvKit moves to a free port instead of failing.
+- MySQL never re-initializes a data folder that still has your databases in it.
+- Saving memcached settings restarts only memcached, and fewer false error reports are sent.
 
 ## Install
 
 ### Windows
 
-Download the latest **`EnvKit-Setup-x.y.z.exe`** from the
-[releases page](https://github.com/Env-Kit/envkit-releases/releases/latest) and run it.
+[Download the installer](https://stats.envkit.net/d/win?c=gh-readme) (the latest
+**`EnvKit-Setup-x.y.z.exe`** from the
+[releases page](https://github.com/Env-Kit/envkit-releases/releases/latest)) and run it.
 (SmartScreen may warn on first run — **More info → Run anyway**; EnvKit is self-signed.)
+
+Or from PowerShell (downloads and runs the latest installer):
+
+```powershell
+irm https://raw.githubusercontent.com/Env-Kit/envkit-releases/main/install.ps1 | iex
+```
 
 ### macOS (Apple Silicon)
 
@@ -100,7 +115,7 @@ EnvKit **auto-updates** on both platforms: once installed, it checks GitHub for 
 and installs them in place (Settings → Updates lets you check/download manually). On first
 launch a short **onboarding wizard** asks your source — **Load from Laragon** (a guided
 detect → import flow, including databases) or **Start fresh** (pick your stack and install
-the runtimes it needs).
+the runtimes it needs) — and ends with your first site open in the browser over HTTPS.
 
 Upgrading from a previous version? Your data directory, certificates, and settings are
 **migrated automatically** on first launch — nothing to do.
@@ -191,8 +206,8 @@ ports/locks (Laragon, XAMPP, WAMP) are stopped during an install.
 - **Clean PATH, your way** — sync to the **user** or **system (Machine)** PATH, with stale
   entries pruned and **competing stacks (Laragon/XAMPP/WAMP/MAMP/Herd…) auto-removed** so
   nothing shadows EnvKit's `php`/`mysql`/`nginx`.
-- **Light/dark UI in five languages** — English, العربية, Deutsch, فارسی, and Español, with
-  right-to-left layout where needed. Bahasa Indonesia is coming soon.
+- **Light/dark UI in six languages** — English, العربية, Deutsch, فارسی, Español, and
+  Bahasa Indonesia, with right-to-left layout where needed.
 - **Free to use** (proprietary — not open source) with **silent auto-update**.
 
 ## How EnvKit compares
@@ -249,10 +264,16 @@ by default, and only works while EnvKit is running.
 ## Reporting issues
 
 Found a bug or have a feature request?
-[Open an issue](https://github.com/Env-Kit/envkit/issues). Please include your OS and
-version, EnvKit version, and steps to reproduce.
+[Open an issue](https://github.com/Env-Kit/envkit-releases/issues/new) (please search
+[existing issues](https://github.com/Env-Kit/envkit-releases/issues) first). Include:
 
-For anything else, reach us at [info@envkit.net](mailto:info@envkit.net).
+- your OS and version (e.g. Windows 11 23H2, macOS 15.3);
+- the EnvKit version (Settings → Updates);
+- what you did, what you expected, and what happened instead;
+- the relevant log lines if a service won't start (Logs page, or the service's log file).
+
+Questions and quick help: [Discord](https://discord.gg/2ArBwMX8pV). For anything else,
+reach us at [info@envkit.net](mailto:info@envkit.net).
 
 ## Support EnvKit
 
