@@ -1,5 +1,5 @@
 {
- "text": "Paywalled databases.",
+ "text": "MySQL shut down unexpectedly.",
  "voice": "dXtC3XhB9GtPusIpNtQx",
  "model": "eleven_multilingual_v2",
  "settings": {
@@ -12,14 +12,24 @@
  "seed": 2021,
  "words": [
   [
-   "Paywalled",
+   "MySQL",
    0.0,
-   0.43
+   0.441
   ],
   [
-   "databases.",
-   0.453,
-   1.254
+   "shut",
+   0.488,
+   0.639
+  ],
+  [
+   "down",
+   0.685,
+   0.836
+  ],
+  [
+   "unexpectedly.",
+   0.882,
+   1.718
   ]
  ]
 }

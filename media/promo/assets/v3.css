@@ -9,12 +9,16 @@
 .vid { opacity: 0; }
 
 /* ── Hook ─────────────────────────────────────────────────── */
-.pain { position: absolute; left: 0; right: 0; text-align: center; font-weight: 760; letter-spacing: -0.05em; line-height: 1; white-space: nowrap; opacity: 0; }
+.pain { position: absolute; left: 0; right: 0; text-align: center; font-family: var(--mono); font-weight: 700; letter-spacing: -0.03em; line-height: 1.05; white-space: nowrap; opacity: 0;
+  color: #ff6b75; text-shadow: 0 0 28px rgba(255, 77, 94, 0.45), 0 4px 30px rgba(0, 0, 0, 0.8); }
+.pain::before { content: 'ERROR'; display: block; margin: 0 auto 0.35em; width: max-content; padding: 0.12em 0.5em; border-radius: 0.2em; font-size: 0.3em; letter-spacing: 0.25em;
+  color: #1a0d03; background: #f5b84a; text-shadow: none; }
+.pain .txt:first-of-type::before { content: '\2715\00a0'; color: #f5b84a; }
 .pain .w { display: inline-block; opacity: 0; margin-right: 0.12em; }
 .pain .w:last-of-type { margin-right: 0; }
 .pain .txt { position: relative; display: inline-block; }
-.pain .strike { position: absolute; left: -3%; right: -3%; top: 52%; height: 0.11em; margin-top: -0.055em; border-radius: 0.06em; background: var(--red);
-  box-shadow: 0 0 0.25em rgba(255, 77, 94, 0.75), 0 0 0 0.02em rgba(45, 212, 170, 0.6); }
+.pain .strike { position: absolute; left: -3%; right: -3%; top: 54%; height: 0.11em; margin-top: -0.055em; border-radius: 0.06em; background: var(--mint);
+  box-shadow: 0 0 0.3em rgba(45, 212, 170, 0.85), 0 0 0 0.02em rgba(234, 255, 248, 0.6); }
 .pain .ghost { position: absolute; inset: 0; opacity: 0; mix-blend-mode: screen; pointer-events: none; }
 .pain .ghost.r { color: #ff3b54; }
 .pain .ghost.c { color: #2de1c2; }
@@ -28,6 +32,9 @@
 .lockchip { position: absolute; display: inline-flex; align-items: center; gap: 14px; padding: 16px 26px; border-radius: 999px; font-family: var(--mono); font-size: 34px;
   color: var(--ink-2); background: rgba(16, 23, 31, 0.9); border: 1px solid rgba(148, 163, 184, 0.3); }
 .lockchip svg { width: 30px; height: 30px; }
+.lockchip.err { color: #ff9aa3; border-color: rgba(255, 77, 94, 0.45); font-size: 28px; }
+.lockchip.amb { color: #f5c97a; border-color: rgba(245, 184, 74, 0.45); font-size: 28px; }
+.dlg.err b { color: #ff8a93; }
 .lockchip em { font-style: normal; font-size: 22px; color: var(--muted); border: 1px solid rgba(148, 163, 184, 0.3); padding: 4px 10px; border-radius: 8px; }
 .ram { position: absolute; width: 760px; padding: 28px 32px; border-radius: 18px; background: rgba(16, 23, 31, 0.92); border: 1px solid rgba(148, 163, 184, 0.25); }
 .ram .lbl { display: flex; justify-content: space-between; font-family: var(--mono); font-size: 26px; color: var(--ink-2); }

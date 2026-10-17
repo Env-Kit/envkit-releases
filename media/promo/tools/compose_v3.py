@@ -53,7 +53,9 @@ def videos(cut, T):
     sfx = "16x9" if cut != "vertical" else "9x16"
     M = T["marks"]; L = T["length"]
     v = [("ribbons", 0, b2s(T, "x3") + 0.2, 0.0, 0.45, 1.12)]
-    tun_from = b2s(T, "x3") - (0.0 if "h4e" in M else 0.0)
+    # the tunnel starts at beat 8 in every cut (the v3 launch edit); keeping it fixed keeps every frame after the
+    # slam identical when only the hook is re-cut, so a new hook can be spliced onto the existing render
+    tun_from = round(8 * T["beat"], 3)
     v.append(("tunnel", tun_from, min(b2s(T, "slam") + 1.6, tun_from + 7.5), 0.4, 0.75 if "h4e" in M else 0.85, 1.25))
     mid0 = b2s(T, "slam") + 1.6
     mid1 = b2s(T, "bd")
@@ -72,10 +74,19 @@ def videos(cut, T):
                    f'data-media-start="{ms}" data-peak="{pk}" data-zoom="{zm}"{ramp} data-track-index="1" muted playsinline></video>')
     return "\n".join(out)
 
-def compose(cut):
+def splice_frame(T, fps=30):
+    """First frame that is identical with or without the hook: the turn text is gone 0.25 s after the slam."""
+    import math
+    return math.ceil((T["marks"]["slam"] * T["beat"] + 0.25) * fps)
+
+def compose(cut, hook=False):
     T = json.load(open(os.path.join(ROOT, "audio-src", "v3", f"timing-{cut}.json")))
     W, H = (1080, 1920) if cut == "vertical" else (1920, 1080)
     L = T["length"]
+    full = ""
+    if hook:   # hook-only render: same timeline maths (data-full-duration), only the first frames are rendered
+        full = f' data-full-duration="{L}"'
+        L = round(splice_frame(T) / 30 + 0.3, 3)
     cid = {"main": "main", "vertical": "vertical", "ad15": "ad15"}[cut]
     html = f"""<!doctype html>
 <html lang="en" data-resolution="{'portrait' if H > W else 'landscape'}">
@@ -93,7 +104,7 @@ def compose(cut):
     </style>
   </head>
   <body>
-    <div id="root" data-composition-id="{cid}" data-start="0" data-duration="{L}" data-width="{W}" data-height="{H}">
+    <div id="root" data-composition-id="{cid}" data-start="0" data-duration="{L}"{full} data-width="{W}" data-height="{H}">
       <div class="clip layer" id="bg" data-start="0" data-duration="{L}" data-track-index="0"><div class="base"></div><div class="glow" id="glow"></div></div>
 {videos(cut, T)}
       <div class="clip layer" id="fx" data-start="0" data-duration="{L}" data-track-index="2"><div id="floor"></div><canvas id="trails" width="{W}" height="{H}"></canvas></div>
@@ -109,8 +120,10 @@ def compose(cut):
   </body>
 </html>
 """
-    open(os.path.join(ROOT, FILES[cut]), "w").write(html)
-    print("wrote", FILES[cut], L, "s")
+    out = ("_hook-" if hook else "") + FILES[cut]
+    open(os.path.join(ROOT, out), "w").write(html)
+    print("wrote", out, L, "s", f"(splice frame {splice_frame(T)})" if hook else "")
 
 if __name__ == "__main__":
-    for c in (sys.argv[1:] or ["main", "vertical", "ad15"]): compose(c)
+    args = [a for a in sys.argv[1:] if a != "--hook"]
+    for c in (args or ["main", "vertical", "ad15"]): compose(c, hook="--hook" in sys.argv)

@@ -8,3 +8,4 @@ _coverage-debug-*
 v1/
 audio-src/*.json
 audio-src/v3/
+_hook-*.html

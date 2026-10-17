@@ -21,10 +21,10 @@ sys.path.insert(0, HERE)
 # id: (text sent to the model, takes). v3 audio tags in [] steer delivery and are not spoken.
 LINES = {
     # Hook (swappable block): three pains, each struck through on the next beat, then the turn.
-    "H1": ("[annoyed] License popups.", 3),
-    "H2": ("[annoyed] Paywalled databases.", 3),
-    "H3": ("[annoyed] Containers eating your RAM.", 3),
-    "H4": ("[calm] What if your dev stack... just worked?", 3),
+    "H1": ("[annoyed] Port 80 is already in use.", 3),
+    "H2": ("[annoyed] MySQL shut down unexpectedly.", 3),
+    "H3": ("[annoyed] Wrong PHP version... again.", 3),
+    "H4": ("[calm] What if your stack just fixed itself?", 3),
     "L03": ("[confident] This is EnvKit.", 2),
     "L04": ("[confident] Your whole local stack. One app.", 2),
     "L05": ("Pick a project...", 2),

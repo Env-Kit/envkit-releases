@@ -24,8 +24,9 @@ The three HTML files are written by `tools/compose_v3.py`; edit `assets/v3.js` /
 - Every app surface is a real screenshot. Every word on screen is HTML text (nothing is AI-generated text).
   The AI chat window is drawn in HTML and uses EnvKit's real MCP tool names and arguments
   (`diagnose_service {"name":"redis"}` → `start_service` → `restart_site_queue_worker {"name":"shop"}`).
-- The hook's background "nods" (a licence dialog, locked database chips, a RAM meter) are generic,
-  brand-free HTML, blurred so they read as mood. No competitor names or logos anywhere.
+- The hook is styled as generic error messages (monospaced, red/amber); its background "nods" (port-80 error
+  dialogs, database crash lines, a version mismatch) are generic, brand-free HTML, blurred so they read as mood.
+  No competitor names or logos anywhere.
 - The AI-generated clips are abstract light only (no text, no UI) and sit under the screenshots.
 
 ## The edit (140 BPM)
@@ -35,10 +36,11 @@ measured length, re-splices the music on its beats, places the sound effects so 
 frames the picture uses, side-chains the music under the voice (−8 dB) and writes `assets/timing-<cut>.js`.
 The picture reads only those marks, so a different voice re-times everything without touching the HTML.
 
-- Hook (0–4.9 s): "License popups." / "Paywalled databases." / "Containers eating your RAM." slam in 2.5 beats
-  (1.07 s) apart over the riser, each struck through (glitch hit) as the next lands. On the third strike the music cuts
-  dead; "What if your dev stack… just worked?" plays over near-black and a light-speed tunnel, and the logo
-  slams on "worked" with the drop.
+- Hook (0–4.9 s): "Port 80 is already in use." / "MySQL shut down unexpectedly." / "Wrong PHP version… again."
+  slam in as error messages over the riser, each struck through in mint (glitch hit) as the next lands. On the
+  third strike (beat 9) the music cuts dead; "What if your stack just fixed itself?" plays over near-black and a
+  light-speed tunnel, and the logo slams on "itself" with the drop (beat 11.5, 4.93 s; the 15 s cut has no turn
+  line and slams half a beat after the third strike, at 4.07 s).
 - Then: This is EnvKit → stack chips → the dashboard ("One app.") → onboarding click on the beat → "Your site is
   live" + chime → three camera punches (Real HTTPS / Real domain / Seconds) → sites → services staccato (one hard
   cut + chip per word) → All running → Redis breaks → the AI chat fixes it with the real tool calls → montage
@@ -55,15 +57,23 @@ exactly 140.00 BPM, beat k at 0.445 + k·60/140 s; beats 0–14 build/riser, 15 
 ## Voiceover
 
 Voice "Hale" (`dXtC3XhB9GtPusIpNtQx`). `tools/vo_config.json` holds the voice, model and voice settings:
-`eleven_v3` (stability 0.5, similarity 0.8, style 0.45, speaker boost) for the script; the three hook pains use
-`eleven_multilingual_v2` at native speed 1.15 and the turn `eleven_turbo_v2_5` at 1.1, because v3 read them too
-long for the beat grid. Every line has 2–3 takes; `edit_v3.py` picks one by objective metrics (no clipping, no
+`eleven_v3` (stability 0.5, similarity 0.8, style 0.45, speaker boost) for the script; the three hook lines use
+`eleven_multilingual_v2` at native speed 1.15 (plus 1.15x tempo in the edit) and the turn `eleven_turbo_v2_5`
+at 1.1 (plus 1.1x), because v3 read them too long for the beat grid. Every line has 2–3 takes; `edit_v3.py` picks one by objective metrics (no clipping, no
 truncated ending, natural pace, pitch range). v3 tends to cut the last phoneme, so its lines get a trailing
 `[pause]` tag. Word timings come from ElevenLabs forced alignment (`/v1/forced-alignment`, `*.fa.json`) snapped
 to the audible boundaries (speech-island starts and energy dips) of each take.
 
 Change the voice: edit `tools/vo_config.json`, then `tools/build_v3.sh vo` (regenerates every take, aligns,
 re-times captions, mix and picture, renders, checks).
+
+## Re-cutting only the hook
+
+The slam (beat 11.5; 9.5 in the 15 s cut) and the music cut (beat 9) are fixed in `tools/edit_v3.py`, and the
+tunnel clip always starts at beat 8, so every frame from 0.25 s after the slam onward is identical whatever the
+hook says. To change the hook: edit the `H1`–`H4` lines in `tools/vo.py`, `python3 tools/vo.py gen H1 H2 H3 H4`,
+`tools/edit_v3.py <cut>` for each cut, `tools/compose_v3.py && tools/compose_v3.py --hook`, render the three
+`_hook-*.html` (5 s each, in parallel), `tools/splice_hook_v3.sh`, then `tools/finish_v3.sh` and `tools/webp_v3.sh`.
 
 ## Checks (`tools/check_v3.sh` → `renders/v3/checks/`)
 

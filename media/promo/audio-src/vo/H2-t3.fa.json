@@ -1,15 +1,25 @@
 {
- "text": "Paywalled databases.",
+ "text": "MySQL shut down unexpectedly.",
  "words": [
   [
-   "Paywalled",
+   "MySQL",
    0.08,
-   0.4
+   0.42
   ],
   [
-   "databases.",
-   0.44,
-   0.96
+   "shut",
+   0.46,
+   0.6
+  ],
+  [
+   "down",
+   0.64,
+   0.8
+  ],
+  [
+   "unexpectedly.",
+   0.84,
+   1.4
   ]
  ]
 }

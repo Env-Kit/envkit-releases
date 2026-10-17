@@ -1,25 +1,25 @@
 {
- "text": "Containers eating your RAM.",
+ "text": "Wrong PHP version... again.",
  "words": [
   [
-   "Containers",
-   0.06,
-   0.46
+   "Wrong",
+   0.08,
+   0.3
   ],
   [
-   "eating",
-   0.5,
-   0.7
+   "PHP",
+   0.4,
+   0.86
   ],
   [
-   "your",
-   0.74,
-   0.82
+   "version...",
+   0.92,
+   1.18
   ],
   [
-   "RAM.",
-   0.86,
-   1.12
+   "again.",
+   1.38,
+   1.58
   ]
  ]
 }

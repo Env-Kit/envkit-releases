@@ -1,5 +1,5 @@
 {
- "text": "What if your dev stack... just worked?",
+ "text": "What if your stack just fixed itself?",
  "words": [
   [
    "What",
@@ -9,32 +9,32 @@
   [
    "if",
    0.22,
-   0.28
+   0.3
   ],
   [
    "your",
-   0.32,
-   0.44
+   0.34,
+   0.4
   ],
   [
-   "dev",
-   0.48,
-   0.64
-  ],
-  [
-   "stack...",
-   0.74,
-   1.04
+   "stack",
+   0.5,
+   0.74
   ],
   [
    "just",
-   1.28,
-   1.42
+   0.78,
+   0.96
   ],
   [
-   "worked?",
-   1.48,
-   1.72
+   "fixed",
+   1.0,
+   1.22
+  ],
+  [
+   "itself?",
+   1.26,
+   1.62
   ]
  ]
 }

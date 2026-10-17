@@ -1,5 +1,5 @@
 {
- "text": "What if your dev stack... just worked?",
+ "text": "What if your stack just fixed itself?",
  "voice": "dXtC3XhB9GtPusIpNtQx",
  "model": "eleven_turbo_v2_5",
  "settings": {
@@ -24,27 +24,27 @@
   [
    "your",
    0.313,
-   0.441
+   0.43
   ],
   [
-   "dev",
-   0.499,
-   0.697
-  ],
-  [
-   "stack...",
-   0.755,
-   1.196
+   "stack",
+   0.464,
+   0.731
   ],
   [
    "just",
-   1.382,
-   1.556
+   0.789,
+   1.01
   ],
   [
-   "worked?",
-   1.602,
-   2.229
+   "fixed",
+   1.115,
+   1.463
+  ],
+  [
+   "itself?",
+   1.521,
+   2.322
   ]
  ]
 }

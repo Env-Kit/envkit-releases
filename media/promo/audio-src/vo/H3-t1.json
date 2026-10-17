@@ -1,5 +1,5 @@
 {
- "text": "Containers eating your RAM.",
+ "text": "Wrong PHP version... again.",
  "voice": "dXtC3XhB9GtPusIpNtQx",
  "model": "eleven_multilingual_v2",
  "settings": {
@@ -12,24 +12,24 @@
  "seed": 2031,
  "words": [
   [
-   "Containers",
+   "Wrong",
    0.0,
-   0.43
+   0.232
   ],
   [
-   "eating",
-   0.476,
-   0.662
+   "PHP",
+   0.279,
+   0.627
   ],
   [
-   "your",
-   0.697,
-   0.801
+   "version...",
+   0.755,
+   1.173
   ],
   [
-   "RAM.",
-   0.836,
-   1.347
+   "again.",
+   1.324,
+   1.858
   ]
  ]
 }

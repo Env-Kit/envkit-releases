@@ -423,26 +423,28 @@ def sfx_track(cues, length):
     return out, log
 
 # ── Shared blocks ────────────────────────────────────────────────────────────────
-HOOK_SPEED = 1.0   # the pains are generated at native speed 1.15 (eleven_multilingual_v2), see vo_config.json
+HOOK_SPEED = 1.15  # pains: generated at native speed 1.15 (eleven_multilingual_v2) + 1.15x tempo to fit the 8-beat riser
 SPEED = {"main": 1.1, "vertical": 1.12, "ad15": 1.12}   # pitch-preserving tempo for the VO after the hook
 def hook_seq(turn=True):
     """The swappable hook: three pains on a 2-beat grid (each struck through as the next one slams in), the music
     cuts out on the third strike, and the turn starts right there; the logo slams on "worked".
     Marks: h1 h2 h3 (line onsets), x1..x3 (strikes; x3 = music cut), h4, slam."""
     seq = [
-        {"id": "H1", "at": 0.25, "mark": "h1", "maxgap": 0.08, "speed": HOOK_SPEED},
-        {"id": "H2", "gap": -0.3, "grid": 0.5, "mark": "h2", "maxgap": 0.08, "speed": HOOK_SPEED},
-        {"id": "H3", "gap": -0.3, "grid": 0.5, "mark": "h3", "maxgap": 0.08, "speed": HOOK_SPEED, "endmark": "h3e"},
+        {"id": "H1", "at": 0.15, "mark": "h1", "maxgap": 0.06, "speed": HOOK_SPEED},
+        {"id": "H2", "gap": -0.4, "grid": 0.25, "mark": "h2", "maxgap": 0.06, "speed": HOOK_SPEED},
+        {"id": "H3", "gap": -0.4, "grid": 0.25, "mark": "h3", "maxgap": 0.12, "speed": HOOK_SPEED, "endmark": "h3e"},
     ]
     if turn:   # "What if your dev stack… just worked?" — key word "worked?" (index 6) lands on the slam beat
-        seq.append({"id": "H4", "key": 6, "gap": 0.0, "grid": 0.5, "mark": "slam", "maxgap": 0.3, "speed": 1.0, "endmark": "h4e"})
+        seq.append({"id": "H4", "key": 6, "at": SLAM, "mark": "slam", "maxgap": 0.2, "speed": 1.1, "endmark": "h4e"})
     return seq
 
+X3, SLAM = 9.0, 11.5   # fixed: the music cut (third strike) and the logo slam; everything after the slam keys off these
 def hook_marks(M):
     M["x1"] = M["h2"]; M["x2"] = M["h3"]
-    M["x3"] = float(np.ceil((M["h3e"] + 0.1) * 2) / 2)    # last strike + music cut (half-beat grid)
+    M["x3"] = X3                                          # last strike + music cut
+    assert M["h3e"] <= X3 - 0.05, f"hook pains run past the music cut: {M['h3e']}"
     if "h4e" not in M:
-        M["slam"] = M["x3"] + 1.5                         # no turn: 1.5 beats of silence, then the slam
+        M["slam"] = 9.5                                   # no turn (15 s cut): half a beat of silence after the last strike, then the slam
 
 def hook_music(M):
     # riser (src beats 5..14 build into the drop) runs under the three pains and stops dead on x3

@@ -7,7 +7,8 @@
 (function () {
   const T = window.TIMING;
   const ROOT = document.getElementById('root');
-  const W = +ROOT.dataset.width, H = +ROOT.dataset.height, LEN = +ROOT.dataset.duration;
+  // data-full-duration: a hook-only render (tools/compose_v3.py --hook) keeps the full timeline maths
+  const W = +ROOT.dataset.width, H = +ROOT.dataset.height, LEN = +(ROOT.dataset.fullDuration || ROOT.dataset.duration);
   const PORTRAIT = H > W;
   const { tl, panel, camTo, ring, sweep, trails, grain, floor } = PromoLib.create({ width: W, height: H, duration: LEN });
   const BEAT = T.beat, M = T.marks;
@@ -100,23 +101,21 @@
   {
     const R = scene('hook', 0, S('x3'), false);
     const nods = [el('div', 'nod', R), el('div', 'nod', R), el('div', 'nod', R)];
-    // nod 1: a stack of generic licence dialogs
-    const dl = [['License required', 'Your trial has ended. Activate to keep working.'], ['Activate your copy', 'This feature needs a paid license.'], ['License required', 'Enter a license key to continue.']];
-    const dpos = PORTRAIT ? [[90, 330, -4], [430, 560, 3], [150, 1240, -2]] : [[150, 120, -4], [1240, 170, 3], [700, 640, -2]];
-    const dlgs = dl.map(([t, b], i) => { const d = el('div', 'dlg', nods[0], `<b>${t}</b>${b}<div class="row"><span>Later</span><span class="p">Buy license</span></div>`); gsap.set(d, { left: dpos[i][0], top: dpos[i][1], rotation: dpos[i][2] }); return d; });
-    // nod 2: database chips behind a padlock
-    const lock = '<svg viewBox="0 0 24 24"><rect x="4.5" y="10.5" width="15" height="10" rx="2.2" fill="none" stroke="#ff8a96" stroke-width="2"/><path d="M8 10.5V7.8a4 4 0 0 1 8 0v2.7" fill="none" stroke="#ff8a96" stroke-width="2"/></svg>';
-    const cpos = PORTRAIT ? [[110, 420], [520, 620], [160, 1220], [560, 1400]] : [[180, 180], [1300, 230], [260, 760], [1240, 800]];
-    const chipsL = ['MySQL', 'PostgreSQL', 'Redis', 'MongoDB'].map((n, i) => { const c = el('div', 'lockchip', nods[1], `${lock}${n}<em>PRO</em>`); gsap.set(c, { left: cpos[i][0], top: cpos[i][1] }); return c; });
-    // nod 3: a RAM meter climbing into the red
-    const ram = el('div', 'ram', nods[2], '<div class="lbl"><span>Memory</span><span class="v">6.1 GB / 16 GB</span></div><div class="bar"><div class="fill"></div></div><div class="rows"><i>web  1.9 GB</i><i>db  3.4 GB</i><i>cache  2.2 GB</i><i>queue  1.6 GB</i><i>search  2.8 GB</i><i>mail  0.9 GB</i></div>');
-    gsap.set(ram, PORTRAIT ? { left: 160, top: 1180 } : { left: 580, top: 650 });
+    // nods (generic, brand-free, blurred): 1 error dialogs about port 80, 2 database crash lines, 3 version mismatch
+    const dl = [['Error', 'listen tcp 0.0.0.0:80: bind: address already in use'], ['Web server failed to start', 'Port 80 is used by another process.'], ['Error', 'bind() to 0.0.0.0:80 failed (Address already in use)']];
+    const dpos = PORTRAIT ? [[60, 330, -4], [400, 560, 3], [120, 1240, -2]] : [[150, 120, -4], [1180, 170, 3], [640, 660, -2]];
+    const dlgs = dl.map(([t, b], i) => { const d = el('div', 'dlg err', nods[0], `<b>${t}</b>${b}<div class="row"><span>Quit</span><span class="p">Retry</span></div>`); gsap.set(d, { left: dpos[i][0], top: dpos[i][1], rotation: dpos[i][2] }); return d; });
+    const xi = '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="#ff8a96" stroke-width="2"/><path d="M8.5 8.5l7 7M15.5 8.5l-7 7" stroke="#ff8a96" stroke-width="2" stroke-linecap="round"/></svg>';
+    const cpos = PORTRAIT ? [[70, 420], [300, 620], [90, 1220], [330, 1400]] : [[140, 170], [1080, 230], [200, 770], [1060, 810]];
+    const chipsL = ['mysqld exited (code 1)', 'InnoDB: crash recovery', "can't connect to :3306", 'database stopped'].map((n, i) => { const c = el('div', 'lockchip err', nods[1], `${xi}${n}`); gsap.set(c, { left: cpos[i][0], top: cpos[i][1] }); return c; });
+    const vpos = PORTRAIT ? [[90, 430], [330, 640], [110, 1230], [300, 1410]] : [[160, 180], [1120, 240], [230, 780], [1000, 820]];
+    const verL = ['php -v  7.4.33', 'requires php ^8.3', 'unsupported PHP version', 'switch version?'].map((n, i) => { const c = el('div', 'lockchip amb', nods[2], `${xi}${n}`); gsap.set(c, { left: vpos[i][0], top: vpos[i][1] }); return c; });
     // 9:16: each pain is two rows (each with its own strike); 16:9: one row
-    const ROWS = { H1: [1], H2: [1], H3: [1] };
+    const ROWS = { H1: [3], H2: [3], H3: [2] };
     const lines = ['H1', 'H2', 'H3'].map((lid, k) => {
       const c = card(lid);
       const p = el('div', 'pain', R);
-      p.style.fontSize = (PORTRAIT ? 128 : (k === 2 ? 132 : 150)) + 'px';
+      p.style.fontSize = (PORTRAIT ? 88 : 98) + 'px';
       const cuts = PORTRAIT ? [0, ...ROWS[lid], c.toks.length] : [0, c.toks.length];
       const ws = [], st = [], gr = [], gc = [];
       for (let r = 0; r + 1 < cuts.length; r++) {
@@ -133,11 +132,11 @@
       if (PORTRAIT) p.style.lineHeight = '1.05';
       return { p, ws, st, gr, gc, c };
     });
-    const cy = PORTRAIT ? 880 : 470, lh = PORTRAIT ? 290 : 170;
+    const cy = PORTRAIT ? 880 : 470, lh = PORTRAIT ? 230 : 130;
     const xs = [S('x1'), S('x2'), S('x3')];
     lines.forEach((L, k) => {
       const t0 = L.c.t0;
-      gsap.set(L.p, { top: cy - (PORTRAIT ? 135 : lh / 2), opacity: 0 });
+      gsap.set(L.p, { top: cy - (PORTRAIT ? 120 : lh / 2), opacity: 0 });
       tl.set(L.p, { opacity: 1 }, t0 - 0.02);
       L.c.toks.forEach((tk, i) => ft(L.ws[i], { opacity: 0, scale: 1.55, y: -20, filter: 'blur(14px)' }, { opacity: 1, scale: 1, y: 0, filter: 'blur(0px)', duration: 0.16, ease: 'power4.out' }, tk.t));
       shake(t0, k === 2 ? 22 : 16, 5);
@@ -163,9 +162,7 @@
     // the nods animate while they are up
     dlgs.forEach((d, i) => ft(d, { scale: 0.7, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.18, ease: 'back.out(2.4)' }, lines[0].c.t0 + i * 0.16));
     chipsL.forEach((c, i) => ft(c, { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.2, ease: 'back.out(2)' }, lines[1].c.t0 + i * 0.12));
-    ft($('.fill', ram), { scaleX: 0.3 }, { scaleX: 0.97, duration: S('x3') - lines[2].c.t0, ease: 'power2.in' }, lines[2].c.t0);
-    const v = $('.v', ram); const steps = 10;
-    for (let i = 0; i <= steps; i++) tl.set(v, { textContent: `${(6.1 + (15.6 - 6.1) * (i / steps) ** 2).toFixed(1)} GB / 16 GB` }, lines[2].c.t0 + (S('x3') - lines[2].c.t0) * i / steps);
+    verL.forEach((c, i) => ft(c, { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.2, ease: 'back.out(2)' }, lines[2].c.t0 + i * 0.12));
     // the music cuts on the last strike: everything drops to near-black
     tl.to(lines.map((l) => l.p), { opacity: 0, filter: 'blur(10px)', duration: 0.14, ease: 'power2.in' }, S('x3') + 0.08);
     doFlash(S('x3'), 0.5);
