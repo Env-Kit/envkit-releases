@@ -1,35 +1,24 @@
 {
- "text": "MySQL shut down unexpectedly.",
+ "text": "[annoyed] MySQL crashed. [pause]",
  "voice": "dXtC3XhB9GtPusIpNtQx",
- "model": "eleven_multilingual_v2",
+ "model": "eleven_v3",
  "settings": {
-  "stability": 0.4,
+  "stability": 0.5,
   "similarity_boost": 0.8,
-  "style": 0.5,
-  "use_speaker_boost": true,
-  "speed": 1.15
+  "style": 0.45,
+  "use_speaker_boost": true
  },
  "seed": 2022,
  "words": [
   [
    "MySQL",
-   0.0,
-   0.488
+   0.758,
+   0.88
   ],
   [
-   "shut",
-   0.534,
-   0.685
-  ],
-  [
-   "down",
-   0.72,
-   0.906
-  ],
-  [
-   "unexpectedly.",
-   0.964,
-   1.858
+   "crashed.",
+   0.96,
+   1.6
   ]
  ]
 }

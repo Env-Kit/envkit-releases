@@ -1,40 +1,25 @@
 {
- "text": "What if your stack just fixed itself?",
+ "text": "Now it fixes itself.",
  "words": [
   [
-   "What",
-   0.1,
-   0.18
+   "Now",
+   0.12,
+   0.26
   ],
   [
-   "if",
-   0.22,
-   0.3
+   "it",
+   0.3,
+   0.38
   ],
   [
-   "your",
-   0.32,
-   0.44
+   "fixes",
+   0.46,
+   0.8
   ],
   [
-   "stack",
-   0.5,
-   0.76
-  ],
-  [
-   "just",
-   0.82,
-   1.0
-  ],
-  [
-   "fixed",
-   1.2,
-   1.44
-  ],
-  [
-   "itself?",
-   1.5,
-   1.96
+   "itself.",
+   0.86,
+   1.34
   ]
  ]
 }

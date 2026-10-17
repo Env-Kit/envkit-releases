@@ -423,7 +423,7 @@ def sfx_track(cues, length):
     return out, log
 
 # ── Shared blocks ────────────────────────────────────────────────────────────────
-HOOK_SPEED = 1.15  # pains: generated at native speed 1.15 (eleven_multilingual_v2) + 1.15x tempo to fit the 8-beat riser
+HOOK_SPEED = 1.0   # hook VO at natural pace: native speed 1.0, no tempo change (short lines instead)
 SPEED = {"main": 1.1, "vertical": 1.12, "ad15": 1.12}   # pitch-preserving tempo for the VO after the hook
 def hook_seq(turn=True):
     """The swappable hook: three pains on a 2-beat grid (each struck through as the next one slams in), the music
@@ -434,11 +434,11 @@ def hook_seq(turn=True):
         {"id": "H2", "gap": -0.4, "grid": 0.25, "mark": "h2", "maxgap": 0.06, "speed": HOOK_SPEED},
         {"id": "H3", "gap": -0.4, "grid": 0.25, "mark": "h3", "maxgap": 0.12, "speed": HOOK_SPEED, "endmark": "h3e"},
     ]
-    if turn:   # "What if your dev stack… just worked?" — key word "worked?" (index 6) lands on the slam beat
-        seq.append({"id": "H4", "key": 6, "at": SLAM, "mark": "slam", "maxgap": 0.2, "speed": 1.1, "endmark": "h4e"})
+    if turn:   # "What if your dev stack… just worked?" — key word "worked?" lands on the slam beat
+        seq.append({"id": "H4", "key": 3, "at": SLAM, "mark": "slam", "maxgap": 0.25, "speed": 1.0, "endmark": "h4e"})
     return seq
 
-X3, SLAM = 9.0, 11.5   # fixed: the music cut (third strike) and the logo slam; everything after the slam keys off these
+X3, SLAM = 8.0, 11.5   # fixed: the music cut (third strike) and the logo slam; everything after the slam keys off these
 def hook_marks(M):
     M["x1"] = M["h2"]; M["x2"] = M["h3"]
     M["x3"] = X3                                          # last strike + music cut

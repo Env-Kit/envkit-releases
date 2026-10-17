@@ -1,0 +1,30 @@
+{
+ "text": "Wrong PHP version.",
+ "voice": "dXtC3XhB9GtPusIpNtQx",
+ "model": "eleven_multilingual_v2",
+ "settings": {
+  "stability": 0.45,
+  "similarity_boost": 0.8,
+  "style": 0.5,
+  "use_speaker_boost": true,
+  "speed": 1.0
+ },
+ "seed": 2035,
+ "words": [
+  [
+   "Wrong",
+   0.0,
+   0.29
+  ],
+  [
+   "PHP",
+   0.36,
+   0.766
+  ],
+  [
+   "version.",
+   0.894,
+   1.579
+  ]
+ ]
+}

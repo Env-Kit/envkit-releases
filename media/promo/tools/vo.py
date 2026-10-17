@@ -21,10 +21,10 @@ sys.path.insert(0, HERE)
 # id: (text sent to the model, takes). v3 audio tags in [] steer delivery and are not spoken.
 LINES = {
     # Hook (swappable block): three pains, each struck through on the next beat, then the turn.
-    "H1": ("[annoyed] Port 80 is already in use.", 3),
-    "H2": ("[annoyed] MySQL shut down unexpectedly.", 3),
-    "H3": ("[annoyed] Wrong PHP version... again.", 3),
-    "H4": ("[calm] What if your stack just fixed itself?", 3),
+    "H1": ("[annoyed] Port 80 in use.", 6),
+    "H2": ("[annoyed] MySQL crashed.", 6),
+    "H3": ("[annoyed] Wrong PHP version.", 6),
+    "H4": ("[calm] Now it fixes itself.", 6),
     "L03": ("[confident] This is EnvKit.", 2),
     "L04": ("[confident] Your whole local stack. One app.", 2),
     "L05": ("Pick a project...", 2),
@@ -70,6 +70,8 @@ def words_from(al, text):
 def gen(model, lid, take, settings=None):
     text, _ = LINES[lid]
     ov = {k: v for k, v in CFG.get("line_overrides", {}).items() if k == lid}.get(lid, {})
+    if lid in CFG.get("hook_compare", {}):   # hook: takes 1-3 eleven_v3, takes 4-6 the comparison model
+        ov = {} if take <= 3 else CFG["hook_compare"][lid]
     model = ov.get("model", model)
     settings = settings or ov.get("settings") or SETTINGS[model]
     # eleven_v3 tends to cut the last phoneme off at the end of a file; a trailing [pause] tag gives a clean decay.

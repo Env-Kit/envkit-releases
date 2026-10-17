@@ -1,25 +1,20 @@
 {
- "text": "Wrong PHP version... again.",
+ "text": "Wrong PHP version.",
  "words": [
   [
    "Wrong",
-   0.08,
-   0.3
+   0.16,
+   0.52
   ],
   [
    "PHP",
-   0.4,
-   0.86
+   0.66,
+   1.28
   ],
   [
-   "version...",
-   0.92,
-   1.18
-  ],
-  [
-   "again.",
+   "version.",
    1.38,
-   1.58
+   1.82
   ]
  ]
 }

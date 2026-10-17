@@ -1,0 +1,35 @@
+{
+ "text": "Now it fixes itself.",
+ "voice": "dXtC3XhB9GtPusIpNtQx",
+ "model": "eleven_multilingual_v2",
+ "settings": {
+  "stability": 0.45,
+  "similarity_boost": 0.8,
+  "style": 0.5,
+  "use_speaker_boost": true,
+  "speed": 1.0
+ },
+ "seed": 2045,
+ "words": [
+  [
+   "Now",
+   0.0,
+   0.209
+  ],
+  [
+   "it",
+   0.267,
+   0.337
+  ],
+  [
+   "fixes",
+   0.383,
+   0.697
+  ],
+  [
+   "itself.",
+   0.743,
+   1.393
+  ]
+ ]
+}

@@ -111,11 +111,11 @@
     const vpos = PORTRAIT ? [[90, 430], [330, 640], [110, 1230], [300, 1410]] : [[160, 180], [1120, 240], [230, 780], [1000, 820]];
     const verL = ['php -v  7.4.33', 'requires php ^8.3', 'unsupported PHP version', 'switch version?'].map((n, i) => { const c = el('div', 'lockchip amb', nods[2], `${xi}${n}`); gsap.set(c, { left: vpos[i][0], top: vpos[i][1] }); return c; });
     // 9:16: each pain is two rows (each with its own strike); 16:9: one row
-    const ROWS = { H1: [3], H2: [3], H3: [2] };
+    const ROWS = { H1: [2], H2: [1], H3: [2] };
     const lines = ['H1', 'H2', 'H3'].map((lid, k) => {
       const c = card(lid);
       const p = el('div', 'pain', R);
-      p.style.fontSize = (PORTRAIT ? 88 : 98) + 'px';
+      p.style.fontSize = (PORTRAIT ? 104 : 124) + 'px';
       const cuts = PORTRAIT ? [0, ...ROWS[lid], c.toks.length] : [0, c.toks.length];
       const ws = [], st = [], gr = [], gc = [];
       for (let r = 0; r + 1 < cuts.length; r++) {

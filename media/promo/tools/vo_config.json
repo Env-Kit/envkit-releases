@@ -19,54 +19,54 @@
       "speed": 1.0
     }
   },
-  "picks": {
-    "_comment": "hook pains: the tightest clean takes (they have to fit the riser)",
-    "H1": "H1-t2",
-    "H2": "H2-t3",
-    "H3": "H3-t3",
-    "H4": "H4-t1"
-  },
-  "line_overrides": {
-    "_comment": "Hook lines: eleven_v3 read them ~1.7x longer than the beat grid allows, so the three pains use eleven_multilingual_v2 at native speed 1.15 and the turn uses eleven_turbo_v2_5 at 1.1 (it keeps a short breath at the ellipsis).",
+  "hook_compare": {
+    "_comment": "hook lines: takes 1-3 eleven_v3 (stability 0.5, native speed), takes 4-6 eleven_multilingual_v2 at speed 1.0; the edit picks the most natural take that fits, no tempo change",
     "H1": {
       "model": "eleven_multilingual_v2",
-      "settings": {
-        "stability": 0.4,
-        "similarity_boost": 0.8,
-        "style": 0.5,
-        "use_speaker_boost": true,
-        "speed": 1.15
-      }
-    },
-    "H2": {
-      "model": "eleven_multilingual_v2",
-      "settings": {
-        "stability": 0.4,
-        "similarity_boost": 0.8,
-        "style": 0.5,
-        "use_speaker_boost": true,
-        "speed": 1.15
-      }
-    },
-    "H3": {
-      "model": "eleven_multilingual_v2",
-      "settings": {
-        "stability": 0.4,
-        "similarity_boost": 0.8,
-        "style": 0.5,
-        "use_speaker_boost": true,
-        "speed": 1.15
-      }
-    },
-    "H4": {
-      "model": "eleven_turbo_v2_5",
       "settings": {
         "stability": 0.45,
         "similarity_boost": 0.8,
         "style": 0.5,
         "use_speaker_boost": true,
-        "speed": 1.1
+        "speed": 1.0
+      }
+    },
+    "H2": {
+      "model": "eleven_multilingual_v2",
+      "settings": {
+        "stability": 0.45,
+        "similarity_boost": 0.8,
+        "style": 0.5,
+        "use_speaker_boost": true,
+        "speed": 1.0
+      }
+    },
+    "H3": {
+      "model": "eleven_multilingual_v2",
+      "settings": {
+        "stability": 0.45,
+        "similarity_boost": 0.8,
+        "style": 0.5,
+        "use_speaker_boost": true,
+        "speed": 1.0
+      }
+    },
+    "H4": {
+      "model": "eleven_multilingual_v2",
+      "settings": {
+        "stability": 0.45,
+        "similarity_boost": 0.8,
+        "style": 0.5,
+        "use_speaker_boost": true,
+        "speed": 1.0
       }
     }
+  },
+  "picks": {
+    "_comment": "hook: most natural take that fits the riser (syllable rate ~4.3-5.1/s, no speed-up)",
+    "H1": "H1-t4",
+    "H2": "H2-t4",
+    "H3": "H3-t5",
+    "H4": "H4-t3"
   }
 }

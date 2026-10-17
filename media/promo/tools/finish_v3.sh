@@ -24,7 +24,7 @@ for cut in main vertical ad15; do
 done
 
 # 16:9 master: H.264 CRF 14 from renders/v3/main-video.mp4 (lossless after a hook splice) + AAC 320k; delivery copies H.264 + AAC.
-ffmpeg -v error -y -i "$V/main-video.mp4" -i "$A/main-final.wav" -map 0:v -map 1:a -c:v libx264 -preset slow -crf 14 -pix_fmt yuv420p -c:a aac -b:a 320k -movflags +faststart -shortest "$R/envkit-promo-v3-master.mp4"
+ffmpeg -v error -y -i "$V/main-video.mp4" -i "$A/main-final.wav" -map 0:v -map 1:a -c:v libx264 -preset medium -crf 14 -pix_fmt yuv420p -c:a aac -b:a 320k -movflags +faststart -shortest "$R/envkit-promo-v3-master.mp4"
 ffmpeg -v error -y -i "$V/main-video.mp4" -i "$A/main-final.wav" -map 0:v -map 1:a -c:v libx264 -preset slow -crf 22 -pix_fmt yuv420p -c:a aac -b:a 192k -movflags +faststart -shortest "$R/envkit-promo-v3-16x9.mp4"
 ffmpeg -v error -y -i "$V/vertical-video.mp4" -i "$A/vertical-final.wav" -map 0:v -map 1:a -c:v libx264 -preset slow -crf 20 -pix_fmt yuv420p -c:a aac -b:a 192k -movflags +faststart -shortest "$R/envkit-promo-v3-9x16.mp4"
 ffmpeg -v error -y -i "$V/ad15-video.mp4" -i "$A/ad15-final.wav" -map 0:v -map 1:a -c:v libx264 -preset slow -crf 19 -pix_fmt yuv420p -c:a aac -b:a 192k -movflags +faststart -shortest "$R/envkit-promo-v3-15s.mp4"

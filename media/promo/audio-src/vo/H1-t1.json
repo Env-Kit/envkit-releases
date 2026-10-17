@@ -1,45 +1,34 @@
 {
- "text": "Port 80 is already in use.",
+ "text": "[annoyed] Port 80 in use. [pause]",
  "voice": "dXtC3XhB9GtPusIpNtQx",
- "model": "eleven_multilingual_v2",
+ "model": "eleven_v3",
  "settings": {
-  "stability": 0.4,
+  "stability": 0.5,
   "similarity_boost": 0.8,
-  "style": 0.5,
-  "use_speaker_boost": true,
-  "speed": 1.15
+  "style": 0.45,
+  "use_speaker_boost": true
  },
  "seed": 2011,
  "words": [
   [
    "Port",
-   0.0,
-   0.221
+   0.277,
+   0.32
   ],
   [
    "80",
-   0.255,
-   0.43
-  ],
-  [
-   "is",
-   0.476,
-   0.546
-  ],
-  [
-   "already",
-   0.592,
-   0.859
+   0.48,
+   0.8
   ],
   [
    "in",
-   0.894,
-   0.964
+   0.933,
+   1.2
   ],
   [
    "use.",
-   1.033,
-   1.533
+   1.32,
+   1.76
   ]
  ]
 }

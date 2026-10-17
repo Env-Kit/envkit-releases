@@ -1,0 +1,35 @@
+{
+ "text": "Port 80 in use.",
+ "voice": "dXtC3XhB9GtPusIpNtQx",
+ "model": "eleven_multilingual_v2",
+ "settings": {
+  "stability": 0.45,
+  "similarity_boost": 0.8,
+  "style": 0.5,
+  "use_speaker_boost": true,
+  "speed": 1.0
+ },
+ "seed": 2016,
+ "words": [
+  [
+   "Port",
+   0.0,
+   0.279
+  ],
+  [
+   "80",
+   0.337,
+   0.499
+  ],
+  [
+   "in",
+   0.569,
+   0.639
+  ],
+  [
+   "use.",
+   0.731,
+   1.3
+  ]
+ ]
+}

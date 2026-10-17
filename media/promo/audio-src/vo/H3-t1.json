@@ -1,35 +1,29 @@
 {
- "text": "Wrong PHP version... again.",
+ "text": "[annoyed] Wrong PHP version. [pause]",
  "voice": "dXtC3XhB9GtPusIpNtQx",
- "model": "eleven_multilingual_v2",
+ "model": "eleven_v3",
  "settings": {
-  "stability": 0.4,
+  "stability": 0.5,
   "similarity_boost": 0.8,
-  "style": 0.5,
-  "use_speaker_boost": true,
-  "speed": 1.15
+  "style": 0.45,
+  "use_speaker_boost": true
  },
  "seed": 2031,
  "words": [
   [
    "Wrong",
-   0.0,
-   0.232
+   0.133,
+   0.4
   ],
   [
    "PHP",
-   0.279,
-   0.627
+   0.56,
+   1.04
   ],
   [
-   "version...",
-   0.755,
-   1.173
-  ],
-  [
-   "again.",
-   1.324,
-   1.858
+   "version.",
+   1.11,
+   1.68
   ]
  ]
 }

@@ -1,25 +1,15 @@
 {
- "text": "MySQL shut down unexpectedly.",
+ "text": "MySQL crashed.",
  "words": [
   [
    "MySQL",
    0.08,
-   0.44
+   0.58
   ],
   [
-   "shut",
-   0.48,
-   0.64
-  ],
-  [
-   "down",
-   0.68,
-   0.84
-  ],
-  [
-   "unexpectedly.",
-   0.86,
-   1.42
+   "crashed.",
+   0.66,
+   1.12
   ]
  ]
 }

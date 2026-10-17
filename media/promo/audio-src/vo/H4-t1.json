@@ -1,50 +1,34 @@
 {
- "text": "What if your stack just fixed itself?",
+ "text": "[calm] Now it fixes itself. [pause]",
  "voice": "dXtC3XhB9GtPusIpNtQx",
- "model": "eleven_turbo_v2_5",
+ "model": "eleven_v3",
  "settings": {
-  "stability": 0.45,
+  "stability": 0.5,
   "similarity_boost": 0.8,
-  "style": 0.5,
-  "use_speaker_boost": true,
-  "speed": 1.1
+  "style": 0.45,
+  "use_speaker_boost": true
  },
  "seed": 2041,
  "words": [
   [
-   "What",
-   0.0,
-   0.209
+   "Now",
+   0.272,
+   0.32
   ],
   [
-   "if",
-   0.244,
-   0.302
+   "it",
+   0.427,
+   0.64
   ],
   [
-   "your",
-   0.337,
-   0.453
+   "fixes",
+   0.72,
+   1.12
   ],
   [
-   "stack",
-   0.488,
-   0.731
-  ],
-  [
-   "just",
-   0.789,
-   0.94
-  ],
-  [
-   "fixed",
-   0.975,
-   1.196
-  ],
-  [
-   "itself?",
-   1.231,
-   1.95
+   "itself.",
+   1.2,
+   1.76
   ]
  ]
 }
