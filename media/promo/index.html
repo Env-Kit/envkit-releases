@@ -3,172 +3,142 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=1920, height=1080" />
+    <!-- EnvKit promo v2 (16:9, 48 s). Cut to a 128 BPM track: beat n lands at 0.088 + n * 0.46875 s.
+         Every UI surface is a real EnvKit screenshot; all words on screen are HTML. -->
     <script src="assets/gsap.min.js"></script>
-    <style>
-      :root {
-        --bg: #06090d;
-        --panel: #10171f;
-        --raised: #19222c;
-        --ink: #eaf0f6;
-        --ink-2: #9aa8b8;
-        --muted: #7e8c9a;
-        --mint: #2dd4aa;
-        --teal: #0d9488;
-        --hair: rgba(148, 163, 184, 0.16);
-        --sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
-      }
-      * { margin: 0; padding: 0; box-sizing: border-box; }
-      html, body { width: 1920px; height: 1080px; overflow: hidden; background: var(--bg); }
-      #root { position: relative; width: 1920px; height: 1080px; overflow: hidden; background: var(--bg); font-family: var(--sans); color: var(--ink); }
-      .clip { position: absolute; inset: 0; }
-      /* One quiet light source: a teal glow from above, like the app's onboarding. */
-      .glow { position: absolute; inset: 0; background: radial-gradient(ellipse 900px 520px at 50% -8%, rgba(45, 212, 170, 0.13), rgba(13, 148, 136, 0.05) 45%, transparent 70%); }
-      .dots { position: absolute; inset: 0; background-image: radial-gradient(rgba(148, 163, 184, 0.09) 1px, transparent 1px); background-size: 28px 28px; }
-
-      /* App window: screenshots are 1440x900 logical, shown at 1600x1000. */
-      .cam { position: absolute; left: 0; top: 0; transform-origin: 0 0; }
-      .win { position: relative; width: 1600px; height: 1000px; border-radius: 14px; overflow: hidden; border: 1px solid var(--hair); background: var(--bg); box-shadow: 0 40px 120px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(0, 0, 0, 0.4); }
-      .win img.shot { position: absolute; left: 0; top: 0; width: 1600px; height: 1000px; display: block; }
-      .lights { position: absolute; left: 18px; top: 9px; display: flex; gap: 8px; z-index: 3; }
-      .lights i { width: 12px; height: 12px; border-radius: 50%; background: #2a333d; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05); }
-
-      .ring { position: absolute; border-radius: 12px; border: 2px solid var(--mint); box-shadow: 0 0 0 6px rgba(45, 212, 170, 0.12); opacity: 0; z-index: 4; }
-
-      .cursor { position: absolute; width: 30px; height: 30px; z-index: 6; opacity: 0; }
-      .click { position: absolute; width: 56px; height: 56px; margin: -28px 0 0 -28px; border-radius: 50%; border: 2px solid var(--mint); opacity: 0; z-index: 5; }
-
-      /* Caption: plain and factual, bottom-left, on a solid panel. */
-      .cap { position: absolute; left: 96px; bottom: 72px; z-index: 10; display: flex; align-items: center; gap: 16px; padding: 18px 26px; border-radius: 14px; background: rgba(8, 12, 17, 0.92); border: 1px solid var(--hair); box-shadow: 0 18px 50px rgba(0, 0, 0, 0.45); opacity: 0; }
-      .cap .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--mint); flex: none; }
-      .cap .t { font-size: 34px; font-weight: 600; letter-spacing: -0.01em; color: var(--ink); white-space: nowrap; }
-      .cap .s { font-size: 24px; color: var(--ink-2); margin-left: 6px; white-space: nowrap; }
-
-      /* Hook */
-      #s-hook .center { position: absolute; left: 0; right: 0; top: 360px; text-align: center; }
-      #s-hook .logo { width: 96px; height: auto; margin: 0 auto 44px; display: block; opacity: 0; }
-      #s-hook h1 { font-size: 92px; font-weight: 650; letter-spacing: -0.035em; opacity: 0; }
-      #s-hook .stack { margin-top: 30px; font-family: var(--mono); font-size: 28px; color: var(--ink-2); opacity: 0; }
-      #s-hook .stack b { color: var(--mint); font-weight: 400; }
-
-      /* AI chat */
-      #chat { position: absolute; right: 120px; top: 140px; width: 840px; z-index: 8; border-radius: 18px; background: #0b1117; border: 1px solid var(--hair); box-shadow: 0 40px 120px rgba(0, 0, 0, 0.6); opacity: 0; overflow: hidden; }
-      #chat .hd { display: flex; align-items: center; gap: 12px; padding: 20px 26px; border-bottom: 1px solid var(--hair); font-size: 22px; color: var(--ink-2); }
-      #chat .hd .live { width: 9px; height: 9px; border-radius: 50%; background: var(--mint); }
-      #chat .hd b { color: var(--ink); font-weight: 600; }
-      #chat .bd { padding: 26px; display: flex; flex-direction: column; gap: 16px; }
-      .msg-user { align-self: flex-end; max-width: 600px; padding: 16px 20px; border-radius: 14px 14px 4px 14px; background: var(--raised); font-size: 24px; line-height: 1.4; opacity: 0; }
-      .tool { display: flex; align-items: flex-start; gap: 14px; padding: 14px 18px; border-radius: 12px; border: 1px solid var(--hair); background: rgba(16, 23, 31, 0.8); opacity: 0; }
-      .tool .ic { width: 22px; height: 22px; flex: none; margin-top: 3px; position: relative; }
-      .tool .spin { position: absolute; inset: 0; border-radius: 50%; border: 2.5px solid rgba(148, 163, 184, 0.25); border-top-color: var(--mint); }
-      .tool .ok { position: absolute; inset: 0; opacity: 0; }
-      .tool .name { font-family: var(--mono); font-size: 21px; color: var(--ink); }
-      .tool .name em { font-style: normal; color: var(--muted); }
-      .tool .res { font-family: var(--mono); font-size: 19px; color: var(--ink-2); margin-top: 6px; opacity: 0; }
-      .tool .res b { color: var(--mint); font-weight: 400; }
-      .msg-ai { font-size: 24px; line-height: 1.45; color: var(--ink); opacity: 0; padding: 4px 2px 0; }
-      .msg-ai code { font-family: var(--mono); font-size: 21px; color: var(--mint); }
-
-      /* Closing card */
-      #s-end .center { position: absolute; left: 0; right: 0; top: 300px; text-align: center; }
-      #s-end .logo { width: 120px; margin: 0 auto 40px; display: block; opacity: 0; }
-      #s-end h2 { font-size: 96px; font-weight: 650; letter-spacing: -0.035em; opacity: 0; }
-      #s-end p.tag { margin-top: 18px; font-size: 34px; color: var(--ink-2); opacity: 0; }
-      #s-end .cta { display: inline-flex; align-items: center; gap: 14px; margin-top: 56px; padding: 18px 30px; border-radius: 12px; border: 1px solid rgba(45, 212, 170, 0.45); background: rgba(45, 212, 170, 0.08); font-size: 32px; color: var(--ink); opacity: 0; }
-      #s-end .cta b { color: var(--mint); font-weight: 600; }
-    </style>
+    <link rel="stylesheet" href="assets/promo.css" />
+    <style>#root { width: 1920px; height: 1080px; }</style>
   </head>
   <body>
-    <div id="root" data-composition-id="main" data-start="0" data-duration="37" data-width="1920" data-height="1080">
-      <div class="clip" id="bg" data-start="0" data-duration="37" data-track-index="0">
-        <div class="glow"></div>
-        <div class="dots"></div>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="48" data-width="1920" data-height="1080">
+      <!-- ── Backdrop (always full-frame) ─────────────────────────────── -->
+      <div class="clip layer" id="bg" data-start="0" data-duration="48" data-track-index="0">
+        <div class="base"></div>
+        <div class="glow" id="glow"></div>
+      </div>
+      <video class="clip bgv" id="v-ribbons" src="assets/ai/ribbons-16x9-graded.mp4" data-start="0" data-duration="8" data-track-index="1" muted playsinline></video>
+      <video class="clip bgv" id="v-circuit" src="assets/ai/circuit-16x9-graded.mp4" data-start="11.4" data-duration="8" data-track-index="1" muted playsinline></video>
+      <video class="clip bgv" id="v-mono" src="assets/ai/monoliths-16x9-graded.mp4" data-start="40" data-duration="8" data-track-index="1" muted playsinline></video>
+      <div class="clip layer" id="fx" data-start="0" data-duration="48" data-track-index="2">
+        <div id="floor"></div>
+        <canvas id="trails" width="1920" height="1080"></canvas>
       </div>
 
-      <!-- 1. Hook -->
-      <div class="clip" id="s-hook" data-start="0" data-duration="3.7" data-track-index="1">
-        <div class="center">
-          <img class="logo" src="assets/envkit-light.svg" alt="" />
-          <h1>Your local stack, one place.</h1>
-          <div class="stack">nginx · php · mysql · postgres · redis · node · <b>https://*.test</b></div>
+      <!-- ── 0. Cold open: logo hit ───────────────────────────────────── -->
+      <div class="clip layer" id="s-logo" data-start="0" data-duration="4.4" data-track-index="10">
+        <div class="flare" id="flare"></div>
+        <div class="streak" id="streak"></div>
+        <div class="lockup" id="lockup">
+          <svg class="mark" viewBox="6 4 384 285" aria-hidden="true">
+            <path class="bar" d="M30.17,20.83 Q33.00,18.00 37.00,17.98 L244.00,17.02 Q248.00,17.00 245.51,20.13 L204.49,71.87 Q202.00,75.00 198.00,75.00 L86.00,75.00 Q82.00,75.00 79.88,78.39 L79.12,79.61 Q77.00,83.00 73.00,82.93 L23.00,82.07 Q19.00,82.00 19.08,78.00 L19.92,35.00 Q20.00,31.00 22.83,28.17 Z" />
+            <path class="bar" d="M19.00,120.00 Q19.00,116.00 23.00,116.00 L171.00,116.00 Q175.00,116.00 172.54,119.15 L152.46,144.85 Q150.00,148.00 152.22,151.33 L165.78,171.67 Q168.00,175.00 164.00,175.00 L86.91,175.00 Q83.00,175.00 80.50,178.00 L80.50,178.00 Q78.00,181.00 74.09,181.00 L23.00,181.00 Q19.00,181.00 19.00,177.00 Z" />
+            <path class="bar" d="M19.09,223.00 Q19.00,219.00 23.00,219.00 L196.00,219.00 Q200.00,219.00 202.37,222.22 L239.63,272.78 Q242.00,276.00 238.00,276.00 L38.00,276.00 Q34.00,276.00 31.07,273.28 L22.93,265.72 Q20.00,263.00 19.91,259.00 Z" />
+            <path class="k" d="M292.11,19.33 Q294.00,17.00 297.00,17.00 L372.00,17.00 Q375.00,17.00 373.10,19.33 L270.90,144.67 Q269.00,147.00 270.87,149.34 L370.13,273.66 Q372.00,276.00 369.00,276.00 L285.00,276.00 Q282.00,276.00 280.11,273.67 L184.89,156.33 Q183.00,154.00 184.89,151.67 Z" />
+          </svg>
+          <div class="word" id="logo-word"><span>E</span><span>n</span><span>v</span><span>K</span><span>i</span><span>t</span></div>
         </div>
       </div>
 
-      <!-- 2. Onboarding ends on a working https site -->
-      <div class="clip" id="s-onb" data-start="3.3" data-duration="7.4" data-track-index="2">
-        <div class="cam" id="cam-onb">
-          <div class="win">
+      <!-- ── 1. Tagline ───────────────────────────────────────────────── -->
+      <div class="clip layer" id="s-tag" data-start="3.6" data-duration="4.4" data-track-index="11">
+        <div class="tagline" id="tagline">
+          <div class="ln"><span class="w">Your</span> <span class="w">local</span> <span class="w">stack,</span></div>
+          <div class="ln"><span class="w">one</span> <span class="w">place.</span></div>
+        </div>
+        <div class="chips" id="chips">
+          <span class="chip">nginx</span><span class="chip">Apache</span><span class="chip">PHP</span><span class="chip">MySQL</span><span class="chip">PostgreSQL</span><span class="chip">Redis</span><span class="chip">Node.js</span><span class="chip on"><i></i>https://*.test</span>
+        </div>
+      </div>
+
+      <!-- ── 2. Onboarding → creating ─────────────────────────────────── -->
+      <div class="clip layer stage" id="s-onb" data-start="7.2" data-duration="7.3" data-track-index="12">
+        <div class="panel" id="pn-onb">
+          <div class="cnt">
             <img class="shot" id="onb-1" src="assets/onboarding-first-site.png" alt="" />
-            <img class="shot" id="onb-2" src="assets/onboarding-creating.png" alt="" style="opacity: 0" />
-            <img class="shot" id="onb-3" src="assets/onboarding-success.png" alt="" style="opacity: 0" />
-            <div class="lights"><i></i><i></i><i></i></div>
+            <img class="shot" id="onb-2" src="assets/onboarding-creating.png" alt="" />
             <div class="click" id="onb-click"></div>
             <svg class="cursor" id="onb-cursor" viewBox="0 0 24 24"><path d="M4 2.5 L4 19.5 L8.6 15.4 L11.6 21.8 L14.4 20.5 L11.4 14.2 L17.6 14.2 Z" fill="#fff" stroke="#06090d" stroke-width="1.4" stroke-linejoin="round" /></svg>
-            <div class="ring" id="onb-ring"></div>
           </div>
+          <div class="sheen"></div>
         </div>
-        <div class="cap" id="cap-onb"><span class="dot"></span><span class="t">First run ends on a working site</span><span class="s">trusted HTTPS, no config files</span></div>
+        <div class="cap" id="cap-onb"><span class="dot"></span><span class="t">Pick a starter. EnvKit does the rest.</span></div>
       </div>
 
-      <!-- 3. Sites -->
-      <div class="clip" id="s-sites" data-start="10.3" data-duration="5.4" data-track-index="3">
-        <div class="cam" id="cam-sites">
-          <div class="win">
-            <img class="shot" src="assets/sites.png" alt="" />
-            <div class="lights"><i></i><i></i><i></i></div>
-            <div class="ring" id="sites-ring"></div>
-          </div>
-        </div>
-        <div class="cap" id="cap-sites"><span class="dot"></span><span class="t">Every project gets its own .test domain</span><span class="s">Laravel, WordPress, Next.js, Vite</span></div>
+      <!-- ── 2b. The breath: the URL types itself ─────────────────────── -->
+      <div class="clip layer" id="s-url" data-start="13" data-duration="2.7" data-track-index="13">
+        <div class="urlscrim"></div>
+        <div class="url" id="url"><span class="pre">https://</span><span class="host"></span><span class="caret" id="caret"></span></div>
       </div>
 
-      <!-- 4. Services running -->
-      <div class="clip" id="s-svc" data-start="15.3" data-duration="6.2" data-track-index="4">
-        <div class="cam" id="cam-svc">
-          <div class="win">
-            <img class="shot" src="assets/dashboard.png" alt="" />
-            <div class="lights"><i></i><i></i><i></i></div>
-            <div class="ring" id="svc-ring"></div>
+      <!-- ── 3. Your site is live ─────────────────────────────────────── -->
+      <div class="clip layer stage" id="s-live" data-start="14.9" data-duration="4.3" data-track-index="14">
+        <div class="panel" id="pn-live">
+          <div class="cnt">
+            <img class="shot" src="assets/onboarding-success.png" alt="" />
+            <div class="ring" id="rg-live"></div>
           </div>
+          <div class="sheen" id="sheen-live"></div>
         </div>
-        <div class="cap" id="cap-svc"><span class="dot"></span><span class="t">Services run in the background</span><span class="s">real status, real ports</span></div>
+        <div class="cap" id="cap-live"><span class="dot"></span><span class="t">Your site is live</span><span class="s">trusted HTTPS, no config files</span></div>
       </div>
 
-      <!-- 5. Databases -->
-      <div class="clip" id="s-db" data-start="21.1" data-duration="5.0" data-track-index="5">
-        <div class="cam" id="cam-db">
-          <div class="win">
-            <img class="shot" src="assets/databases.png" alt="" />
-            <div class="lights"><i></i><i></i><i></i></div>
-            <div class="ring" id="db-ring"></div>
-          </div>
+      <!-- ── 4. Sites ─────────────────────────────────────────────────── -->
+      <div class="clip layer stage" id="s-sites" data-start="18.5" data-duration="4.4" data-track-index="15">
+        <div class="panel" id="pn-sites">
+          <div class="cnt"><img class="shot" src="assets/sites.png" alt="" /><div class="ring" id="rg-sites"></div></div>
+          <div class="sheen"></div>
         </div>
-        <div class="cap" id="cap-db"><span class="dot"></span><span class="t">Databases, users and snapshots</span><span class="s">MySQL, PostgreSQL, MongoDB</span></div>
+        <div class="hl" id="hl-sites" style="left: 110px; top: 350px; width: 560px">
+          <h2 class="kin">Every project gets its own .test domain.</h2>
+          <p class="kin">Laravel, WordPress, Next.js, Vite. Each on trusted HTTPS.</p>
+        </div>
       </div>
 
-      <!-- 6. AI / MCP -->
-      <div class="clip" id="s-ai" data-start="25.7" data-duration="7.6" data-track-index="6">
-        <div class="cam" id="cam-ai">
-          <div class="win" id="ai-win">
-            <img class="shot" src="assets/ai.png" alt="" />
-            <div class="lights"><i></i><i></i><i></i></div>
-          </div>
+      <!-- ── 5. Services ──────────────────────────────────────────────── -->
+      <div class="clip layer stage" id="s-svc" data-start="22.2" data-duration="4.5" data-track-index="16">
+        <div class="panel" id="pn-svc">
+          <div class="cnt"><img class="shot" src="assets/dashboard.png" alt="" /><div class="ring" id="rg-svc"></div></div>
+          <div class="sheen"></div>
+        </div>
+        <div class="hl" id="hl-svc" style="left: 1350px; top: 380px; width: 470px">
+          <h2 class="kin">Every service, running.</h2>
+          <p class="kin">Real status, real ports. Start, stop and switch versions in one click.</p>
+        </div>
+      </div>
+
+      <!-- ── 6. Databases ─────────────────────────────────────────────── -->
+      <div class="clip layer stage" id="s-db" data-start="26" data-duration="4.4" data-track-index="17">
+        <div class="panel" id="pn-db">
+          <div class="cnt"><img class="shot" src="assets/databases.png" alt="" /><div class="ring" id="rg-db"></div></div>
+          <div class="sheen"></div>
+        </div>
+        <div class="hl" id="hl-db" style="left: 120px; top: 370px; width: 520px">
+          <h2 class="kin">Databases, users and snapshots.</h2>
+          <p class="kin">MySQL / MariaDB, PostgreSQL and MongoDB, side by side.</p>
+        </div>
+      </div>
+
+      <!-- ── 7. AI assistant over MCP ─────────────────────────────────── -->
+      <div class="clip layer stage" id="s-ai" data-start="29.75" data-duration="8.2" data-track-index="18">
+        <div class="panel" id="pn-ai">
+          <div class="cnt"><img class="shot" src="assets/ai.png" alt="" /></div>
+          <div class="sheen"></div>
         </div>
         <div id="chat">
-          <div class="hd"><span class="live"></span><b>AI assistant</b>· connected to EnvKit over MCP</div>
+          <div class="hd"><span class="live"></span><b>AI assistant</b><span class="sep">·</span>connected to EnvKit over MCP</div>
           <div class="bd">
-            <div class="msg-user" id="ai-u">Redis stopped and the shop queue is failing. Can you fix it?</div>
+            <div class="msg-user" id="ai-u"><span class="w">Redis</span> <span class="w">stopped</span> <span class="w">and</span> <span class="w">the</span> <span class="w">shop</span> <span class="w">queue</span> <span class="w">is</span> <span class="w">failing.</span> <span class="w">Can</span> <span class="w">you</span> <span class="w">fix</span> <span class="w">it?</span></div>
             <div class="tool" id="ai-t1">
               <div class="ic"><div class="spin"></div><svg class="ok" viewBox="0 0 22 22"><circle cx="11" cy="11" r="10" fill="rgba(45,212,170,0.15)" stroke="#2dd4aa" stroke-width="1.5" /><path d="M6.5 11.5 L9.6 14.4 L15.5 8" fill="none" stroke="#2dd4aa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg></div>
-              <div><div class="name"><em>envkit ·</em> diagnose_service <em>{ "service": "redis" }</em></div><div class="res">stopped · port 6379 is free · config OK</div></div>
+              <div><div class="name"><em>envkit ·</em> diagnose_service <em>{ "name": "redis" }</em></div><div class="res">stopped · port 6379 is free · config OK</div></div>
             </div>
             <div class="tool" id="ai-t2">
               <div class="ic"><div class="spin"></div><svg class="ok" viewBox="0 0 22 22"><circle cx="11" cy="11" r="10" fill="rgba(45,212,170,0.15)" stroke="#2dd4aa" stroke-width="1.5" /><path d="M6.5 11.5 L9.6 14.4 L15.5 8" fill="none" stroke="#2dd4aa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg></div>
-              <div><div class="name"><em>envkit ·</em> start_service <em>{ "service": "redis" }</em></div><div class="res"><b>running</b> · 127.0.0.1:6379</div></div>
+              <div><div class="name"><em>envkit ·</em> start_service <em>{ "name": "redis" }</em></div><div class="res"><b>running</b> · 127.0.0.1:6379</div></div>
             </div>
             <div class="tool" id="ai-t3">
               <div class="ic"><div class="spin"></div><svg class="ok" viewBox="0 0 22 22"><circle cx="11" cy="11" r="10" fill="rgba(45,212,170,0.15)" stroke="#2dd4aa" stroke-width="1.5" /><path d="M6.5 11.5 L9.6 14.4 L15.5 8" fill="none" stroke="#2dd4aa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg></div>
-              <div><div class="name"><em>envkit ·</em> restart_site_queue_worker <em>{ "site": "shop" }</em></div><div class="res">worker <b>default</b> restarted</div></div>
+              <div><div class="name"><em>envkit ·</em> restart_site_queue_worker <em>{ "name": "shop" }</em></div><div class="res">worker <b>default</b> restarted</div></div>
             </div>
             <div class="msg-ai" id="ai-a">Redis is back on <code>:6379</code> and the shop queue worker restarted. Jobs are processing again.</div>
           </div>
@@ -176,116 +146,249 @@
         <div class="cap" id="cap-ai"><span class="dot"></span><span class="t">Your AI assistant can run the stack too</span><span class="s">built-in MCP server</span></div>
       </div>
 
-      <!-- 7. Closing card -->
-      <div class="clip" id="s-end" data-start="32.9" data-duration="4.1" data-track-index="7">
-        <div class="center">
-          <img class="logo" src="assets/envkit-light.svg" alt="" />
-          <h2>EnvKit</h2>
-          <p class="tag">Your local stack, one place.</p>
-          <div class="cta">Free for Windows &amp; macOS <span style="color: var(--muted)">·</span> <b>envkit.net</b></div>
+      <!-- ── 8. Montage ───────────────────────────────────────────────── -->
+      <div class="clip layer stage" id="s-mont" data-start="37.3" data-duration="4.4" data-track-index="19">
+        <div class="panel mp" id="pn-cron"><div class="cnt"><img class="shot" src="assets/cron.png" alt="" /></div><div class="sheen"></div></div>
+        <div class="panel mp" id="pn-logs"><div class="cnt"><img class="shot" src="assets/logs.png" alt="" /></div><div class="sheen"></div></div>
+        <div class="panel mp" id="pn-detail"><div class="cnt"><img class="shot" src="assets/site-detail.png" alt="" /></div><div class="sheen"></div></div>
+        <div class="panel mp" id="pn-tools"><div class="cnt"><img class="shot" src="assets/tools.png" alt="" /></div><div class="sheen"></div></div>
+        <div class="mlabel" id="ml-cron"><h3>Cron</h3><p>Scheduled tasks, with their last run</p></div>
+        <div class="mlabel" id="ml-logs"><h3>Logs</h3><p>Every service log, live and searchable</p></div>
+        <div class="mlabel" id="ml-detail"><h3>Site detail</h3><p>PHP version, workers, scheduler, backups</p></div>
+        <div class="mlabel" id="ml-tools"><h3>Tools</h3><p>Composer, PIE, Xdebug on demand</p></div>
+      </div>
+
+      <!-- ── 9. End card ──────────────────────────────────────────────── -->
+      <div class="clip layer" id="s-end" data-start="41" data-duration="7" data-track-index="20">
+        <div class="flare" id="flare-end"></div>
+        <div class="endcard" id="endcard">
+          <div class="lockup sm" id="end-lockup">
+            <svg class="mark" viewBox="6 4 384 285" aria-hidden="true">
+              <path class="bar" d="M30.17,20.83 Q33.00,18.00 37.00,17.98 L244.00,17.02 Q248.00,17.00 245.51,20.13 L204.49,71.87 Q202.00,75.00 198.00,75.00 L86.00,75.00 Q82.00,75.00 79.88,78.39 L79.12,79.61 Q77.00,83.00 73.00,82.93 L23.00,82.07 Q19.00,82.00 19.08,78.00 L19.92,35.00 Q20.00,31.00 22.83,28.17 Z" />
+              <path class="bar" d="M19.00,120.00 Q19.00,116.00 23.00,116.00 L171.00,116.00 Q175.00,116.00 172.54,119.15 L152.46,144.85 Q150.00,148.00 152.22,151.33 L165.78,171.67 Q168.00,175.00 164.00,175.00 L86.91,175.00 Q83.00,175.00 80.50,178.00 L80.50,178.00 Q78.00,181.00 74.09,181.00 L23.00,181.00 Q19.00,181.00 19.00,177.00 Z" />
+              <path class="bar" d="M19.09,223.00 Q19.00,219.00 23.00,219.00 L196.00,219.00 Q200.00,219.00 202.37,222.22 L239.63,272.78 Q242.00,276.00 238.00,276.00 L38.00,276.00 Q34.00,276.00 31.07,273.28 L22.93,265.72 Q20.00,263.00 19.91,259.00 Z" />
+              <path class="k" d="M292.11,19.33 Q294.00,17.00 297.00,17.00 L372.00,17.00 Q375.00,17.00 373.10,19.33 L270.90,144.67 Q269.00,147.00 270.87,149.34 L370.13,273.66 Q372.00,276.00 369.00,276.00 L285.00,276.00 Q282.00,276.00 280.11,273.67 L184.89,156.33 Q183.00,154.00 184.89,151.67 Z" />
+            </svg>
+            <div class="word">EnvKit</div>
+          </div>
+          <p class="tag" id="end-tag">Your local stack, one place.</p>
+          <div class="ctarow" id="end-cta">
+            <span class="free">Free for Windows &amp; macOS</span>
+            <span class="btn" id="end-btn">Download at envkit.net<span class="btn-sheen" id="btn-sheen"></span></span>
+          </div>
         </div>
+      </div>
+
+      <!-- ── Finishing: vignette + grain (always on top) ──────────────── -->
+      <div class="clip layer" id="finish" data-start="0" data-duration="48" data-track-index="30">
+        <div id="vignette"></div>
+        <div id="grain"></div>
       </div>
     </div>
 
+    <script src="assets/promo-lib.js"></script>
     <script>
-      window.__timelines = window.__timelines || {};
-      const tl = gsap.timeline({ paused: true });
+      (function () {
+        const { b, tl, panel, cam, camTo, ring, kin, words, typeInto, enter, sweep, trails, grain, floor } = PromoLib.create({ width: 1920, height: 1080, duration: 48 });
+        const EXPO = 'expo.out', IO = 'power3.inOut', SINE = 'sine.inOut';
 
-      // Logical app px (1440x900) -> window px (1600x1000).
-      const K = 1600 / 1440;
-      // Camera that puts logical point (lx, ly) at screen point (cx, cy) with zoom s.
-      const cam = (lx, ly, s, cx = 960, cy = 540) => ({ x: cx - lx * K * s, y: cy - ly * K * s, scale: s });
-      const WIDE = { x: 160, y: 40, scale: 1 };
-      const ring = (sel, l, t, w, h) => gsap.set(sel, { left: l * K, top: t * K, width: w * K, height: h * K });
-      const E = 'power2.inOut';
-      const OUT = 'power3.out';
-      const fadeIn = (sel, at, d = 0.5) => tl.fromTo(sel, { opacity: 0 }, { opacity: 1, duration: d, ease: 'power1.out' }, at);
-      const fadeOut = (sel, at, d = 0.5) => tl.to(sel, { opacity: 0, duration: d, ease: 'power1.in' }, at);
-      const capIn = (sel, at) => tl.fromTo(sel, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.6, ease: OUT }, at);
+        // ── Backdrop ──────────────────────────────────────────────────
+        trails('#trails', { count: 18 });
+        floor('#floor');
+        grain('#grain');
+        // Trails and floor breathe with the edit: bright in the open and on the end card, quiet under UI.
+        gsap.set('#trails', { opacity: 0.55 });
+        tl.to('#trails', { opacity: 0.3, duration: 1.2, ease: SINE }, b(14));
+        tl.to('#trails', { opacity: 0.85, duration: 0.3 }, b(30));
+        tl.to('#trails', { opacity: 0.35, duration: 1.0, ease: SINE }, b(32));
+        tl.to('#trails', { opacity: 0.55, duration: 1.0, ease: SINE }, b(86));
+        gsap.set('#floor', { opacity: 0.0 });
+        tl.to('#floor', { opacity: 1, duration: 2, ease: SINE }, b(14));
+        tl.to('#floor', { opacity: 0.4, duration: 1, ease: SINE }, b(86));
+        // The mint key light drifts across the frame like a slow camera move (parallax with the panels).
+        gsap.set('#glow', { x: -180, y: -40, scale: 1 });
+        tl.to('#glow', { x: 220, y: 30, scale: 1.25, duration: 48, ease: 'none' }, 0);
 
-      // 1. Hook (0 - 3.7)
-      tl.fromTo('#s-hook .logo', { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.7, ease: OUT }, 0.2);
-      tl.fromTo('#s-hook h1', { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 0.9, ease: OUT }, 0.45);
-      tl.fromTo('#s-hook .stack', { opacity: 0 }, { opacity: 1, duration: 0.8 }, 1.25);
-      fadeOut('#s-hook', 3.2, 0.5);
+        // AI backdrop clips: graded footage sits under the light, never over UI.
+        gsap.set('#v-ribbons', { opacity: 0.0, scale: 1.08 });
+        tl.to('#v-ribbons', { opacity: 0.85, duration: 0.9, ease: 'power1.out' }, 0);
+        tl.to('#v-ribbons', { scale: 1.0, duration: 8, ease: 'none' }, 0);
+        tl.to('#v-ribbons', { opacity: 0.32, duration: 0.6, ease: SINE }, b(6));
+        tl.to('#v-ribbons', { opacity: 0, duration: 0.5 }, b(15.5));
+        gsap.set('#v-circuit', { opacity: 0, scale: 1.12 });
+        tl.to('#v-circuit', { opacity: 0.32, duration: 0.8, ease: SINE }, 11.4);
+        tl.to('#v-circuit', { opacity: 0.55, duration: 0.5, ease: SINE }, b(28));
+        tl.to('#v-circuit', { scale: 1.0, duration: 8, ease: 'none' }, 11.4);
+        tl.to('#v-circuit', { opacity: 0.22, duration: 0.5, ease: SINE }, b(32.4));
+        tl.to('#v-circuit', { opacity: 0, duration: 0.6 }, b(39.5));
+        gsap.set('#v-mono', { opacity: 0, scale: 1.1 });
+        tl.to('#v-mono', { opacity: 0.6, duration: 1.2, ease: SINE }, b(87.3));
+        tl.to('#v-mono', { scale: 1.0, duration: 8, ease: 'none' }, 40);
+        tl.to('#v-mono', { opacity: 0.35, duration: 1.0, ease: SINE }, b(92));
 
-      // 2. Onboarding (3.3 - 10.7)
-      fadeIn('#s-onb', 3.3, 0.5);
-      tl.fromTo('#cam-onb', cam(720, 470, 0.94), { ...cam(760, 560, 1.12), duration: 2.3, ease: E }, 3.3);
-      capIn('#cap-onb', 3.7);
-      gsap.set('#onb-cursor', { left: 0, top: 0, x: 600 * K, y: 330 * K });
-      tl.to('#onb-cursor', { opacity: 1, duration: 0.3 }, 3.7);
-      tl.to('#onb-cursor', { x: 925 * K, y: 785 * K, duration: 1.3, ease: E }, 4.0);
-      gsap.set('#onb-click', { left: 925 * K, top: 787 * K });
-      tl.to('#onb-cursor', { scale: 0.85, duration: 0.08, yoyo: true, repeat: 1 }, 5.3);
-      tl.fromTo('#onb-click', { opacity: 0.9, scale: 0.4 }, { opacity: 0, scale: 1.3, duration: 0.6, ease: 'power2.out' }, 5.35);
-      tl.to('#onb-2', { opacity: 1, duration: 0.35 }, 5.6);
-      tl.to('#onb-cursor', { opacity: 0, duration: 0.3 }, 5.6);
-      tl.to('#cam-onb', { ...cam(720, 450, 1.0), duration: 0.9, ease: E }, 5.6);
-      tl.to('#onb-3', { opacity: 1, duration: 0.45 }, 6.7);
-      ring('#onb-ring', 606, 373, 228, 45);
-      tl.to('#cam-onb', { ...cam(720, 420, 1.55), duration: 1.4, ease: E }, 7.3);
-      tl.fromTo('#onb-ring', { opacity: 0, scale: 1.06 }, { opacity: 1, scale: 1, duration: 0.5, ease: OUT }, 7.9);
-      fadeOut('#s-onb', 10.2, 0.5);
+        // ── 0. Cold open (b0–b8) ─────────────────────────────────────
+        const bars = gsap.utils.toArray('#lockup .bar');
+        gsap.set('#lockup', { x: 0, scale: 1 });
+        tl.fromTo(bars, { x: -140, opacity: 0, filter: 'blur(10px)' }, { x: 0, opacity: 1, filter: 'blur(0px)', duration: 0.42, ease: 'power4.out', stagger: 0.06 }, b(2) - 0.42);
+        tl.fromTo('#lockup .k', { x: 120, y: -60, opacity: 0, filter: 'blur(14px)' }, { x: 0, y: 0, opacity: 1, filter: 'blur(0px)', duration: 0.34, ease: 'power4.out' }, b(2) - 0.34);
+        tl.fromTo('#lockup .mark', { scale: 1.12 }, { scale: 1, duration: 1.4, ease: EXPO }, b(2));
+        tl.fromTo('#flare', { opacity: 0, scale: 0.4 }, { opacity: 0.95, scale: 1, duration: 0.18, ease: 'power2.out' }, b(2));
+        tl.to('#flare', { opacity: 0, scale: 1.7, duration: 1.6, ease: 'power2.out' }, b(2) + 0.18);
+        tl.fromTo('#streak', { opacity: 0, scaleX: 0.05 }, { opacity: 1, scaleX: 1, duration: 0.3, ease: 'power3.out' }, b(2));
+        tl.to('#streak', { opacity: 0, duration: 0.9, ease: 'power2.in' }, b(2) + 0.3);
+        tl.fromTo('#logo-word span', { y: 40, opacity: 0, filter: 'blur(10px)' }, { y: 0, opacity: 1, filter: 'blur(0px)', duration: 0.6, ease: EXPO, stagger: 0.045 }, b(4));
+        tl.to('#lockup', { scale: 0.86, opacity: 0, filter: 'blur(16px)', duration: 0.55, ease: 'power3.in' }, b(7.2));
 
-      // 3. Sites (10.3 - 15.7)
-      fadeIn('#s-sites', 10.3, 0.5);
-      tl.fromTo('#cam-sites', WIDE, { ...cam(830, 280, 1.32), duration: 2.4, ease: E }, 10.5);
-      capIn('#cap-sites', 10.9);
-      ring('#sites-ring', 281, 179, 369, 181);
-      tl.fromTo('#sites-ring', { opacity: 0 }, { opacity: 1, duration: 0.45 }, 12.7);
-      tl.to('#cam-sites', { ...cam(1000, 360, 1.28), duration: 2.4, ease: 'sine.inOut' }, 12.9);
-      tl.to('#sites-ring', { opacity: 0, duration: 0.4 }, 14.4);
-      fadeOut('#s-sites', 15.2, 0.5);
+        // ── 1. Tagline (b8–b16) ──────────────────────────────────────
+        const tw = gsap.utils.toArray('#tagline .w');
+        [0, 0.5, 1, 2, 3].forEach((beat, i) => {
+          tl.fromTo(tw[i], { y: 70, opacity: 0, filter: 'blur(16px)' }, { y: 0, opacity: 1, filter: 'blur(0px)', duration: 0.7, ease: EXPO }, b(8 + beat));
+        });
+        gsap.utils.toArray('#chips .chip').forEach((c, i) => {
+          tl.fromTo(c, { y: 24, opacity: 0, scale: 0.9 }, { y: 0, opacity: 1, scale: 1, duration: 0.45, ease: 'back.out(2)' }, b(12 + i * 0.5));
+        });
+        tl.fromTo('#tagline', { scale: 1 }, { scale: 1.04, duration: 3.4, ease: 'none' }, b(8));
+        tl.to(['#tagline', '#chips'], { scale: 1.9, opacity: 0, filter: 'blur(22px)', duration: 0.5, ease: 'power3.in', stagger: 0.03 }, b(15.1));
 
-      // 4. Services (15.3 - 21.5)
-      fadeIn('#s-svc', 15.3, 0.5);
-      tl.fromTo('#cam-svc', WIDE, { ...cam(820, 250, 1.3), duration: 2.0, ease: E }, 15.5);
-      capIn('#cap-svc', 15.9);
-      ring('#svc-ring', 281, 127, 1123, 86);
-      tl.fromTo('#svc-ring', { opacity: 0 }, { opacity: 1, duration: 0.4 }, 17.0);
-      tl.to('#svc-ring', { opacity: 0, duration: 0.3 }, 18.2);
-      tl.to('#cam-svc', { ...cam(700, 740, 1.45), duration: 2.0, ease: E }, 18.3);
-      fadeOut('#s-svc', 21.0, 0.5);
+        // ── 2. Onboarding (b16–b28) ──────────────────────────────────
+        const ONB = panel('#pn-onb', { crop: [0, 0, 1440, 900], w: 1500, left: 210, top: 72 });
+        gsap.set('#onb-2', { opacity: 0 });
+        enter('#pn-onb', b(15.4), { from: { z: -900, rotationX: 30, rotationY: -14, y: 180 }, to: { z: 0, rotationX: 5, rotationY: -3, y: 0 }, dur: 1.0 });
+        tl.to('#pn-onb', { rotationX: 0, rotationY: 0, duration: 2.6, ease: SINE }, b(18));
+        sweep('#pn-onb .sheen', b(16.5), 1.1);
+        tl.fromTo('#cap-onb', { opacity: 0, y: 20, filter: 'blur(8px)' }, { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.6, ease: EXPO }, b(17));
+        // Cursor travels to "Create hello.test" and clicks on beat 22.
+        gsap.set('#onb-cursor', { x: 560, y: 330 });
+        tl.to('#onb-cursor', { opacity: 1, duration: 0.25 }, b(18));
+        tl.to('#onb-cursor', { x: 920, y: 778, duration: 1.4, ease: 'power3.inOut' }, b(18.6));
+        gsap.set('#onb-click', { left: 925, top: 787 });
+        tl.to('#onb-cursor', { scale: 0.82, duration: 0.07, yoyo: true, repeat: 1 }, b(22) - 0.05);
+        tl.fromTo('#onb-click', { opacity: 0.95, scale: 0.3 }, { opacity: 0, scale: 1.5, duration: 0.6, ease: 'power2.out' }, b(22));
+        tl.to('#onb-2', { opacity: 1, duration: 0.25, ease: 'power1.out' }, b(22) + 0.12);
+        tl.to('#onb-cursor', { opacity: 0, duration: 0.2 }, b(22) + 0.12);
+        tl.to('#cap-onb', { opacity: 0, y: 10, duration: 0.3 }, b(24));
+        // Push in on "Creating hello.test…" through the riser.
+        camTo(ONB, { at: b(22.6), dur: 4.4, ease: 'power2.inOut', cx: 720, cy: 395, cw: 560 });
+        tl.to('#pn-onb', { z: 120, duration: 4.2, ease: 'power2.in' }, b(23));
+        // The breath: everything defocuses, only the URL is left.
+        tl.to('#pn-onb', { opacity: 0.0, filter: 'blur(24px)', z: 320, duration: 0.45, ease: 'power2.in' }, b(28) - 0.2);
 
-      // 5. Databases (21.1 - 26.1)
-      fadeIn('#s-db', 21.1, 0.5);
-      tl.fromTo('#cam-db', WIDE, { ...cam(820, 470, 1.32), duration: 2.2, ease: E }, 21.3);
-      capIn('#cap-db', 21.7);
-      ring('#db-ring', 293, 546, 1110, 48);
-      tl.fromTo('#db-ring', { opacity: 0 }, { opacity: 1, duration: 0.4 }, 23.4);
-      tl.to('#cam-db', { ...cam(780, 560, 1.42), duration: 2.0, ease: 'sine.inOut' }, 23.5);
-      fadeOut('#s-db', 25.6, 0.5);
+        // ── 2b. URL types itself in the silence (b28–b32) ─────────────
+        typeInto('#url .host', 'hello.test', b(28.6), 0.1);
+        tl.fromTo('#s-url .urlscrim', { opacity: 0 }, { opacity: 1, duration: 0.4 }, b(28) - 0.1);
+        tl.to('#s-url .urlscrim', { opacity: 0, duration: 0.4 }, b(32) - 0.2);
+        tl.fromTo('#url', { opacity: 0, scale: 0.92, filter: 'blur(10px)' }, { opacity: 1, scale: 1, filter: 'blur(0px)', duration: 0.4, ease: EXPO }, b(28));
+        tl.fromTo('#caret', { opacity: 1 }, { opacity: 0.15, duration: 0.18, repeat: 7, yoyo: true, ease: 'steps(1)' }, b(28));
+        tl.to('#url', { scale: 1.06, duration: 1.8, ease: 'none' }, b(28.4));
+        tl.to('#url', { scale: 0.34, y: -150, opacity: 0, filter: 'blur(6px)', duration: 0.42, ease: 'power3.in' }, b(32) - 0.32);
 
-      // 6. AI / MCP (25.7 - 33.3)
-      fadeIn('#s-ai', 25.7, 0.5);
-      tl.fromTo('#cam-ai', WIDE, { x: -60, y: 60, scale: 0.86, duration: 1.2, ease: E }, 26.4);
-      capIn('#cap-ai', 26.1);
-      tl.to('#ai-win', { opacity: 0.38, duration: 1.0 }, 26.6);
-      tl.fromTo('#chat', { opacity: 0, x: 40 }, { opacity: 1, x: 0, duration: 0.7, ease: OUT }, 26.7);
-      tl.fromTo('#ai-u', { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.45, ease: OUT }, 27.2);
-      const toolStep = (id, at) => {
-        tl.fromTo(id, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.4, ease: OUT }, at);
-        tl.fromTo(`${id} .spin`, { rotation: 0 }, { rotation: 540, duration: 0.8, ease: 'none' }, at);
-        tl.to(`${id} .spin`, { opacity: 0, duration: 0.15 }, at + 0.75);
-        tl.to(`${id} .ok`, { opacity: 1, duration: 0.2 }, at + 0.8);
-        tl.to(`${id} .res`, { opacity: 1, duration: 0.3 }, at + 0.85);
-      };
-      toolStep('#ai-t1', 28.0);
-      toolStep('#ai-t2', 29.1);
-      toolStep('#ai-t3', 30.2);
-      tl.fromTo('#ai-a', { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.5, ease: OUT }, 31.3);
-      fadeOut('#s-ai', 32.8, 0.5);
+        // ── 3. Live (b32–b40) ────────────────────────────────────────
+        const LIVE = panel('#pn-live', { crop: [0, 0, 1440, 900], w: 1500, left: 210, top: 72, view: [720, 330, 1060] });
+        tl.fromTo('#pn-live', { opacity: 0, scale: 1.14, filter: 'blur(22px)' }, { opacity: 1, scale: 1, filter: 'blur(0px)', duration: 0.55, ease: EXPO }, b(32) - 0.05);
+        sweep('#sheen-live', b(32), 0.9);
+        ring('#rg-live', [606, 373, 228, 45], b(33));
+        tl.fromTo('#cap-live', { opacity: 0, y: 20, filter: 'blur(8px)' }, { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.6, ease: EXPO }, b(33));
+        camTo(LIVE, { at: b(34), dur: 4.4, ease: SINE, cx: 720, cy: 360, cw: 720 });
+        tl.to('#pn-live', { rotationY: 4, rotationX: 3, duration: 4.4, ease: SINE }, b(34));
 
-      // 7. Closing (32.9 - 37)
-      tl.fromTo('#s-end .logo', { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.7, ease: OUT }, 33.2);
-      tl.fromTo('#s-end h2', { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.8, ease: OUT }, 33.4);
-      tl.fromTo('#s-end p.tag', { opacity: 0 }, { opacity: 1, duration: 0.7 }, 33.9);
-      tl.fromTo('#s-end .cta', { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.7, ease: OUT }, 34.3);
-      tl.set({}, {}, 37);
+        // ── 4. Sites (b40–b48) ───────────────────────────────────────
+        tl.to('#s-live .panel, #cap-live', { x: -260, opacity: 0, filter: 'blur(18px)', duration: 0.42, ease: 'power3.in' }, b(40) - 0.36);
+        const SITES = panel('#pn-sites', { crop: [236, 58, 1204, 400], w: 1300, left: 730, top: 320 });
+        enter('#pn-sites', b(40) - 0.12, { from: { x: 520, z: -500, rotationY: 42, rotationX: 8 }, to: { x: 0, z: 0, rotationY: 16, rotationX: 4 }, dur: 0.9 });
+        tl.to('#pn-sites', { rotationY: 9, rotationX: 2, duration: 3.2, ease: SINE }, b(42));
+        camTo(SITES, { at: b(42), dur: 3.4, ease: SINE, cx: 236 + 602 + 30, cy: 58 + 200, cw: 1150 });
+        sweep('#pn-sites .sheen', b(41), 1.0);
+        kin('#hl-sites', b(40.5));
+        ring('#rg-sites', [281, 179, 369, 181], b(43));
 
-      window.__timelines['main'] = tl;
-      tl.seek(0);
+        // ── 5. Services (b48–b56) ────────────────────────────────────
+        tl.to('#pn-sites, #hl-sites', { x: -300, opacity: 0, filter: 'blur(18px)', duration: 0.42, ease: 'power3.in' }, b(48) - 0.36);
+        const SVC = panel('#pn-svc', { crop: [244, 96, 1196, 520], w: 1240, left: 40, top: 270 });
+        enter('#pn-svc', b(48) - 0.12, { from: { x: -520, z: -500, rotationY: -42, rotationX: 8 }, to: { x: 0, z: 0, rotationY: -15, rotationX: 4 }, dur: 0.9 });
+        tl.to('#pn-svc', { rotationY: -8, rotationX: 2, duration: 3.2, ease: SINE }, b(50));
+        camTo(SVC, { at: b(50), dur: 3.4, ease: SINE, cx: 244 + 598, cy: 96 + 230, cw: 1100 });
+        sweep('#pn-svc .sheen', b(49), 1.0);
+        kin('#hl-svc', b(48.5));
+        ring('#rg-svc', [281, 127, 1123, 86], b(51));
+
+        // ── 6. Databases (b56–b64) ───────────────────────────────────
+        tl.to('#pn-svc, #hl-svc', { x: 300, opacity: 0, filter: 'blur(18px)', duration: 0.42, ease: 'power3.in' }, b(56) - 0.36);
+        const DB = panel('#pn-db', { crop: [236, 92, 1204, 580], w: 1230, left: 710, top: 240 });
+        enter('#pn-db', b(56) - 0.12, { from: { x: 520, z: -500, rotationY: 42, rotationX: 8 }, to: { x: 0, z: 0, rotationY: 15, rotationX: 4 }, dur: 0.9 });
+        tl.to('#pn-db', { rotationY: 8, rotationX: 2, duration: 3.2, ease: SINE }, b(58));
+        camTo(DB, { at: b(58), dur: 3.4, ease: SINE, cx: 236 + 602, cy: 92 + 320, cw: 1080 });
+        sweep('#pn-db .sheen', b(57), 1.0);
+        kin('#hl-db', b(56.5));
+        ring('#rg-db', [293, 546, 1110, 48], b(59));
+
+        // ── 7. AI over MCP (b64–b80) ─────────────────────────────────
+        tl.to('#pn-db, #hl-db', { x: -300, opacity: 0, filter: 'blur(18px)', duration: 0.42, ease: 'power3.in' }, b(64) - 0.36);
+        panel('#pn-ai', { crop: [236, 40, 1204, 800], w: 1080, left: 60, top: 190 });
+        enter('#pn-ai', b(64) - 0.12, { from: { x: -480, z: -600, rotationY: -40, rotationX: 6 }, to: { x: 0, z: -120, rotationY: -20, rotationX: 3 }, dur: 0.9 });
+        tl.to('#pn-ai', { opacity: 0.42, filter: 'blur(2px)', duration: 0.8, ease: SINE }, b(66));
+        tl.to('#pn-ai', { rotationY: -14, duration: 6, ease: SINE }, b(66));
+        tl.fromTo('#chat', { opacity: 0, x: 120, z: -300, rotationY: 18, filter: 'blur(14px)' }, { opacity: 1, x: 0, z: 0, rotationY: -6, filter: 'blur(0px)', duration: 0.9, ease: EXPO }, b(65));
+        tl.to('#chat', { rotationY: -2, duration: 6, ease: SINE }, b(67));
+        tl.fromTo('#cap-ai', { opacity: 0, y: 20, filter: 'blur(8px)' }, { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.6, ease: EXPO }, b(65.5));
+        tl.fromTo('#ai-u', { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.3, ease: 'power2.out' }, b(66));
+        words('#ai-u', b(66), 0.115);
+        const toolStep = (id, at, done) => {
+          tl.fromTo(id, { opacity: 0, y: 14, filter: 'blur(6px)' }, { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.4, ease: EXPO }, at);
+          tl.fromTo(`${id} .spin`, { rotation: 0 }, { rotation: 720, duration: done - at, ease: 'none' }, at);
+          tl.to(`${id} .spin`, { opacity: 0, duration: 0.1 }, done - 0.05);
+          tl.fromTo(`${id} .ok`, { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.35, ease: 'back.out(3)' }, done);
+          tl.fromTo(`${id} .res`, { opacity: 0, x: -8 }, { opacity: 1, x: 0, duration: 0.3, ease: 'power2.out' }, done + 0.05);
+        };
+        toolStep('#ai-t1', b(68), b(69.5));
+        toolStep('#ai-t2', b(70.5), b(72));
+        toolStep('#ai-t3', b(73), b(74.5));
+        tl.fromTo('#ai-a', { opacity: 0, y: 10, filter: 'blur(6px)' }, { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.6, ease: EXPO }, b(75.5));
+        tl.to('#chat', { scale: 1.03, duration: 1.6, ease: SINE }, b(76));
+        tl.to('#s-ai .panel, #chat, #cap-ai', { opacity: 0, z: -400, filter: 'blur(20px)', duration: 0.45, ease: 'power3.in', stagger: 0.04 }, b(80) - 0.4);
+
+        // ── 8. Montage (b80–b88): one screen every two beats ──────────
+        const M = [
+          ['#pn-cron', '#ml-cron', [236, 40, 1204, 440], 80],
+          ['#pn-logs', '#ml-logs', [236, 40, 1204, 760], 82],
+          ['#pn-detail', '#ml-detail', [236, 40, 1204, 560], 84],
+          ['#pn-tools', '#ml-tools', [236, 40, 1204, 500], 86],
+        ];
+        M.forEach(([p, l, crop, beat], i) => {
+          const hMax = 800, wMax = 1170;
+          const w = Math.min(wMax, (hMax * crop[2]) / crop[3]);
+          const h = (w * crop[3]) / crop[2];
+          const P = panel(p, { crop, w, left: 1920 - w - 70, top: (1080 - h) / 2 });
+          const dir = i % 2 ? -1 : 1;
+          enter(p, b(beat) - 0.1, { from: { x: 420, z: -500, rotationY: 40 * dir, rotationX: 6 }, to: { x: 0, z: 0, rotationY: 12 * dir, rotationX: 3 }, dur: 0.6 });
+          camTo(P, { at: b(beat) + 0.4, dur: 0.9, ease: SINE, cx: crop[0] + crop[2] / 2, cy: crop[1] + crop[3] / 2, cw: crop[2] * 0.94 });
+          sweep(`${p} .sheen`, b(beat) + 0.1, 0.7);
+          tl.fromTo(`${l} h3`, { y: 50, opacity: 0, filter: 'blur(12px)' }, { y: 0, opacity: 1, filter: 'blur(0px)', duration: 0.5, ease: EXPO }, b(beat));
+          tl.fromTo(`${l} p`, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, ease: EXPO }, b(beat) + 0.08);
+          if (i < M.length - 1) {
+            tl.to(p, { x: -300, z: -420, opacity: 0, filter: 'blur(16px)', duration: 0.32, ease: 'power3.in' }, b(beat + 2) - 0.3);
+            tl.to(l, { opacity: 0, y: -20, filter: 'blur(8px)', duration: 0.28, ease: 'power3.in' }, b(beat + 2) - 0.28);
+          }
+        });
+        tl.to('#pn-tools, #ml-tools', { opacity: 0, scale: 0.92, filter: 'blur(20px)', duration: 0.45, ease: 'power3.in' }, b(88) - 0.4);
+
+        // ── 9. End card (b88–end) ────────────────────────────────────
+        const endBars = gsap.utils.toArray('#end-lockup .bar');
+        tl.fromTo(endBars, { x: -90, opacity: 0, filter: 'blur(8px)' }, { x: 0, opacity: 1, filter: 'blur(0px)', duration: 0.4, ease: 'power4.out', stagger: 0.05 }, b(88) - 0.38);
+        tl.fromTo('#end-lockup .k', { x: 80, y: -40, opacity: 0, filter: 'blur(12px)' }, { x: 0, y: 0, opacity: 1, filter: 'blur(0px)', duration: 0.32, ease: 'power4.out' }, b(88) - 0.3);
+        tl.fromTo('#end-lockup .word', { x: -30, opacity: 0, filter: 'blur(12px)' }, { x: 0, opacity: 1, filter: 'blur(0px)', duration: 0.7, ease: EXPO }, b(88) + 0.05);
+        tl.fromTo('#flare-end', { opacity: 0, scale: 0.4 }, { opacity: 0.7, scale: 1, duration: 0.2, ease: 'power2.out' }, b(88));
+        tl.to('#flare-end', { opacity: 0.16, scale: 1.5, duration: 2.0, ease: 'power2.out' }, b(88) + 0.2);
+        tl.fromTo('#end-tag', { y: 30, opacity: 0, filter: 'blur(10px)' }, { y: 0, opacity: 1, filter: 'blur(0px)', duration: 0.7, ease: EXPO }, b(90));
+        tl.fromTo('#end-cta', { y: 30, opacity: 0, filter: 'blur(10px)' }, { y: 0, opacity: 1, filter: 'blur(0px)', duration: 0.7, ease: EXPO }, b(92));
+        tl.fromTo('#btn-sheen', { xPercent: -160 }, { xPercent: 360, duration: 0.9, ease: 'power2.inOut' }, b(96) - 0.15);
+        tl.fromTo('#end-btn', { boxShadow: '0 0 0 1px rgba(45,212,170,0.25), 0 0 0px rgba(45,212,170,0)' }, { boxShadow: '0 0 0 1px rgba(45,212,170,0.25), 0 0 60px rgba(45,212,170,0.35)', duration: 0.25, yoyo: true, repeat: 1, ease: 'power2.out' }, b(96));
+        tl.fromTo('#endcard', { scale: 0.98 }, { scale: 1.02, duration: 7, ease: 'none' }, 41);
+
+        tl.set({}, {}, 48);
+        window.__timelines = window.__timelines || {};
+        window.__timelines['main'] = tl;
+        tl.seek(0);
+      })();
     </script>
   </body>
 </html>

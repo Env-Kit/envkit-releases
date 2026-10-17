@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="en" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <!-- EnvKit promo v2, 9:16 cut (29.25 s) for Reels / Shorts / TikTok. Same 128 BPM grid as
+         index.html; the soundtrack is an on-the-bar re-edit of the same track (tools/vertical_cues.py). -->
+    <script src="assets/gsap.min.js"></script>
+    <link rel="stylesheet" href="assets/promo.css" />
+    <style>
+      #root { width: 1080px; height: 1920px; }
+      #bg .glow { top: 30%; }
+      .lockup { top: 880px; gap: 30px; }
+      .lockup .mark { width: 130px; }
+      .lockup .word { font-size: 112px; }
+      .tagline { top: 700px; font-size: 118px; }
+      .vhl { position: absolute; left: 80px; right: 80px; top: 250px; }
+      .vhl h2 { font-size: 96px; font-weight: 680; letter-spacing: -0.04em; line-height: 1.04; }
+      .vhl p { margin-top: 26px; font-size: 36px; line-height: 1.38; color: var(--ink-2); }
+      .vhl .w { display: inline-block; }
+      .cap { left: 60px; right: 60px; bottom: 210px; justify-content: center; flex-wrap: wrap; padding: 22px 28px; }
+      .cap .t { font-size: 40px; }
+      .cap .s { font-size: 30px; }
+      .url { top: 900px; font-size: 76px; }
+      .caret { height: 76px; vertical-align: -10px; }
+      .urlscrim { top: 940px; width: 1100px; height: 700px; margin: -350px 0 0 -550px; }
+      #chat { left: 50px; right: 50px; width: auto; top: 560px; }
+      #chat .hd { font-size: 26px; }
+      .msg-user { font-size: 30px; max-width: 760px; }
+      .tool .name { font-size: 24px; }
+      .tool .res { font-size: 22px; }
+      .msg-ai { font-size: 30px; }
+      .msg-ai code { font-size: 26px; }
+      .vtop { position: absolute; left: 80px; right: 80px; top: 250px; font-size: 86px; font-weight: 680; letter-spacing: -0.04em; line-height: 1.05; }
+      .vtop .s { display: block; margin-top: 22px; font-size: 36px; font-weight: 400; letter-spacing: 0; color: var(--ink-2); }
+      .vtop .w { display: inline-block; }
+      .endcard .lockup.sm { top: 620px; }
+      .endcard .lockup.sm .mark { width: 130px; }
+      .endcard .lockup.sm .word { font-size: 116px; }
+      .endcard .tag { top: 800px; font-size: 44px; }
+      .ctarow { top: 960px; flex-direction: column; gap: 34px; }
+      .ctarow .free { font-size: 40px; }
+      .ctarow .btn { font-size: 40px; padding: 26px 44px; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="vertical" data-start="0" data-duration="29.25" data-width="1080" data-height="1920">
+      <div class="clip layer" id="bg" data-start="0" data-duration="29.25" data-track-index="0">
+        <div class="base"></div>
+        <div class="glow" id="glow"></div>
+      </div>
+      <video class="clip bgv" id="v-ribbons" src="assets/ai/ribbons-9x16-graded.mp4" data-start="0" data-duration="5" data-track-index="1" muted playsinline></video>
+      <video class="clip bgv" id="v-circuit" src="assets/ai/circuit-9x16-graded.mp4" data-start="5.2" data-duration="6.4" data-track-index="1" muted playsinline></video>
+      <video class="clip bgv" id="v-mono" src="assets/ai/monoliths-9x16-graded.mp4" data-start="21.5" data-duration="7.75" data-track-index="1" muted playsinline></video>
+      <div class="clip layer" id="fx" data-start="0" data-duration="29.25" data-track-index="2">
+        <div id="floor"></div>
+        <canvas id="trails" width="1080" height="1920"></canvas>
+      </div>
+
+      <!-- v0–v8: logo hit + tagline -->
+      <div class="clip layer" id="s-logo" data-start="0" data-duration="2.4" data-track-index="10">
+        <div class="flare" id="flare"></div>
+        <div class="streak" id="streak" style="top: 950px"></div>
+        <div class="lockup" id="lockup">
+          <svg class="mark" viewBox="6 4 384 285" aria-hidden="true">
+            <path class="bar" d="M30.17,20.83 Q33.00,18.00 37.00,17.98 L244.00,17.02 Q248.00,17.00 245.51,20.13 L204.49,71.87 Q202.00,75.00 198.00,75.00 L86.00,75.00 Q82.00,75.00 79.88,78.39 L79.12,79.61 Q77.00,83.00 73.00,82.93 L23.00,82.07 Q19.00,82.00 19.08,78.00 L19.92,35.00 Q20.00,31.00 22.83,28.17 Z" />
+            <path class="bar" d="M19.00,120.00 Q19.00,116.00 23.00,116.00 L171.00,116.00 Q175.00,116.00 172.54,119.15 L152.46,144.85 Q150.00,148.00 152.22,151.33 L165.78,171.67 Q168.00,175.00 164.00,175.00 L86.91,175.00 Q83.00,175.00 80.50,178.00 L80.50,178.00 Q78.00,181.00 74.09,181.00 L23.00,181.00 Q19.00,181.00 19.00,177.00 Z" />
+            <path class="bar" d="M19.09,223.00 Q19.00,219.00 23.00,219.00 L196.00,219.00 Q200.00,219.00 202.37,222.22 L239.63,272.78 Q242.00,276.00 238.00,276.00 L38.00,276.00 Q34.00,276.00 31.07,273.28 L22.93,265.72 Q20.00,263.00 19.91,259.00 Z" />
+            <path class="k" d="M292.11,19.33 Q294.00,17.00 297.00,17.00 L372.00,17.00 Q375.00,17.00 373.10,19.33 L270.90,144.67 Q269.00,147.00 270.87,149.34 L370.13,273.66 Q372.00,276.00 369.00,276.00 L285.00,276.00 Q282.00,276.00 280.11,273.67 L184.89,156.33 Q183.00,154.00 184.89,151.67 Z" />
+          </svg>
+          <div class="word" id="logo-word"><span>E</span><span>n</span><span>v</span><span>K</span><span>i</span><span>t</span></div>
+        </div>
+      </div>
+      <div class="clip layer" id="s-tag" data-start="1.6" data-duration="2.6" data-track-index="11">
+        <div class="tagline" id="tagline">
+          <div class="ln"><span class="w">Your</span> <span class="w">local</span></div>
+          <div class="ln"><span class="w">stack,</span></div>
+          <div class="ln"><span class="w">one</span> <span class="w">place.</span></div>
+        </div>
+      </div>
+
+      <!-- v8–v12: onboarding click + creating -->
+      <div class="clip layer stage" id="s-onb" data-start="3.4" data-duration="2.4" data-track-index="12">
+        <div class="panel" id="pn-onb">
+          <div class="cnt">
+            <img class="shot" id="onb-1" src="assets/onboarding-first-site.png" alt="" />
+            <img class="shot" id="onb-2" src="assets/onboarding-creating.png" alt="" />
+            <div class="click" id="onb-click"></div>
+            <svg class="cursor" id="onb-cursor" viewBox="0 0 24 24"><path d="M4 2.5 L4 19.5 L8.6 15.4 L11.6 21.8 L14.4 20.5 L11.4 14.2 L17.6 14.2 Z" fill="#fff" stroke="#06090d" stroke-width="1.4" stroke-linejoin="round" /></svg>
+          </div>
+          <div class="sheen"></div>
+        </div>
+        <div class="vtop" id="t-onb"><span class="w">Pick</span> <span class="w">a</span> <span class="w">starter.</span><span class="s">EnvKit does the rest.</span></div>
+      </div>
+
+      <!-- v12–v16: the URL types itself in the break -->
+      <div class="clip layer" id="s-url" data-start="5.4" data-duration="2.4" data-track-index="13">
+        <div class="urlscrim"></div>
+        <div class="url" id="url"><span class="pre">https://</span><span class="host"></span><span class="caret" id="caret"></span></div>
+      </div>
+
+      <!-- v16–v24: live -->
+      <div class="clip layer stage" id="s-live" data-start="7.4" data-duration="4.2" data-track-index="14">
+        <div class="panel" id="pn-live">
+          <div class="cnt"><img class="shot" src="assets/onboarding-success.png" alt="" /><div class="ring" id="rg-live"></div></div>
+          <div class="sheen" id="sheen-live"></div>
+        </div>
+        <div class="vtop" id="t-live"><span class="w">Your</span> <span class="w">site</span> <span class="w">is</span> <span class="w">live.</span><span class="s">Trusted HTTPS, no config files.</span></div>
+      </div>
+
+      <!-- v24–v36: sites, services, databases -->
+      <div class="clip layer stage" id="s-sites" data-start="11.1" data-duration="2.3" data-track-index="15">
+        <div class="panel" id="pn-sites"><div class="cnt"><img class="shot" src="assets/sites.png" alt="" /><div class="ring" id="rg-sites"></div></div><div class="sheen"></div></div>
+        <div class="vhl" id="hl-sites"><h2 class="kin">Every project gets a .test domain.</h2></div>
+      </div>
+      <div class="clip layer stage" id="s-svc" data-start="13" data-duration="2.3" data-track-index="16">
+        <div class="panel" id="pn-svc"><div class="cnt"><img class="shot" src="assets/dashboard.png" alt="" /><div class="ring" id="rg-svc"></div></div><div class="sheen"></div></div>
+        <div class="vhl" id="hl-svc"><h2 class="kin">Every service, running.</h2></div>
+      </div>
+      <div class="clip layer stage" id="s-db" data-start="14.85" data-duration="2.4" data-track-index="17">
+        <div class="panel" id="pn-db"><div class="cnt"><img class="shot" src="assets/databases.png" alt="" /><div class="ring" id="rg-db"></div></div><div class="sheen"></div></div>
+        <div class="vhl" id="hl-db"><h2 class="kin">Databases, users and snapshots.</h2></div>
+      </div>
+
+      <!-- v36–v48: AI over MCP -->
+      <div class="clip layer stage" id="s-ai" data-start="16.7" data-duration="6.1" data-track-index="18">
+        <div class="panel" id="pn-ai"><div class="cnt"><img class="shot" src="assets/ai.png" alt="" /></div></div>
+        <div class="vtop" id="t-ai"><span class="w">Your</span> <span class="w">AI</span> <span class="w">assistant</span> <span class="w">can</span> <span class="w">run</span> <span class="w">it</span> <span class="w">too.</span><span class="s">Built-in MCP server.</span></div>
+        <div id="chat">
+          <div class="hd"><span class="live"></span><b>AI assistant</b><span class="sep">·</span>connected over MCP</div>
+          <div class="bd">
+            <div class="msg-user" id="ai-u"><span class="w">Redis</span> <span class="w">stopped</span> <span class="w">and</span> <span class="w">the</span> <span class="w">shop</span> <span class="w">queue</span> <span class="w">is</span> <span class="w">failing.</span> <span class="w">Can</span> <span class="w">you</span> <span class="w">fix</span> <span class="w">it?</span></div>
+            <div class="tool" id="ai-t1">
+              <div class="ic"><div class="spin"></div><svg class="ok" viewBox="0 0 22 22"><circle cx="11" cy="11" r="10" fill="rgba(45,212,170,0.15)" stroke="#2dd4aa" stroke-width="1.5" /><path d="M6.5 11.5 L9.6 14.4 L15.5 8" fill="none" stroke="#2dd4aa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg></div>
+              <div><div class="name"><em>envkit ·</em> diagnose_service <em>{ "name": "redis" }</em></div><div class="res">stopped · port 6379 is free</div></div>
+            </div>
+            <div class="tool" id="ai-t2">
+              <div class="ic"><div class="spin"></div><svg class="ok" viewBox="0 0 22 22"><circle cx="11" cy="11" r="10" fill="rgba(45,212,170,0.15)" stroke="#2dd4aa" stroke-width="1.5" /><path d="M6.5 11.5 L9.6 14.4 L15.5 8" fill="none" stroke="#2dd4aa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg></div>
+              <div><div class="name"><em>envkit ·</em> start_service <em>{ "name": "redis" }</em></div><div class="res"><b>running</b> · 127.0.0.1:6379</div></div>
+            </div>
+            <div class="tool" id="ai-t3">
+              <div class="ic"><div class="spin"></div><svg class="ok" viewBox="0 0 22 22"><circle cx="11" cy="11" r="10" fill="rgba(45,212,170,0.15)" stroke="#2dd4aa" stroke-width="1.5" /><path d="M6.5 11.5 L9.6 14.4 L15.5 8" fill="none" stroke="#2dd4aa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg></div>
+              <div><div class="name"><em>envkit ·</em> restart_site_queue_worker</div><div class="res">worker <b>default</b> restarted</div></div>
+            </div>
+            <div class="msg-ai" id="ai-a">Redis is back on <code>:6379</code> and the queue is processing again.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- v48–end: end card -->
+      <div class="clip layer" id="s-end" data-start="22.2" data-duration="7.05" data-track-index="20">
+        <div class="flare" id="flare-end" style="top: 700px"></div>
+        <div class="endcard" id="endcard">
+          <div class="lockup sm" id="end-lockup">
+            <svg class="mark" viewBox="6 4 384 285" aria-hidden="true">
+              <path class="bar" d="M30.17,20.83 Q33.00,18.00 37.00,17.98 L244.00,17.02 Q248.00,17.00 245.51,20.13 L204.49,71.87 Q202.00,75.00 198.00,75.00 L86.00,75.00 Q82.00,75.00 79.88,78.39 L79.12,79.61 Q77.00,83.00 73.00,82.93 L23.00,82.07 Q19.00,82.00 19.08,78.00 L19.92,35.00 Q20.00,31.00 22.83,28.17 Z" />
+              <path class="bar" d="M19.00,120.00 Q19.00,116.00 23.00,116.00 L171.00,116.00 Q175.00,116.00 172.54,119.15 L152.46,144.85 Q150.00,148.00 152.22,151.33 L165.78,171.67 Q168.00,175.00 164.00,175.00 L86.91,175.00 Q83.00,175.00 80.50,178.00 L80.50,178.00 Q78.00,181.00 74.09,181.00 L23.00,181.00 Q19.00,181.00 19.00,177.00 Z" />
+              <path class="bar" d="M19.09,223.00 Q19.00,219.00 23.00,219.00 L196.00,219.00 Q200.00,219.00 202.37,222.22 L239.63,272.78 Q242.00,276.00 238.00,276.00 L38.00,276.00 Q34.00,276.00 31.07,273.28 L22.93,265.72 Q20.00,263.00 19.91,259.00 Z" />
+              <path class="k" d="M292.11,19.33 Q294.00,17.00 297.00,17.00 L372.00,17.00 Q375.00,17.00 373.10,19.33 L270.90,144.67 Q269.00,147.00 270.87,149.34 L370.13,273.66 Q372.00,276.00 369.00,276.00 L285.00,276.00 Q282.00,276.00 280.11,273.67 L184.89,156.33 Q183.00,154.00 184.89,151.67 Z" />
+            </svg>
+            <div class="word">EnvKit</div>
+          </div>
+          <p class="tag" id="end-tag">Your local stack, one place.</p>
+          <div class="ctarow" id="end-cta">
+            <span class="free">Free for Windows &amp; macOS</span>
+            <span class="btn" id="end-btn">Download at envkit.net<span class="btn-sheen" id="btn-sheen"></span></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="clip layer" id="finish" data-start="0" data-duration="29.25" data-track-index="30">
+        <div id="vignette"></div>
+        <div id="grain"></div>
+      </div>
+    </div>
+
+    <script src="assets/promo-lib.js"></script>
+    <script>
+      (function () {
+        const { b, tl, panel, camTo, ring, kin, words, typeInto, enter, sweep, trails, grain, floor } = PromoLib.create({ width: 1080, height: 1920, duration: 29.25 });
+        const EXPO = 'expo.out', SINE = 'sine.inOut';
+        const wordsIn = (sel, at, step = 0.09) => {
+          tl.fromTo(`${sel} .w`, { y: 50, opacity: 0, filter: 'blur(12px)' }, { y: 0, opacity: 1, filter: 'blur(0px)', duration: 0.6, ease: EXPO, stagger: step }, at);
+          tl.fromTo(`${sel} .s`, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: EXPO }, at + 0.3);
+        };
+        const out = (sel, at) => tl.to(sel, { opacity: 0, y: -30, filter: 'blur(14px)', duration: 0.32, ease: 'power3.in' }, at - 0.3);
+
+        trails('#trails', { count: 14, seed: 11 });
+        floor('#floor');
+        grain('#grain');
+        gsap.set('#trails', { opacity: 0.5 });
+        gsap.set('#floor', { opacity: 0 });
+        tl.to('#floor', { opacity: 0.8, duration: 1.5, ease: SINE }, b(16));
+        gsap.set('#glow', { y: -60 });
+        tl.to('#glow', { y: 120, scale: 1.2, duration: 29.25, ease: 'none' }, 0);
+
+        gsap.set('#v-ribbons', { opacity: 0 });
+        tl.to('#v-ribbons', { opacity: 0.75, duration: 0.8 }, 0);
+        tl.to('#v-ribbons', { opacity: 0.3, duration: 0.5 }, b(4));
+        tl.to('#v-ribbons', { opacity: 0, duration: 0.4 }, b(8.5));
+        gsap.set('#v-circuit', { opacity: 0, scale: 1.1 });
+        tl.to('#v-circuit', { opacity: 0.55, duration: 0.5 }, b(12) - 0.2);
+        tl.to('#v-circuit', { scale: 1, duration: 6.4, ease: 'none' }, 5.2);
+        tl.to('#v-circuit', { opacity: 0.2, duration: 0.5 }, b(16.3));
+        tl.to('#v-circuit', { opacity: 0, duration: 0.5 }, b(23));
+        gsap.set('#v-mono', { opacity: 0, scale: 1.08 });
+        tl.to('#v-mono', { opacity: 0.6, duration: 1.0 }, b(47.3));
+        tl.to('#v-mono', { scale: 1, duration: 7.75, ease: 'none' }, 21.5);
+
+        // v0–v8 logo + tagline
+        tl.fromTo('#lockup .bar', { x: -110, opacity: 0, filter: 'blur(10px)' }, { x: 0, opacity: 1, filter: 'blur(0px)', duration: 0.42, ease: 'power4.out', stagger: 0.06 }, b(2) - 0.42);
+        tl.fromTo('#lockup .k', { x: 100, y: -50, opacity: 0, filter: 'blur(14px)' }, { x: 0, y: 0, opacity: 1, filter: 'blur(0px)', duration: 0.34, ease: 'power4.out' }, b(2) - 0.34);
+        tl.fromTo('#flare', { opacity: 0, scale: 0.4 }, { opacity: 0.95, scale: 1, duration: 0.18 }, b(2));
+        tl.to('#flare', { opacity: 0, scale: 1.7, duration: 1.4, ease: 'power2.out' }, b(2) + 0.18);
+        tl.fromTo('#streak', { opacity: 0, scaleX: 0.05 }, { opacity: 1, scaleX: 1, duration: 0.3, ease: 'power3.out' }, b(2));
+        tl.to('#streak', { opacity: 0, duration: 0.8 }, b(2) + 0.3);
+        tl.fromTo('#logo-word span', { y: 40, opacity: 0, filter: 'blur(10px)' }, { y: 0, opacity: 1, filter: 'blur(0px)', duration: 0.5, ease: EXPO, stagger: 0.04 }, b(2.5));
+        tl.to('#lockup', { scale: 0.85, opacity: 0, filter: 'blur(16px)', duration: 0.4, ease: 'power3.in' }, b(4) - 0.35);
+        const tw = gsap.utils.toArray('#tagline .w');
+        [0, 0.5, 1, 2, 2.5].forEach((beat, i) => tl.fromTo(tw[i], { y: 70, opacity: 0, filter: 'blur(16px)' }, { y: 0, opacity: 1, filter: 'blur(0px)', duration: 0.6, ease: EXPO }, b(4 + beat)));
+        tl.to('#tagline', { scale: 1.8, opacity: 0, filter: 'blur(22px)', duration: 0.45, ease: 'power3.in' }, b(8) - 0.4);
+
+        // v8–v12 onboarding: wizard column → click → creating
+        const ONB = panel('#pn-onb', { crop: [420, 120, 600, 760], w: 920, left: 80, top: 640 });
+        gsap.set('#onb-2', { opacity: 0 });
+        enter('#pn-onb', b(8) - 0.15, { from: { z: -800, rotationX: 28, y: 200 }, to: { z: 0, rotationX: 4, y: 0 }, dur: 0.8 });
+        wordsIn('#t-onb', b(8));
+        gsap.set('#onb-cursor', { x: 760, y: 640 });
+        tl.to('#onb-cursor', { opacity: 1, duration: 0.15 }, b(8.4));
+        tl.to('#onb-cursor', { x: 920, y: 778, duration: 0.6, ease: 'power3.inOut' }, b(8.6));
+        gsap.set('#onb-click', { left: 925, top: 787 });
+        tl.to('#onb-cursor', { scale: 0.82, duration: 0.07, yoyo: true, repeat: 1 }, b(10) - 0.05);
+        tl.fromTo('#onb-click', { opacity: 0.95, scale: 0.3 }, { opacity: 0, scale: 1.5, duration: 0.5 }, b(10));
+        tl.to('#onb-2', { opacity: 1, duration: 0.2 }, b(10) + 0.1);
+        tl.to('#onb-cursor', { opacity: 0, duration: 0.15 }, b(10) + 0.1);
+        camTo(ONB, { at: b(10.2), dur: 1.0, ease: 'power2.inOut', cx: 720, cy: 395, cw: 420 });
+        out('#t-onb', b(12));
+        tl.to('#pn-onb', { opacity: 0, filter: 'blur(24px)', z: 300, duration: 0.4, ease: 'power2.in' }, b(12) - 0.2);
+
+        // v12–v16 URL in the silence
+        tl.fromTo('#s-url .urlscrim', { opacity: 0 }, { opacity: 1, duration: 0.4 }, b(12) - 0.1);
+        tl.fromTo('#url', { opacity: 0, scale: 0.92, filter: 'blur(10px)' }, { opacity: 1, scale: 1, filter: 'blur(0px)', duration: 0.4, ease: EXPO }, b(12));
+        typeInto('#url .host', 'hello.test', b(12.6), 0.1);
+        tl.fromTo('#caret', { opacity: 1 }, { opacity: 0.15, duration: 0.18, repeat: 7, yoyo: true, ease: 'steps(1)' }, b(12));
+        tl.to('#url', { scale: 0.34, y: -100, opacity: 0, filter: 'blur(6px)', duration: 0.42, ease: 'power3.in' }, b(16) - 0.32);
+        tl.to('#s-url .urlscrim', { opacity: 0, duration: 0.4 }, b(16) - 0.2);
+
+        // v16–v24 live
+        const LIVE = panel('#pn-live', { crop: [420, 190, 600, 470], w: 960, left: 60, top: 760 });
+        tl.fromTo('#pn-live', { opacity: 0, scale: 1.14, filter: 'blur(22px)' }, { opacity: 1, scale: 1, filter: 'blur(0px)', duration: 0.55, ease: EXPO }, b(16) - 0.05);
+        sweep('#sheen-live', b(16), 0.9);
+        wordsIn('#t-live', b(16.5));
+        ring('#rg-live', [606, 373, 228, 45], b(17));
+        camTo(LIVE, { at: b(18), dur: 3.4, ease: SINE, cx: 720, cy: 400, cw: 480 });
+        out('#t-live', b(24));
+        tl.to('#pn-live', { x: -400, opacity: 0, filter: 'blur(18px)', duration: 0.38, ease: 'power3.in' }, b(24) - 0.34);
+
+        // v24–v36 sites, services, databases (four beats each)
+        const trio = [
+          ['#pn-sites', '#hl-sites', [250, 150, 560, 470], [281, 179, 369, 181], 24, [480, 300]],
+          ['#pn-svc', '#hl-svc', [250, 100, 620, 520], [281, 127, 1123, 86], 28, [560, 330]],
+          ['#pn-db', '#hl-db', [250, 300, 620, 420], [293, 546, 1110, 48], 32, [560, 520]],
+        ];
+        trio.forEach(([p, h, crop, r, beat, look], i) => {
+          const w = 980, hh = (w * crop[3]) / crop[2];
+          const P = panel(p, { crop, w, left: 50, top: 1100 - hh / 2 + 60 });
+          const dir = i % 2 ? -1 : 1;
+          enter(p, b(beat) - 0.12, { from: { x: 420 * dir, z: -500, rotationY: 36 * dir, rotationX: 10 }, to: { x: 0, z: 0, rotationY: 8 * dir, rotationX: 5 }, dur: 0.7 });
+          tl.to(p, { rotationY: 2 * dir, rotationX: 1, duration: 1.6, ease: SINE }, b(beat + 1));
+          camTo(P, { at: b(beat + 1), dur: 1.6, ease: SINE, cx: look[0], cy: look[1], cw: crop[2] * 0.9 });
+          sweep(`${p} .sheen`, b(beat) + 0.15, 0.8);
+          kin(h, b(beat) + 0.05);
+          ring(`#rg-${p.slice(4)}`, r, b(beat + 1.5));
+          tl.to([p, h], { x: -360 * dir, opacity: 0, filter: 'blur(16px)', duration: 0.34, ease: 'power3.in' }, b(beat + 4) - 0.32);
+        });
+
+        // v36–v48 AI over MCP
+        panel('#pn-ai', { crop: [236, 40, 900, 860], w: 980, left: 50, top: 520 });
+        enter('#pn-ai', b(36) - 0.12, { from: { z: -600, rotationX: 20 }, to: { z: -200, rotationX: 6 }, dur: 0.8 });
+        tl.to('#pn-ai', { opacity: 0.28, filter: 'blur(4px)', duration: 0.6 }, b(37));
+        wordsIn('#t-ai', b(36), 0.06);
+        tl.fromTo('#chat', { opacity: 0, y: 160, z: -300, rotationX: -14, filter: 'blur(14px)' }, { opacity: 1, y: 0, z: 0, rotationX: 0, filter: 'blur(0px)', duration: 0.8, ease: EXPO }, b(37));
+        tl.fromTo('#ai-u', { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.3 }, b(37.5));
+        words('#ai-u', b(37.5), 0.08);
+        const toolStep = (id, at, done) => {
+          tl.fromTo(id, { opacity: 0, y: 14, filter: 'blur(6px)' }, { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.35, ease: EXPO }, at);
+          tl.fromTo(`${id} .spin`, { rotation: 0 }, { rotation: 540, duration: done - at, ease: 'none' }, at);
+          tl.to(`${id} .spin`, { opacity: 0, duration: 0.1 }, done - 0.05);
+          tl.fromTo(`${id} .ok`, { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.3, ease: 'back.out(3)' }, done);
+          tl.fromTo(`${id} .res`, { opacity: 0, x: -8 }, { opacity: 1, x: 0, duration: 0.3 }, done + 0.05);
+        };
+        toolStep('#ai-t1', b(39.5), b(40.5));
+        toolStep('#ai-t2', b(41), b(42));
+        toolStep('#ai-t3', b(42.5), b(43.5));
+        tl.fromTo('#ai-a', { opacity: 0, y: 10, filter: 'blur(6px)' }, { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.5, ease: EXPO }, b(44.5));
+        tl.to(['#t-ai', '#chat', '#pn-ai'], { opacity: 0, z: -400, filter: 'blur(20px)', duration: 0.42, ease: 'power3.in', stagger: 0.03 }, b(48) - 0.4);
+
+        // v48– end card
+        tl.fromTo('#end-lockup .bar', { x: -80, opacity: 0, filter: 'blur(8px)' }, { x: 0, opacity: 1, filter: 'blur(0px)', duration: 0.4, ease: 'power4.out', stagger: 0.05 }, b(48) - 0.38);
+        tl.fromTo('#end-lockup .k', { x: 70, y: -40, opacity: 0, filter: 'blur(12px)' }, { x: 0, y: 0, opacity: 1, filter: 'blur(0px)', duration: 0.32, ease: 'power4.out' }, b(48) - 0.3);
+        tl.fromTo('#end-lockup .word', { x: -30, opacity: 0, filter: 'blur(12px)' }, { x: 0, opacity: 1, filter: 'blur(0px)', duration: 0.7, ease: EXPO }, b(48) + 0.05);
+        tl.fromTo('#flare-end', { opacity: 0, scale: 0.4 }, { opacity: 0.7, scale: 1, duration: 0.2 }, b(48));
+        tl.to('#flare-end', { opacity: 0.16, scale: 1.5, duration: 2.0, ease: 'power2.out' }, b(48) + 0.2);
+        tl.fromTo('#end-tag', { y: 30, opacity: 0, filter: 'blur(10px)' }, { y: 0, opacity: 1, filter: 'blur(0px)', duration: 0.7, ease: EXPO }, b(50));
+        tl.fromTo('#end-cta', { y: 30, opacity: 0, filter: 'blur(10px)' }, { y: 0, opacity: 1, filter: 'blur(0px)', duration: 0.7, ease: EXPO }, b(52));
+        tl.fromTo('#btn-sheen', { xPercent: -160 }, { xPercent: 360, duration: 0.9, ease: 'power2.inOut' }, b(56) - 0.15);
+        tl.fromTo('#end-btn', { boxShadow: '0 0 0 1px rgba(45,212,170,0.25), 0 0 0px rgba(45,212,170,0)' }, { boxShadow: '0 0 0 1px rgba(45,212,170,0.25), 0 0 60px rgba(45,212,170,0.35)', duration: 0.25, yoyo: true, repeat: 1 }, b(56));
+        tl.fromTo('#endcard', { scale: 0.98 }, { scale: 1.02, duration: 7, ease: 'none' }, 22.2);
+
+        tl.set({}, {}, 29.25);
+        window.__timelines = window.__timelines || {};
+        window.__timelines['vertical'] = tl;
+        tl.seek(0);
+      })();
+    </script>
+  </body>
+</html>

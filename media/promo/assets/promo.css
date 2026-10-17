@@ -1,0 +1,123 @@
+/* EnvKit promo v2 — "control room" at night: near-black, one mint light source, no gradient text. */
+:root {
+  --bg: #06090d;
+  --panel: #10171f;
+  --raised: #19222c;
+  --ink: #eaf0f6;
+  --ink-2: #9aa8b8;
+  --muted: #7e8c9a;
+  --mint: #2dd4aa;
+  --teal: #0d9488;
+  --hair: rgba(148, 163, 184, 0.16);
+  --sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 100%; height: 100%; overflow: hidden; background: var(--bg); }
+#root { position: relative; overflow: hidden; background: var(--bg); font-family: var(--sans); color: var(--ink); -webkit-font-smoothing: antialiased; }
+.clip, .layer { position: absolute; inset: 0; }
+.stage { perspective: 2200px; perspective-origin: 50% 45%; }
+
+/* ── Backdrop ─────────────────────────────────────────────── */
+#bg .base { position: absolute; inset: 0; background:
+  radial-gradient(ellipse 70% 60% at 50% 120%, rgba(13, 148, 136, 0.16), transparent 70%),
+  linear-gradient(180deg, #070b10 0%, #06090d 55%, #071012 100%); }
+#bg .glow { position: absolute; left: 50%; top: 18%; width: 1700px; height: 1100px; margin: -550px 0 0 -850px;
+  background: radial-gradient(closest-side, rgba(45, 212, 170, 0.20), rgba(13, 148, 136, 0.08) 45%, transparent 75%); }
+.bgv { width: 100%; height: 100%; object-fit: cover; opacity: 0; }
+#floor { position: absolute; left: -50%; width: 200%; height: 900px; bottom: -120px;
+  background-image: linear-gradient(rgba(148, 163, 184, 0.09) 1px, transparent 1px), linear-gradient(90deg, rgba(148, 163, 184, 0.09) 1px, transparent 1px);
+  background-size: 90px 90px; transform: perspective(700px) rotateX(72deg); transform-origin: 50% 100%;
+  -webkit-mask-image: linear-gradient(to top, #000 10%, transparent 80%); mask-image: linear-gradient(to top, #000 10%, transparent 80%); }
+#trails { position: absolute; inset: 0; width: 100%; height: 100%; mix-blend-mode: screen; }
+
+/* ── Finishing ────────────────────────────────────────────── */
+#vignette { position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse 120% 95% at 50% 48%, transparent 58%, rgba(0, 0, 0, 0.42) 100%); }
+#grain { position: absolute; inset: 0; background-image: url(grain.png); background-size: 256px 256px; opacity: 0.075; mix-blend-mode: overlay; }
+
+/* ── Logo ─────────────────────────────────────────────────── */
+.lockup { position: absolute; left: 0; right: 0; top: 470px; display: flex; justify-content: center; align-items: center; gap: 44px; }
+.lockup .mark { width: 190px; height: auto; overflow: visible; }
+.lockup .mark .bar { fill: var(--ink); }
+.lockup .mark .k { fill: #34b895; }
+.lockup .word { font-size: 150px; font-weight: 680; letter-spacing: -0.045em; line-height: 1; }
+.lockup .word span { display: inline-block; }
+.flare { position: absolute; left: 50%; top: 50%; width: 1500px; height: 900px; margin: -450px 0 0 -750px; opacity: 0;
+  background: radial-gradient(closest-side, rgba(45, 212, 170, 0.42), rgba(13, 148, 136, 0.14) 40%, transparent 72%); }
+.streak { position: absolute; left: 0; right: 0; top: 50%; height: 3px; margin-top: -1px; opacity: 0;
+  background: linear-gradient(90deg, transparent, rgba(45, 212, 170, 0.0) 8%, rgba(45, 212, 170, 0.8) 40%, rgba(234, 255, 248, 0.95) 50%, rgba(45, 212, 170, 0.8) 60%, transparent 92%);
+  box-shadow: 0 0 18px rgba(45, 212, 170, 0.6); }
+
+/* ── Tagline ──────────────────────────────────────────────── */
+.tagline { position: absolute; left: 0; right: 0; top: 300px; text-align: center; font-size: 132px; font-weight: 680; letter-spacing: -0.045em; line-height: 1.02; }
+.tagline .w { display: inline-block; }
+.chips { position: absolute; left: 0; right: 0; top: 660px; display: flex; justify-content: center; gap: 14px; }
+.chip { font-family: var(--mono); font-size: 26px; color: var(--ink-2); padding: 10px 18px; border-radius: 999px; border: 1px solid var(--hair); background: rgba(16, 23, 31, 0.72); display: inline-flex; align-items: center; gap: 10px; }
+.chip.on { color: var(--ink); border-color: rgba(45, 212, 170, 0.45); }
+.chip.on i { width: 9px; height: 9px; border-radius: 50%; background: var(--mint); box-shadow: 0 0 10px rgba(45, 212, 170, 0.8); }
+
+/* ── Panels (real screenshots) ────────────────────────────── */
+.panel { position: absolute; overflow: hidden; border-radius: 16px; background: var(--bg); opacity: 0;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  box-shadow: 0 50px 140px rgba(0, 0, 0, 0.62), 0 0 0 1px rgba(0, 0, 0, 0.5), 0 -1px 0 rgba(45, 212, 170, 0.18) inset; }
+.panel .cnt { position: absolute; left: 0; top: 0; width: 1440px; height: 900px; }
+.panel img.shot { position: absolute; left: 0; top: 0; width: 1440px; height: 900px; display: block; }
+.sheen { position: absolute; top: -10%; bottom: -10%; left: 0; width: 38%; pointer-events: none; mix-blend-mode: screen; transform: translateX(-130%) skewX(-14deg);
+  background: linear-gradient(90deg, transparent, rgba(45, 212, 170, 0.07) 30%, rgba(210, 255, 240, 0.14) 50%, rgba(45, 212, 170, 0.07) 70%, transparent); }
+.ring { position: absolute; border-radius: 12px; border: 2px solid var(--mint); box-shadow: 0 0 0 5px rgba(45, 212, 170, 0.12), 0 0 30px rgba(45, 212, 170, 0.25); opacity: 0; }
+.cursor { position: absolute; left: 0; top: 0; width: 24px; height: 24px; opacity: 0; transform-origin: 4px 3px; }
+.click { position: absolute; width: 52px; height: 52px; margin: -26px 0 0 -26px; border-radius: 50%; border: 2px solid var(--mint); opacity: 0; }
+
+/* ── Captions + headlines ─────────────────────────────────── */
+.cap { position: absolute; left: 96px; bottom: 66px; display: flex; align-items: center; gap: 16px; padding: 18px 26px; border-radius: 14px;
+  background: rgba(8, 12, 17, 0.86); border: 1px solid var(--hair); box-shadow: 0 18px 50px rgba(0, 0, 0, 0.5); opacity: 0; }
+.cap .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--mint); box-shadow: 0 0 10px rgba(45, 212, 170, 0.8); flex: none; }
+.cap .t { font-size: 34px; font-weight: 620; letter-spacing: -0.015em; white-space: nowrap; }
+.cap .s { font-size: 25px; color: var(--ink-2); white-space: nowrap; }
+.hl { position: absolute; }
+.hl h2 { font-size: 70px; font-weight: 680; letter-spacing: -0.04em; line-height: 1.04; }
+.hl p { margin-top: 26px; font-size: 28px; line-height: 1.4; color: var(--ink-2); }
+.hl .w { display: inline-block; }
+.mlabel { position: absolute; left: 110px; top: 430px; width: 440px; }
+.mlabel h3 { font-size: 84px; font-weight: 680; letter-spacing: -0.045em; line-height: 1; opacity: 0; }
+.mlabel p { margin-top: 22px; font-size: 28px; color: var(--ink-2); line-height: 1.35; opacity: 0; }
+
+.urlscrim { position: absolute; left: 50%; top: 528px; width: 1500px; height: 520px; margin: -260px 0 0 -750px; background: radial-gradient(closest-side, rgba(6, 9, 13, 0.82), rgba(6, 9, 13, 0.5) 55%, transparent); }
+/* ── URL typing ───────────────────────────────────────────── */
+.url { position: absolute; left: 0; right: 0; top: 480px; text-align: center; font-family: var(--mono); font-size: 96px; letter-spacing: -0.02em; opacity: 0; }
+.url .pre { color: var(--muted); }
+.url .host { color: var(--ink); }
+.caret { display: inline-block; width: 6px; height: 96px; margin-left: 8px; vertical-align: -12px; background: var(--mint); box-shadow: 0 0 16px rgba(45, 212, 170, 0.8); }
+
+/* ── AI chat (an assistant's chat window, drawn in HTML) ──── */
+#chat { position: absolute; right: 90px; top: 230px; width: 860px; border-radius: 18px; background: rgba(11, 17, 23, 0.96); border: 1px solid var(--hair);
+  box-shadow: 0 50px 140px rgba(0, 0, 0, 0.65), 0 -1px 0 rgba(45, 212, 170, 0.18) inset; opacity: 0; overflow: hidden; }
+#chat .hd { display: flex; align-items: center; gap: 12px; padding: 20px 26px; border-bottom: 1px solid var(--hair); font-size: 22px; color: var(--ink-2); }
+#chat .hd .live { width: 9px; height: 9px; border-radius: 50%; background: var(--mint); box-shadow: 0 0 10px rgba(45, 212, 170, 0.8); }
+#chat .hd b { color: var(--ink); font-weight: 600; }
+#chat .bd { padding: 26px; display: flex; flex-direction: column; gap: 16px; }
+.msg-user { align-self: flex-end; max-width: 620px; padding: 16px 20px; border-radius: 14px 14px 4px 14px; background: var(--raised); font-size: 25px; line-height: 1.4; opacity: 0; }
+.tool { display: flex; align-items: flex-start; gap: 14px; padding: 14px 18px; border-radius: 12px; border: 1px solid var(--hair); background: rgba(16, 23, 31, 0.85); opacity: 0; }
+.tool .ic { width: 22px; height: 22px; flex: none; margin-top: 3px; position: relative; }
+.tool .spin { position: absolute; inset: 0; border-radius: 50%; border: 2.5px solid rgba(148, 163, 184, 0.25); border-top-color: var(--mint); }
+.tool .ok { position: absolute; inset: 0; opacity: 0; }
+.tool .name { font-family: var(--mono); font-size: 21px; color: var(--ink); }
+.tool .name em { font-style: normal; color: var(--muted); }
+.tool .res { font-family: var(--mono); font-size: 19px; color: var(--ink-2); margin-top: 6px; opacity: 0; }
+.tool .res b { color: var(--mint); font-weight: 400; }
+.msg-ai { font-size: 25px; line-height: 1.45; opacity: 0; padding: 4px 2px 0; }
+.msg-ai code { font-family: var(--mono); font-size: 22px; color: var(--mint); }
+
+/* ── End card ─────────────────────────────────────────────── */
+.endcard { position: absolute; inset: 0; }
+.endcard .lockup.sm { top: 330px; gap: 34px; }
+.endcard .lockup.sm .mark { width: 150px; }
+.endcard .lockup.sm .word { font-size: 124px; }
+.endcard .tag { position: absolute; left: 0; right: 0; top: 520px; text-align: center; font-size: 40px; color: var(--ink-2); letter-spacing: -0.01em; opacity: 0; }
+.ctarow { position: absolute; left: 0; right: 0; top: 650px; display: flex; justify-content: center; align-items: center; gap: 30px; opacity: 0; }
+.ctarow .free { font-size: 32px; color: var(--ink); }
+.ctarow .btn { position: relative; overflow: hidden; display: inline-flex; align-items: center; padding: 20px 34px; border-radius: 12px; background: var(--mint); color: #04130d; font-size: 32px; font-weight: 640;
+  box-shadow: 0 0 0 1px rgba(45, 212, 170, 0.25); }
+.btn-sheen { position: absolute; top: -20%; bottom: -20%; left: 0; width: 30%; transform: skewX(-18deg);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.55), transparent); }

@@ -2,3 +2,8 @@ node_modules/
 renders/
 .hyperframes/
 *.mp4
+*.mov
+*.wav
+_coverage-debug-*
+v1/
+audio-src/*.json

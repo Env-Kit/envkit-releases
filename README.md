@@ -24,7 +24,7 @@ A Laragon, XAMPP and Herd alternative.
 [Docs](https://envkit.net/docs) ·
 [Changelog](https://envkit.net/changelog)
 
-<a href="art/envkit-demo.mp4"><img src="art/envkit-demo.webp" alt="EnvKit in action: first-run site, sites, services, databases and the AI (MCP) assistant" width="880" /></a>
+<a href="art/envkit-demo.mp4"><img src="art/envkit-demo.webp" alt="EnvKit in action: first-run site, sites, services, databases, the AI (MCP) assistant, cron, logs and tools" width="880" /></a>
 
 </div>
 
