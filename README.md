@@ -249,10 +249,6 @@ holding your databases.
     <td><img src="art/ai.png" alt="AI (MCP)" /><p align="center">AI (MCP)</p></td>
     <td><img src="art/tools.png" alt="Tools" /><p align="center">Tools</p></td>
   </tr>
-  <tr>
-    <td><img src="art/settings.png" alt="Settings" /><p align="center">Settings</p></td>
-    <td></td>
-  </tr>
 </table>
 
 ## What EnvKit changes on your system
