@@ -1,306 +1,309 @@
 <div align="center">
 
-<img src="brand/envkit-light.svg" alt="EnvKit logo" width="92" />
+<img src="brand/envkit-light.svg" alt="EnvKit logo" width="88" />
 
-<img src="brand/envkit-banner.webp" alt="EnvKit — Your local stack, one place." width="880" />
+# EnvKit
 
-# EnvKit — local development environment for Windows & macOS
+**Your local stack, one place.**
 
-**Your local stack, one place.** A free Laragon / XAMPP / Herd alternative.
+A free local development environment for Windows and macOS: nginx or Apache, any PHP
+version, MySQL, PostgreSQL, Redis and trusted `.test` HTTPS, from one desktop app.
+A Laragon, XAMPP and Herd alternative.
 
-EnvKit is a desktop app that runs your entire local web-development stack — nginx **or**
-Apache, multiple PHP versions, MySQL/MariaDB, PostgreSQL, Redis, MongoDB, Mailpit, Node.js,
-Python, phpMyAdmin, trusted `.test` HTTPS, and PATH sync — from one modern tray app. Build
-Laravel, WordPress, PHP, and Node/React/Next.js/Angular sites locally with one-click services and
-trusted local SSL. It can even be **driven by an AI assistant** (Claude Code / Desktop, Cursor,
-Windsurf, VS Code, Zed, OpenCode, Gemini CLI, PhpStorm/JetBrains) through a built-in MCP server.
-
-[![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS-0d9488)](#requirements)
-[![Price](https://img.shields.io/badge/price-Free-2563eb)](#install)
-[![Download](https://img.shields.io/badge/download-latest%20release-2dd4aa)](https://github.com/Env-Kit/envkit-releases/releases/latest)
-[![Website](https://img.shields.io/badge/website-envkit.net-2dd4aa)](https://envkit.net/)
-[![Review on Trustpilot](https://img.shields.io/badge/review%20us-Trustpilot-00b67a?logo=trustpilot&logoColor=white)](https://www.trustpilot.com/evaluate/envkit.net)
-[![Support on Ko-fi](https://img.shields.io/badge/support-Ko--fi-ff5e5b?logo=kofi&logoColor=white)](https://ko-fi.com/envkit)
-[![Discord](https://img.shields.io/badge/chat-Discord-5865f2?logo=discord&logoColor=white)](https://discord.gg/2ArBwMX8pV)
+[![Release](https://img.shields.io/github/v/release/Env-Kit/envkit-releases?color=2dd4aa&label=release)](https://github.com/Env-Kit/envkit-releases/releases/latest)
+[![Downloads](https://img.shields.io/github/downloads/Env-Kit/envkit-releases/total?color=0d9488)](https://github.com/Env-Kit/envkit-releases/releases)
+[![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS-0d9488)](#install)
+[![Price](https://img.shields.io/badge/price-free-2563eb)](#install)
+[![Docs](https://img.shields.io/badge/docs-envkit.net-2dd4aa)](https://envkit.net/docs)
+[![Discord](https://img.shields.io/badge/Discord-join-5865F2?logo=discord&logoColor=white)](https://discord.gg/2ArBwMX8pV)
+[![Ko-fi](https://img.shields.io/badge/support-Ko--fi-ff5e5b?logo=kofi&logoColor=white)](https://ko-fi.com/envkit)
 
 **[Download for Windows](https://stats.envkit.net/d/win?c=gh-readme)** ·
-**[Download for macOS (Apple Silicon)](https://stats.envkit.net/d/mac?c=gh-readme)** ·
-[All releases](https://github.com/Env-Kit/envkit-releases/releases) ·
+**[Download for macOS](https://stats.envkit.net/d/mac?c=gh-readme)** ·
+[Website](https://envkit.net) ·
 [Docs](https://envkit.net/docs) ·
-[Report a bug](https://github.com/Env-Kit/envkit-releases/issues/new)
+[Changelog](https://envkit.net/changelog)
 
-<img src="art/envkit-demo.gif" alt="EnvKit in action — dashboard, sites, and services" width="880" />
+<img src="art/envkit-demo.gif" alt="EnvKit in action: dashboard, sites and services" width="880" />
 
 </div>
 
----
+EnvKit runs your whole PHP and Node stack as native processes, managed from a tray app.
+No Docker, no WSL, no config files to hand-edit. Install it, pick your stack, and the
+first-run wizard ends with a working site open in your browser over HTTPS.
 
-> **This repository is the public home for EnvKit releases & documentation.** Visit the [**website**](https://envkit.net/) for features, screenshots, and comparisons, or grab the
-> installer from the [**Releases**](https://github.com/Env-Kit/envkit-releases/releases/latest)
-> page. The application source is maintained privately.
-
-EnvKit is free, with no limit on the number of sites and no popup asking you to upgrade.
-Switching from another tool? See how it compares to
-[Laragon](https://envkit.net/laragon-alternative),
-[Herd](https://envkit.net/herd-alternative), and
+Free, with no limit on sites and no upgrade popups. Moving from another tool? See how it
+compares to [Laragon](https://envkit.net/laragon-alternative),
+[Herd](https://envkit.net/herd-alternative) and
 [XAMPP](https://envkit.net/xampp-alternative).
 
-## What's new
+## Features
 
-In 0.33.0-beta.44 ([full notes](https://github.com/Env-Kit/envkit-releases/releases/latest)):
+### Sites, domains and HTTPS
 
-- First-run setup now ends with a working site. Pick a starter (a PHP or HTML page, a small
-  Node server, or a new Laravel or Vite app) or link a folder you already have, and EnvKit
-  opens it in your browser over HTTPS. If a port is busy or the certificate isn't trusted,
-  the wizard says so and offers the fix.
-- Bahasa Indonesia, and a first run opens in your system language when it's one of the
-  built-in ones.
-- If another program holds memcached's port or an extra PHP version's port (PhpStorm's
-  Xdebug uses 9003), EnvKit moves to a free port instead of failing.
-- MySQL never re-initializes a data folder that still has your databases in it.
-- Saving memcached settings restarts only memcached, and fewer false error reports are sent.
+- 🌐 **Automatic `.test` domains with trusted HTTPS.** Every site gets a hostname and a
+  certificate from EnvKit's local CA, trusted by your browser with no warnings.
+- 🧱 **Any kind of project.** Laravel, WordPress, Bedrock, CodeIgniter, plain PHP, and
+  Node, React, Next.js, Vite and Angular dev servers, all served at `.test` over HTTPS with
+  hot reload and a live view of the dev server's output.
+- 🚀 **New projects in one step.** Start a Laravel, WordPress or Node project, clone a Git
+  repo, or link a folder you already have.
+- 🔗 **Site groups.** Keep related sites together, and switch any site off or put it to sleep
+  when you don't need it.
+- 🌍 **Share a site publicly.** One click gives a site a public `https://<name>.envkit.net`
+  link to show a client or test a webhook, with a Stop button when you're done.
+- 🔄 **Live reload.** Save a file and the browser refreshes, including your other open tabs
+  after a WordPress admin or Laravel form save.
+
+### PHP, Node and runtimes
+
+- 🐘 **Multiple PHP versions, per site.** Run each site on its own PHP version, isolated
+  from the others, with Xdebug switched on only when you want it.
+- 🧰 **Your choice of web server.** nginx, Apache, Caddy or FrankenPHP, switched from
+  Settings.
+- 📦 **Node.js with nvm.** Per-project versions from `.nvmrc`, plus npm, pnpm, Yarn and Bun.
+  Python, Go and Deno are one click away.
+- 🧷 **Custom versions.** Install any version of MySQL/MariaDB, nginx, Node.js, MongoDB,
+  Redis, PostgreSQL or Python by typing its number.
+- 📄 **`envkit.json`.** Commit a project's required PHP extensions and `php.ini` values, with
+  a per-developer `envkit.local.json` on top.
+
+### Databases and services
+
+- 🗄️ **One-click services.** MySQL/MariaDB (including MySQL 8), PostgreSQL, Redis, MongoDB,
+  Memcached, Meilisearch, MinIO and Mailpit.
+- 🧭 **Database admin built in.** phpMyAdmin, Adminer, pgAdmin for PostgreSQL and a Mongo
+  web UI, opened already pointed at your local server.
+- 📬 **Mail catcher.** Mailpit captures every email your app sends, with its own page in
+  the app.
+- 🛟 **Backups that respect your data.** Back up and restore a site's database from its
+  page. A MySQL data folder that still has your databases in it is never re-initialized.
+
+### Debugging and everyday tools
+
+- 🩺 **Diagnose and self-heal.** Finds port conflicts, stale PIDs and broken configs and
+  repairs them. If another program holds a port, EnvKit moves to a free one instead of
+  failing.
+- 🛰️ **Dumps and logs.** `dump()` output and every service's logs in one place.
+- ⏰ **Scheduled tasks (Cron).** Run commands on a schedule, with templates for Laravel,
+  Node and NestJS.
+- 🔀 **Git panel per site.** Stage, commit, switch branches, fetch, pull and push, with Git
+  and the GitHub CLI bundled.
+- 📡 **Laravel Reverb.** One-click install, supervision and proxying of WebSockets per site,
+  plus queue workers and the scheduler.
+- 🧹 **Clean PATH.** `php`, `composer`, `node`, `mysql` and friends on your PATH, with
+  competing stacks (Laragon, XAMPP, WAMP, MAMP, Herd) removed so nothing shadows them.
+
+### App
+
+- 🖥️ **One tray app for everything.** Dashboard, sites, services, databases, logs, mail and
+  cron, in light or dark.
+- 🌏 **Six languages.** English, العربية, Deutsch, فارسی, Español and Bahasa Indonesia,
+  with right-to-left layout where needed.
+- 🔁 **Import from Laragon.** Projects **and** databases, in a guided detect-and-import flow.
+- ⬆️ **Silent auto-update** on both platforms, with small differential downloads.
+
+## AI integration (MCP)
+
+EnvKit ships a built-in [Model Context Protocol](https://modelcontextprotocol.io/) server,
+so an AI assistant can run your local stack for you. Turn it on in **Settings → AI** and
+click **Set up AI clients**: EnvKit registers itself with Claude Code and Claude Desktop,
+Cursor, Windsurf, VS Code, Zed, OpenCode, Gemini CLI and PhpStorm (via Junie).
+
+Then just ask:
+
+```
+You: mysql won't start, fix it
+AI:  → diagnose_service(mysql)    # port 3306 held by another process
+     → repair_service(mysql)      # frees the port, fixes the config, starts it
+     ✓ mysql is running
+
+You: make a new Laravel site called shop with its own database
+AI:  → create_laravel_site(shop)
+     → create_database(shop)
+     ✓ https://shop.test is ready
+```
+
+The server listens on `127.0.0.1` only, uses a bearer token, is off by default, and only
+runs while EnvKit is open.
+
+## Why EnvKit?
+
+|                                   | **EnvKit** | Laravel Herd | Laragon | XAMPP |
+|-----------------------------------|:----------:|:------------:|:-------:|:-----:|
+| Windows **and** macOS             | ✅ | ✅ | ❌ | ✅ |
+| Free, no license or paid tier     | ✅ | ❌ | ❌ | ✅ |
+| nginx **and** Apache              | ✅ | ❌ | ✅ | ❌ |
+| Per-site PHP version              | ✅ | ✅ | 🟡 | ❌ |
+| Trusted local HTTPS               | ✅ | ✅ | ✅ | 🟡 |
+| MySQL, PostgreSQL, Redis included | ✅ | 💲 | 🟡 | 🟡 |
+| MongoDB                           | ✅ | ❌ | 🟡 | ❌ |
+| Mail catcher                      | ✅ | 💲 | ❌ | 🟡 |
+| Node / Next.js / Vite dev sites   | ✅ | 🟡 | 🟡 | ❌ |
+| Import from Laragon (with databases) | ✅ | ❌ | — | ❌ |
+| AI control via MCP                | ✅ | ✅ | ❌ | ❌ |
+| Multi-language UI (with RTL)      | ✅ | ❌ | 🟡 | ❌ |
+| Auto-update                       | ✅ | ✅ | 🟡 | ❌ |
+
+<sub>✅ built in · 🟡 partial or via add-on · ❌ not available · 💲 paid tier. A best-effort
+snapshot from late 2026; tell us if something is out of date.</sub>
 
 ## Install
 
 ### Windows
 
-[Download the installer](https://stats.envkit.net/d/win?c=gh-readme) (the latest
-**`EnvKit-Setup-x.y.z.exe`** from the
-[releases page](https://github.com/Env-Kit/envkit-releases/releases/latest)) and run it.
-(SmartScreen may warn on first run — **More info → Run anyway**; EnvKit is self-signed.)
+[Download the installer](https://stats.envkit.net/d/win?c=gh-readme) and run it.
+Windows 10 or 11.
 
-Or from PowerShell (downloads and runs the latest installer):
+> [!NOTE]
+> EnvKit is self-signed for now, so SmartScreen may warn on the first run. Click
+> **More info → Run anyway**.
+
+<details>
+<summary>Install from PowerShell instead</summary>
 
 ```powershell
 irm https://raw.githubusercontent.com/Env-Kit/envkit-releases/main/install.ps1 | iex
 ```
 
-### macOS (Apple Silicon)
+Run the same command again any time to update.
 
-One-line install (downloads the latest macOS build, strips the Gatekeeper quarantine, opens it):
+</details>
+
+### macOS (Apple Silicon)
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/Env-Kit/envkit-releases/main/install.sh | bash
 ```
 
-Run the same command again any time to update. To uninstall: add `-s -- --uninstall`.
+Downloads the latest Mac build, clears the Gatekeeper quarantine and opens it. Run it again
+to update, or add `-s -- --uninstall` to remove EnvKit. macOS 12 or later on an M-series
+Mac; Intel Macs are not supported.
 
-Or with Homebrew:
+<details>
+<summary>Install with Homebrew instead</summary>
 
 ```bash
 brew install --cask env-kit/tap/envkit
 ```
 
-> The installer always fetches the newest release that ships a macOS build. Windows and
-> macOS are released independently, so the very latest tag is sometimes Windows-only — the
-> script (and the in-app updater) skip past it to the latest Mac build automatically.
+</details>
 
-Or download **`EnvKit-x.y.z-arm64.dmg`** manually from the
-[releases page](https://github.com/Env-Kit/envkit-releases/releases) (pick the newest release
-that lists an `-arm64.dmg` asset), open it, and
-drag **EnvKit** to Applications. The app is Developer-ID signed but not yet notarized, so
-macOS may block the first launch (right-click → Open no longer works on macOS 15). Any one
-of these gets past it:
+<details>
+<summary>Install from the DMG instead</summary>
 
-- open it once, then go to System Settings → Privacy & Security and click **Open Anyway**;
+[Download the DMG](https://stats.envkit.net/d/mac?c=gh-readme), open it and drag
+**EnvKit** to Applications. The app is Developer ID signed but not notarized yet, so macOS
+may block the first launch. Any one of these gets past it:
+
+- open it once, then click **Open Anyway** in System Settings → Privacy & Security;
 - use the `curl` one-liner above, which clears the quarantine for you;
 - run `xattr -dr com.apple.quarantine /Applications/EnvKit.app`.
 
-Notarization is pending on Apple's side; we'll switch it on as soon as it's available, no
-action needed on your end.
+Windows and macOS builds are released separately, so the very latest release is sometimes
+Windows-only. The installer script and the in-app updater pick the newest Mac build
+automatically.
 
-EnvKit no longer supports Intel Macs — Apple Silicon (M-series) only.
+</details>
 
-EnvKit **auto-updates** on both platforms: once installed, it checks GitHub for new releases
-and installs them in place (Settings → Updates lets you check/download manually). On first
-launch a short **onboarding wizard** asks your source — **Load from Laragon** (a guided
-detect → import flow, including databases) or **Start fresh** (pick your stack and install
-the runtimes it needs) — and ends with your first site open in the browser over HTTPS.
+## Quick start
 
-Upgrading from a previous version? Your data directory, certificates, and settings are
-**migrated automatically** on first launch — nothing to do.
+1. **Open EnvKit.** The first-run wizard asks where you're coming from: **Load from
+   Laragon** imports your projects and databases, **Start fresh** installs the stack you
+   pick.
+2. **Make your first site.** Pick a starter (a PHP or HTML page, a small Node server, or a
+   new Laravel or Vite app) or link a folder you already have.
+3. **Open it.** EnvKit serves it at `https://<name>.test` and opens your browser. If
+   something blocks it (a busy port, an untrusted certificate, a stopped web server), the
+   wizard says what and offers the fix.
 
-## Requirements
+Upgrading? Your sites, databases, certificates and settings carry over automatically.
 
-- Windows 10 / 11, or
-- macOS 12 Monterey or later (Apple Silicon only)
+## What's new
 
-## What EnvKit changes on your system
-
-EnvKit is designed to run side-by-side with whatever you already have installed. For
-developers who want the full picture, this is everything it touches (Windows):
-
-- **Windows Defender exclusions.** The installer excludes EnvKit's install folder
-  (real-time scanning otherwise locks the freshly installed exe and the first launch
-  fails), and the app excludes its own `services` and `tools` folders plus the bundled
-  service executables (php, nginx, mysqld, …) so scanning doesn't quarantine or slow
-  them. The installer's exclusion is removed on uninstall. Only Microsoft Defender is
-  affected; scoped to EnvKit's own folders.
-- **Trusted certificates.** Two certificates go into the Trusted Root store: EnvKit's
-  code-signing certificate (so auto-updates verify — there is no paid EV/OV cert yet),
-  and the local CA that signs the HTTPS certificates for your `.test` sites. The
-  code-signing cert is removed on uninstall.
-- **hosts file.** One `127.0.0.1 <site>.test` entry per site, removed when the site is
-  removed.
-- **PATH.** The bundled tools (php, composer, node, git, mysql, redis-cli, …) are added
-  to your user PATH (optionally machine PATH) and kept in sync. Settings → Environment
-  shows the exact folders and lets you re-sync or opt out.
-- **No Windows services, no firewall rules, no drivers.** Services (nginx, PHP, MySQL,
-  …) run as child processes of the app: they start when EnvKit starts and stop when it
-  quits.
-
-Existing software (PHP, Node, PostgreSQL, nginx installed on your machine) is never
-replaced, modified, or uninstalled — EnvKit installs its own copies inside its data
-directory and runs them side-by-side. Processes belonging to installed Windows services
-or Program Files software are left running; only portable dev stacks that hold the same
-ports/locks (Laragon, XAMPP, WAMP) are stopped during an install.
+0.33.0-beta.44 ([full notes](https://github.com/Env-Kit/envkit-releases/releases/latest)):
+first-run setup ends with a working site, Bahasa Indonesia, automatic port moves for
+memcached and extra PHP versions, and a MySQL guard that never re-initializes a data folder
+holding your databases.
 
 ## Screenshots
 
-**Dashboard**
+<table>
+  <tr>
+    <td><img src="art/dashboard.png" alt="Dashboard" /><p align="center">Dashboard</p></td>
+    <td><img src="art/sites.png" alt="Sites" /><p align="center">Sites</p></td>
+  </tr>
+  <tr>
+    <td><img src="art/services.png" alt="Services" /><p align="center">Services</p></td>
+    <td><img src="art/tools.png" alt="Tools" /><p align="center">Tools</p></td>
+  </tr>
+  <tr>
+    <td><img src="art/ai.png" alt="AI (MCP)" /><p align="center">AI (MCP)</p></td>
+    <td><img src="art/settings.png" alt="Settings" /><p align="center">Settings</p></td>
+  </tr>
+</table>
 
-<img src="art/dashboard.png" alt="EnvKit dashboard" width="920" />
+## What EnvKit changes on your system
 
-**Sites**
+EnvKit runs side by side with whatever you already have. It never replaces, modifies or
+uninstalls PHP, Node, PostgreSQL or nginx installed on your machine; it keeps its own copies
+in its data folder.
 
-<img src="art/sites.png" alt="EnvKit sites" width="920" />
+<details>
+<summary>The full list (Windows)</summary>
 
-**Services**
+- **Windows Defender exclusions** for EnvKit's own install, `services` and `tools` folders
+  and the bundled service executables, so scanning doesn't lock or quarantine them. The
+  installer's exclusion is removed on uninstall.
+- **Trusted certificates.** EnvKit's code-signing certificate (so auto-updates verify;
+  removed on uninstall) and the local CA that signs your `.test` certificates.
+- **hosts file.** One `127.0.0.1 <site>.test` line per site, removed with the site.
+- **PATH.** The bundled tools are added to your user PATH (or machine PATH if you choose)
+  and kept in sync. Settings → Environment shows the exact folders and lets you opt out.
+- **No Windows services, firewall rules or drivers.** Services run as child processes of
+  the app and stop when it quits. Portable stacks that hold the same ports (Laragon, XAMPP,
+  WAMP) are stopped only while EnvKit installs something.
 
-<img src="art/services.png" alt="EnvKit services" width="920" />
+</details>
 
-**Tools**
+## Documentation
 
-<img src="art/tools.png" alt="EnvKit tools" width="920" />
+📖 **[envkit.net/docs](https://envkit.net/docs)**: install, sites, services, databases,
+PHP versions, MCP, `envkit.json`, custom versions and translating the app.
 
-**AI (MCP)**
+## Getting help
 
-<img src="art/ai.png" alt="EnvKit AI / MCP" width="920" />
-
-**Settings**
-
-<img src="art/settings.png" alt="EnvKit settings" width="920" />
-
-## Highlights
-
-- **Windows _and_ macOS** — one app, the same stack on both (signed build for Apple Silicon).
-- **nginx _or_ Apache**, switchable in Settings — PHP via FastCGI on both.
-- **Trusted `.test` HTTPS** for every site via an auto-installed local CA.
-- **Multiple PHP versions** with **per-site isolation** and **Xdebug on-demand**.
-- **Bundled databases & tools** — MySQL/MariaDB (incl. **MySQL 8**), PostgreSQL, Redis,
-  **MongoDB**, **Mailpit**, Node.js, **Python**, phpMyAdmin, plus Composer/Git/gh/nvm/ngrok/Cmder
-  installers.
-- **Custom versions** — install an arbitrary typed version of MySQL/MariaDB, nginx, Node.js,
-  MongoDB, Redis, PostgreSQL, or Python.
-- **Per-project Git** — a built-in Git panel per site: stage/commit, branches, fetch/pull/push,
-  and history, with bundled Git + GitHub CLI.
-- **Node / React / Next.js / Angular / Vite dev sites** reverse-proxied at `.test` HTTPS with
-  **hot-reload**, plus a **live dev-server output** viewer.
-- **Laravel Reverb (WebSockets)** — one-click install, supervise, and proxy per site.
-- **Import from Laragon** — projects **and** databases (incl. MySQL → MariaDB transfer).
-- **Diagnose & self-heal services** — find port conflicts / stale PIDs / bad configs and
-  repair them.
-- **AI control via MCP** — let Claude Code/Desktop, Cursor, Windsurf, VS Code, Zed, OpenCode,
-  Gemini CLI, or PhpStorm/JetBrains (via Junie) operate your stack: add/remove sites, manage
-  MySQL databases, start/stop and diagnose services.
-- **Clean PATH, your way** — sync to the **user** or **system (Machine)** PATH, with stale
-  entries pruned and **competing stacks (Laragon/XAMPP/WAMP/MAMP/Herd…) auto-removed** so
-  nothing shadows EnvKit's `php`/`mysql`/`nginx`.
-- **Light/dark UI in six languages** — English, العربية, Deutsch, فارسی, Español, and
-  Bahasa Indonesia, with right-to-left layout where needed.
-- **Free to use** (proprietary — not open source) with **silent auto-update**.
-
-## How EnvKit compares
-
-A best-effort snapshot (mid-2026) against other popular local PHP stacks.
-
-| Feature | **EnvKit** | Laravel Herd | Laragon | AppServ | XAMPP |
-|---|:---:|:---:|:---:|:---:|:---:|
-| Platform | Windows **+** macOS | macOS, Windows | Windows | Windows | Win / macOS / Linux |
-| Price / license | Free · proprietary | Free + paid Pro | Free | Free | Free |
-| Web server | nginx **+** Apache | nginx | Apache + nginx | Apache | Apache |
-| Multiple PHP versions | ✅ | ✅ | ✅ | ❌ | ❌ |
-| Per-site PHP isolation | ✅ | ✅ | 🟡 | ❌ | ❌ |
-| Auto `.test` domains | ✅ | ✅ | ✅ | ❌ | ❌ |
-| Trusted local HTTPS | ✅ | ✅ | ✅ | ❌ | 🟡 manual |
-| MySQL / MariaDB | ✅ | 💲 Pro | ✅ | ✅ | ✅ |
-| PostgreSQL | ✅ | 💲 Pro | 🟡 | ❌ | ❌ |
-| Redis | ✅ | 💲 Pro | 🟡 | ❌ | ❌ |
-| MongoDB | ✅ | ❌ | 🟡 | ❌ | ❌ |
-| DB web admin UIs (Postgres/Mongo) | ✅ | ❌ | ❌ | ❌ | ❌ |
-| Mail catcher (Mailpit) | ✅ | 💲 Pro | ❌ | ❌ | 🟡 Mercury |
-| Node.js | ✅ | 🟡 | ✅ | ❌ | ❌ |
-| Node / React / Next.js / Angular dev sites | ✅ | 🟡 | 🟡 | ❌ | ❌ |
-| Laravel Reverb (WebSockets) | ✅ | 🟡 | ❌ | ❌ | ❌ |
-| nvm + per-project `.nvmrc` | ✅ | ❌ | ❌ | ❌ | ❌ |
-| Python | ✅ | ❌ | 🟡 | ❌ | ❌ |
-| Composer / Laravel scaffolding | ✅ | ✅ | ✅ | ❌ | ❌ |
-| Built-in Git panel (stage / commit / branches) | ✅ | ❌ | 🟡 | ❌ | ❌ |
-| Light / dark UI | ✅ | ✅ | 🟡 | ❌ | ❌ |
-| Multi-language UI (+ RTL) | ✅ | ❌ | 🟡 | ❌ | ❌ |
-| Import from Laragon (projects **+ databases**) | ✅ | ❌ | — | ❌ | ❌ |
-| AI control via MCP | ✅ | ❌ | ❌ | ❌ | ❌ |
-| Diagnose & self-heal services | ✅ | ❌ | ❌ | ❌ | ❌ |
-| Auto-update | ✅ | ✅ | 🟡 | ❌ | ❌ |
-
-<sub>✅ built-in · 🟡 partial / via add-on · ❌ not available · 💲 paid tier</sub>
-
-## AI access (MCP)
-
-EnvKit ships an MCP server so AI assistants can operate your local stack.
-
-1. Open **Settings → AI** and toggle **Enable MCP server**.
-2. Click **Set up AI clients** — EnvKit registers itself **globally** with Claude Code /
-   Desktop, Cursor, Windsurf, VS Code, Zed, OpenCode, Gemini CLI, and PhpStorm/JetBrains
-   (via Junie), and installs an `envkit` skill. (Or copy the shown URL config into your
-   client's `mcpServers` yourself — for the JetBrains AI Assistant chat, paste it in
-   Settings → Tools → AI Assistant → Model Context Protocol → Add.)
-3. **Restart your AI client**, then ask things like *"start redis"*, *"diagnose why mysql
-   won't start, then repair it"*, or *"list my Laravel sites"*.
-
-The endpoint is local-only (`http://127.0.0.1:<port>/mcp`), bearer-token authenticated, off
-by default, and only works while EnvKit is running.
-
-## Reporting issues
-
-Found a bug or have a feature request?
-[Open an issue](https://github.com/Env-Kit/envkit-releases/issues/new) (please search
-[existing issues](https://github.com/Env-Kit/envkit-releases/issues) first). Include:
-
-- your OS and version (e.g. Windows 11 23H2, macOS 15.3);
-- the EnvKit version (Settings → Updates);
-- what you did, what you expected, and what happened instead;
-- the relevant log lines if a service won't start (Logs page, or the service's log file).
-
-Questions and quick help: [Discord](https://discord.gg/2ArBwMX8pV). For anything else,
-reach us at [info@envkit.net](mailto:info@envkit.net).
+- **Questions and quick help:** [Discord](https://discord.gg/2ArBwMX8pV)
+- **Bugs and feature requests:** [open an issue](https://github.com/Env-Kit/envkit-releases/issues/new)
+  (search [existing issues](https://github.com/Env-Kit/envkit-releases/issues) first).
+  Include your OS and version, the EnvKit version (Settings → Updates), what you did and
+  what happened, and the relevant log lines if a service won't start.
+- **Anything else:** [info@envkit.net](mailto:info@envkit.net)
 
 ## Support EnvKit
 
 EnvKit is free. If it saves you time, you can support it on
-[Ko-fi](https://ko-fi.com/envkit). The current goal is $350 for two things:
+[Ko-fi](https://ko-fi.com/envkit). The current goal is $350 for a real Windows
+code-signing certificate, so installing no longer shows "Windows protected your PC", and an
+Apple Developer membership, so the Mac app opens without a warning. Receipts go up on
+[Discord](https://discord.gg/2ArBwMX8pV) once they're bought.
 
-- a real Windows code-signing certificate, so installing no longer shows
-  "Windows protected your PC" and updates verify on every machine;
-- an Apple Developer membership, so the Mac app can be notarized and opens
-  without a warning.
-
-We post the receipts on [Discord](https://discord.gg/2ArBwMX8pV) once they're bought.
+Starring this repo and leaving a review on
+[Trustpilot](https://www.trustpilot.com/evaluate/envkit.net) helps too.
 
 ## Team
 
-EnvKit is built and maintained by:
-
-- **Ziad Talaat** — [@zsnakeee](https://github.com/zsnakeee)
-- **Kirlos Osama** — [@ker00sama-dev](https://github.com/ker00sama-dev)
-- **Youssef Yasser** — [@7aWy11](https://github.com/7aWy11)
+- **Ziad Talaat** · [@zsnakeee](https://github.com/zsnakeee)
+- **Kirlos Osama** · [@ker00sama-dev](https://github.com/ker00sama-dev)
+- **Youssef Yasser** · [@7aWy11](https://github.com/7aWy11)
 
 ## License
 
-**EnvKit is free to use**, but it is **not open source**. All rights reserved.
+EnvKit is **free to use** but **not open source**. All rights reserved. This repository
+holds the releases, installers and documentation; the application source is private.
 
 <div align="center">
 
-<sub>EnvKit · <a href="https://github.com/Env-Kit">Env-Kit</a></sub>
+<sub>EnvKit · <a href="https://envkit.net">envkit.net</a> · <a href="https://github.com/Env-Kit">Env-Kit</a></sub>
 
 </div>
