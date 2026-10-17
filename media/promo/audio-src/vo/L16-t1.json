@@ -1,0 +1,24 @@
+{
+ "text": "[excited] It's free. [pause]",
+ "voice": "dXtC3XhB9GtPusIpNtQx",
+ "model": "eleven_v3",
+ "settings": {
+  "stability": 0.5,
+  "similarity_boost": 0.8,
+  "style": 0.45,
+  "use_speaker_boost": true
+ },
+ "seed": 1161,
+ "words": [
+  [
+   "It's",
+   0.139,
+   0.44
+  ],
+  [
+   "free.",
+   0.496,
+   0.8
+  ]
+ ]
+}

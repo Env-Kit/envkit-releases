@@ -1,0 +1,39 @@
+{
+ "text": "[confident] EnvKit. For Windows and Mac. [pause]",
+ "voice": "dXtC3XhB9GtPusIpNtQx",
+ "model": "eleven_v3",
+ "settings": {
+  "stability": 0.5,
+  "similarity_boost": 0.8,
+  "style": 0.45,
+  "use_speaker_boost": true
+ },
+ "seed": 1172,
+ "words": [
+  [
+   "EnvKit.",
+   0.275,
+   0.92
+  ],
+  [
+   "For",
+   0.99,
+   1.2
+  ],
+  [
+   "Windows",
+   1.26,
+   1.68
+  ],
+  [
+   "and",
+   1.76,
+   2.0
+  ],
+  [
+   "Mac.",
+   2.08,
+   2.4
+  ]
+ ]
+}

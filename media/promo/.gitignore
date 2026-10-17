@@ -7,3 +7,4 @@ renders/
 _coverage-debug-*
 v1/
 audio-src/*.json
+audio-src/v3/

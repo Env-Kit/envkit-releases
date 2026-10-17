@@ -1,0 +1,25 @@
+{
+ "text": "Paywalled databases.",
+ "voice": "dXtC3XhB9GtPusIpNtQx",
+ "model": "eleven_multilingual_v2",
+ "settings": {
+  "stability": 0.4,
+  "similarity_boost": 0.8,
+  "style": 0.5,
+  "use_speaker_boost": true,
+  "speed": 1.15
+ },
+ "seed": 2021,
+ "words": [
+  [
+   "Paywalled",
+   0.0,
+   0.43
+  ],
+  [
+   "databases.",
+   0.453,
+   1.254
+  ]
+ ]
+}

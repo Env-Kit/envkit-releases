@@ -1,0 +1,29 @@
+{
+ "text": "[satisfied] and it's live. [pause]",
+ "voice": "dXtC3XhB9GtPusIpNtQx",
+ "model": "eleven_v3",
+ "settings": {
+  "stability": 0.5,
+  "similarity_boost": 0.8,
+  "style": 0.45,
+  "use_speaker_boost": true
+ },
+ "seed": 1062,
+ "words": [
+  [
+   "and",
+   0.26,
+   0.32
+  ],
+  [
+   "it's",
+   0.453,
+   0.8
+  ],
+  [
+   "live.",
+   0.912,
+   1.44
+  ]
+ ]
+}

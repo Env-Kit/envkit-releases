@@ -1,0 +1,50 @@
+{
+ "text": "What if your dev stack... just worked?",
+ "voice": "dXtC3XhB9GtPusIpNtQx",
+ "model": "eleven_turbo_v2_5",
+ "settings": {
+  "stability": 0.45,
+  "similarity_boost": 0.8,
+  "style": 0.5,
+  "use_speaker_boost": true,
+  "speed": 1.1
+ },
+ "seed": 2041,
+ "words": [
+  [
+   "What",
+   0.0,
+   0.197
+  ],
+  [
+   "if",
+   0.232,
+   0.29
+  ],
+  [
+   "your",
+   0.325,
+   0.441
+  ],
+  [
+   "dev",
+   0.488,
+   0.662
+  ],
+  [
+   "stack...",
+   0.708,
+   0.998
+  ],
+  [
+   "just",
+   1.057,
+   1.242
+  ],
+  [
+   "worked?",
+   1.289,
+   1.95
+  ]
+ ]
+}

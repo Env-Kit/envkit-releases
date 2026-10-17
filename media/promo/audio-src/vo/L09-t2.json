@@ -1,0 +1,39 @@
+{
+ "text": "[energetic] PHP. Node. MySQL. Postgres. Redis. [pause]",
+ "voice": "dXtC3XhB9GtPusIpNtQx",
+ "model": "eleven_v3",
+ "settings": {
+  "stability": 0.5,
+  "similarity_boost": 0.8,
+  "style": 0.45,
+  "use_speaker_boost": true
+ },
+ "seed": 1092,
+ "words": [
+  [
+   "PHP.",
+   0.612,
+   0.8
+  ],
+  [
+   "Node.",
+   0.992,
+   2.48
+  ],
+  [
+   "MySQL.",
+   2.6,
+   3.68
+  ],
+  [
+   "Postgres.",
+   3.776,
+   4.96
+  ],
+  [
+   "Redis.",
+   5.053,
+   5.84
+  ]
+ ]
+}

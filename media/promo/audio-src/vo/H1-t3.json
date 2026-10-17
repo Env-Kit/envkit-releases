@@ -1,0 +1,25 @@
+{
+ "text": "License popups.",
+ "voice": "dXtC3XhB9GtPusIpNtQx",
+ "model": "eleven_multilingual_v2",
+ "settings": {
+  "stability": 0.4,
+  "similarity_boost": 0.8,
+  "style": 0.5,
+  "use_speaker_boost": true,
+  "speed": 1.15
+ },
+ "seed": 2013,
+ "words": [
+  [
+   "License",
+   0.0,
+   0.395
+  ],
+  [
+   "popups.",
+   0.43,
+   1.161
+  ]
+ ]
+}

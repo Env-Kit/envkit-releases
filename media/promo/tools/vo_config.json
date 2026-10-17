@@ -1,0 +1,66 @@
+{
+  "_comment": "Voiceover voice + delivery. Change voice_id/settings here, then run: tools/build_v3.sh vo (regenerates every take, re-picks, re-times captions and the mix).",
+  "voice_id": "dXtC3XhB9GtPusIpNtQx",
+  "voice_name": "Hale (\"4-hale (EnvKit sample)\" in the account library)",
+  "model": "eleven_v3",
+  "fallback_model": "eleven_multilingual_v2",
+  "settings": {
+    "eleven_v3": {
+      "stability": 0.5,
+      "similarity_boost": 0.8,
+      "style": 0.45,
+      "use_speaker_boost": true
+    },
+    "eleven_multilingual_v2": {
+      "stability": 0.38,
+      "similarity_boost": 0.8,
+      "style": 0.5,
+      "use_speaker_boost": true,
+      "speed": 1.0
+    }
+  },
+  "picks": {},
+  "line_overrides": {
+    "_comment": "Hook lines: eleven_v3 read them ~1.7x longer than the beat grid allows, so the three pains use eleven_multilingual_v2 at native speed 1.15 and the turn uses eleven_turbo_v2_5 at 1.1 (it keeps a short breath at the ellipsis).",
+    "H1": {
+      "model": "eleven_multilingual_v2",
+      "settings": {
+        "stability": 0.4,
+        "similarity_boost": 0.8,
+        "style": 0.5,
+        "use_speaker_boost": true,
+        "speed": 1.15
+      }
+    },
+    "H2": {
+      "model": "eleven_multilingual_v2",
+      "settings": {
+        "stability": 0.4,
+        "similarity_boost": 0.8,
+        "style": 0.5,
+        "use_speaker_boost": true,
+        "speed": 1.15
+      }
+    },
+    "H3": {
+      "model": "eleven_multilingual_v2",
+      "settings": {
+        "stability": 0.4,
+        "similarity_boost": 0.8,
+        "style": 0.5,
+        "use_speaker_boost": true,
+        "speed": 1.15
+      }
+    },
+    "H4": {
+      "model": "eleven_turbo_v2_5",
+      "settings": {
+        "stability": 0.45,
+        "similarity_boost": 0.8,
+        "style": 0.5,
+        "use_speaker_boost": true,
+        "speed": 1.1
+      }
+    }
+  }
+}

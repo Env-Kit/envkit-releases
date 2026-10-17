@@ -1,0 +1,44 @@
+{
+ "text": "[confident] Your whole local stack. One app. [pause]",
+ "voice": "dXtC3XhB9GtPusIpNtQx",
+ "model": "eleven_v3",
+ "settings": {
+  "stability": 0.5,
+  "similarity_boost": 0.8,
+  "style": 0.45,
+  "use_speaker_boost": true
+ },
+ "seed": 1042,
+ "words": [
+  [
+   "Your",
+   0.134,
+   0.16
+  ],
+  [
+   "whole",
+   0.213,
+   0.48
+  ],
+  [
+   "local",
+   0.547,
+   0.88
+  ],
+  [
+   "stack.",
+   0.973,
+   1.88
+  ],
+  [
+   "One",
+   1.99,
+   2.32
+  ],
+  [
+   "app.",
+   2.42,
+   2.76
+  ]
+ ]
+}

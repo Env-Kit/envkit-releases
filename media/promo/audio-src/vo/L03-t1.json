@@ -1,0 +1,29 @@
+{
+ "text": "[confident] This is EnvKit. [pause]",
+ "voice": "dXtC3XhB9GtPusIpNtQx",
+ "model": "eleven_v3",
+ "settings": {
+  "stability": 0.5,
+  "similarity_boost": 0.8,
+  "style": 0.45,
+  "use_speaker_boost": true
+ },
+ "seed": 1031,
+ "words": [
+  [
+   "This",
+   0.336,
+   0.4
+  ],
+  [
+   "is",
+   0.56,
+   0.88
+  ],
+  [
+   "EnvKit.",
+   1.0,
+   1.68
+  ]
+ ]
+}

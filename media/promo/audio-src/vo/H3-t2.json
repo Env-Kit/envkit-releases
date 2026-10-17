@@ -1,0 +1,35 @@
+{
+ "text": "Containers eating your RAM.",
+ "voice": "dXtC3XhB9GtPusIpNtQx",
+ "model": "eleven_multilingual_v2",
+ "settings": {
+  "stability": 0.4,
+  "similarity_boost": 0.8,
+  "style": 0.5,
+  "use_speaker_boost": true,
+  "speed": 1.15
+ },
+ "seed": 2032,
+ "words": [
+  [
+   "Containers",
+   0.0,
+   0.453
+  ],
+  [
+   "eating",
+   0.499,
+   0.697
+  ],
+  [
+   "your",
+   0.731,
+   0.848
+  ],
+  [
+   "RAM.",
+   0.882,
+   1.44
+  ]
+ ]
+}

@@ -27,7 +27,7 @@
     }
 
     function panel(sel, { crop, w, left, top, view }) {
-      const el = document.querySelector(sel);
+      const el = typeof sel === 'string' ? document.querySelector(sel) : sel;
       const h = (w * crop[3]) / crop[2];
       el.style.width = w + 'px';
       el.style.height = h + 'px';
@@ -111,7 +111,7 @@
 
     // Mint light trails: thin ribbons of light drifting across the frame.
     function trails(sel, { count = 16, seed = 7 } = {}) {
-      const cv = document.querySelector(sel);
+      const cv = typeof sel === 'string' ? document.querySelector(sel) : sel;
       const ctx = cv.getContext('2d');
       const W = cv.width, H = cv.height;
       const R = rng(seed);

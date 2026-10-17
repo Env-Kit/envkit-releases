@@ -1,0 +1,34 @@
+{
+ "text": "[confident] Just ask your AI. [pause]",
+ "voice": "dXtC3XhB9GtPusIpNtQx",
+ "model": "eleven_v3",
+ "settings": {
+  "stability": 0.5,
+  "similarity_boost": 0.8,
+  "style": 0.45,
+  "use_speaker_boost": true
+ },
+ "seed": 1122,
+ "words": [
+  [
+   "Just",
+   0.128,
+   0.32
+  ],
+  [
+   "ask",
+   0.42,
+   0.72
+  ],
+  [
+   "your",
+   0.752,
+   0.88
+  ],
+  [
+   "AI.",
+   1.093,
+   1.6
+  ]
+ ]
+}

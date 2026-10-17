@@ -1,0 +1,39 @@
+{
+ "text": "[confident] Real HTTPS. Real domain. Seconds. [pause]",
+ "voice": "dXtC3XhB9GtPusIpNtQx",
+ "model": "eleven_v3",
+ "settings": {
+  "stability": 0.5,
+  "similarity_boost": 0.8,
+  "style": 0.45,
+  "use_speaker_boost": true
+ },
+ "seed": 1072,
+ "words": [
+  [
+   "Real",
+   0.272,
+   0.32
+  ],
+  [
+   "HTTPS.",
+   0.533,
+   2.0
+  ],
+  [
+   "Real",
+   2.08,
+   2.4
+  ],
+  [
+   "domain.",
+   2.48,
+   3.56
+  ],
+  [
+   "Seconds.",
+   3.635,
+   4.2
+  ]
+ ]
+}

@@ -1,70 +1,100 @@
-# EnvKit promo video (v2)
+# EnvKit promo video (v3)
 
-Source of `art/envkit-demo.mp4` and `art/envkit-demo.webp` in the README, plus the full-length
-16:9 promo and a 9:16 cut for Reels / Shorts / TikTok. It is a [HyperFrames](https://hyperframes.heygen.com)
+Source of `art/envkit-demo.mp4` and `art/envkit-demo.webp` in the README, plus the full 16:9 promo,
+a 9:16 cut for Reels / Shorts / TikTok and a 15 s 16:9 ad cut. It is a [HyperFrames](https://hyperframes.heygen.com)
 project: plain HTML + one GSAP timeline per composition, rendered frame by frame in headless Chrome.
 
 | File | What |
 | --- | --- |
-| `index.html` | 16:9, 1920x1080 @ 30 fps, 48 s |
-| `vertical.html` | 9:16, 1080x1920 @ 30 fps, 29.25 s |
-| `assets/promo.css`, `assets/promo-lib.js` | shared look and helpers (panels, clamped camera, kinetic type, light trails, grain) |
+| `index.html` | 16:9, 1920x1080 @ 30 fps, 44.1 s (main cut) |
+| `vertical.html` | 9:16, 1080x1920 @ 30 fps, 27.2 s |
+| `ad15.html` | 16:9 ad cut, 14.8 s |
+| `assets/v3.js`, `assets/v3.css` | the scenes, shared by all three cuts |
+| `assets/timing-<cut>.js` | generated: beat marks, voiceover word timings, caption cards |
+| `assets/promo-lib.js`, `assets/promo.css` | panels, clamped camera, light trails, grain (from v2) |
 | `assets/*.png` | real EnvKit screenshots (2880x1800), the only UI shown in the video |
 | `assets/ai/` | abstract backdrop clips (not in git, see below) |
-| `audio-src/` | ElevenLabs music bed + sound effects (small mp3s, in git) |
-| `tools/` | mix, loudness, coverage checks, ElevenLabs and Higgsfield helpers |
+| `audio-src/` | ElevenLabs music bed, sound effects and every voiceover take (small mp3s, in git) |
+| `tools/` | edit, mix, compose, checks, ElevenLabs and Higgsfield helpers |
+
+The three HTML files are written by `tools/compose_v3.py`; edit `assets/v3.js` / `tools/edit_v3.py`, not the HTML.
 
 ## Honest by construction
 
-- Every app surface is a real screenshot. Every word on screen is HTML text. The AI chat window is
-  drawn in HTML and uses EnvKit's real MCP tool names and arguments (`diagnose_service`,
-  `start_service`, `restart_site_queue_worker`).
+- Every app surface is a real screenshot. Every word on screen is HTML text (nothing is AI-generated text).
+  The AI chat window is drawn in HTML and uses EnvKit's real MCP tool names and arguments
+  (`diagnose_service {"name":"redis"}` → `start_service` → `restart_site_queue_worker {"name":"shop"}`).
+- The hook's background "nods" (a licence dialog, locked database chips, a RAM meter) are generic,
+  brand-free HTML, blurred so they read as mood. No competitor names or logos anywhere.
 - The AI-generated clips are abstract light only (no text, no UI) and sit under the screenshots.
 
-## The edit is cut to the music
+## The edit (140 BPM)
 
-The track is 128 BPM; beat `n` lands at `0.088 + n * 0.46875` s (`b(n)` in `assets/promo-lib.js`
-and `tools/mix.py`). Scene changes sit on bar lines, the 2-bar break in the track is where the URL
-types itself, and the drop is "Your site is live". `tools/mix.py` places each sound effect so its
-measured transient lands on the same beat the picture uses.
+`tools/edit_v3.py` is the edit decision list. It lays every voiceover line out on the 140 BPM grid from its
+measured length, re-splices the music on its beats, places the sound effects so their transients land on the
+frames the picture uses, side-chains the music under the voice (−8 dB) and writes `assets/timing-<cut>.js`.
+The picture reads only those marks, so a different voice re-times everything without touching the HTML.
 
-## No uncovered frames (the v1 bug)
+- Hook (0–4.9 s): "License popups." / "Paywalled databases." / "Containers eating your RAM." slam in 2.5 beats
+  (1.07 s) apart over the riser, each struck through (glitch hit) as the next lands. On the third strike the music cuts
+  dead; "What if your dev stack… just worked?" plays over near-black and a light-speed tunnel, and the logo
+  slams on "worked" with the drop.
+- Then: This is EnvKit → stack chips → the dashboard ("One app.") → onboarding click on the beat → "Your site is
+  live" + chime → three camera punches (Real HTTPS / Real domain / Seconds) → sites → services staccato (one hard
+  cut + chip per word) → All running → Redis breaks → the AI chat fixes it with the real tool calls → montage
+  (Cron / Logs / Git / Databases, one cut per word, punch-in on the off-beat) → wall of screens → everything
+  drops out for "And the best part?" → "It's free." on the drop again → end card (envkit.net, Download).
+- Captions: every VO word is on screen at its onset. 16:9 uses an elegant lower third (whole line dim,
+  spoken word lit in mint); 9:16 uses big centred captions; hook, "What if…", the staccato words and
+  "It's free." are the big kinetic type itself.
 
-v1 zoomed the app window with a free camera, so on some zooms the window slid off and half the
-frame showed the empty page. In v2:
+Music: one ElevenLabs `music_v1` generation (`tools/music_v3.py`, seed 140, composition plan). Measured:
+exactly 140.00 BPM, beat k at 0.445 + k·60/140 s; beats 0–14 build/riser, 15 hard drop, 77–78 filter break,
+79–94 sub-only, 95 final hit + tail. Loudness: −14 LUFS integrated, true peak ≤ −1.6 dBTP after AAC.
 
-- a full-frame backdrop (graded footage, light trails, floor grid, glow) is always under everything;
-- screenshots live in panels, and `camTo()` clamps the crop to the screenshot bounds, so a zoomed
-  screenshot always covers its panel.
+## Voiceover
 
-`tools/coverage_debug.sh index.html` (or `vertical.html`) renders a copy where the page and every
-panel background are magenta and fails if any magenta pixel shows (sampled every 0.25 s).
-`tools/coverage_check.py <video>` measures luminance per half and quadrant every 0.25 s and lists
-large flat dark regions. As a control, the magenta test flags 128 of 148 frames of v1.
+Voice "Hale" (`dXtC3XhB9GtPusIpNtQx`). `tools/vo_config.json` holds the voice, model and voice settings:
+`eleven_v3` (stability 0.5, similarity 0.8, style 0.45, speaker boost) for the script; the three hook pains use
+`eleven_multilingual_v2` at native speed 1.15 and the turn `eleven_turbo_v2_5` at 1.1, because v3 read them too
+long for the beat grid. Every line has 2–3 takes; `edit_v3.py` picks one by objective metrics (no clipping, no
+truncated ending, natural pace, pitch range). v3 tends to cut the last phoneme, so its lines get a trailing
+`[pause]` tag. Word timings come from ElevenLabs forced alignment (`/v1/forced-alignment`, `*.fa.json`) snapped
+to the audible boundaries (speech-island starts and energy dips) of each take.
+
+Change the voice: edit `tools/vo_config.json`, then `tools/build_v3.sh vo` (regenerates every take, aligns,
+re-times captions, mix and picture, renders, checks).
+
+## Checks (`tools/check_v3.sh` → `renders/v3/checks/`)
+
+- `tools/coverage_debug.sh <file>.html` renders a copy where the page, every panel and every tile background
+  are magenta and fails if any magenta pixel shows, checking **every frame** (30 fps). v3: 0 of 1325 / 817 / 444
+  frames uncovered. `tools/coverage_check.py <video>` is the luminance heuristic from v2.
+- `tools/sync_check.py <cut> <video>`: caption time vs the measured onset of every word that follows a pause
+  (median 3–4 ms), vs the forced-alignment start of every word (median 33–40 ms), and the frame where each
+  rendered caption word turns mint vs its VO time (all words within 48 ms, i.e. frame rounding).
+- ebur128 loudness and true peak of every deliverable.
 
 ## Build
 
 ```bash
-# 1. picture (HyperFrames pinned to 0.8.168)
-npx --yes hyperframes@0.8.168 render -q high -o renders/envkit-promo-master-video.mp4
-npx --yes hyperframes@0.8.168 render -c vertical.html -q high -o renders/envkit-promo-9x16-video.mp4
-# 2. sound + mux: mix -> limiter -> two-pass loudnorm (-16 LUFS, -1.5 dBTP) -> ProRes master + H.264/AAC
-PYTHON=/path/to/python-with-numpy tools/finish.sh
-# 3. README WebP (silent, 1280 wide, 15 fps)
-PYTHON=/path/to/python-with-numpy-and-pillow tools/webp.sh
+# everything (PYTHON = a python with numpy + Pillow; HyperFrames pinned to 0.8.168)
+PYTHON=/path/to/python tools/build_v3.sh        # add "vo" to regenerate the voiceover first
 ```
+
+Steps it runs: `tools/edit_v3.py main|vertical|ad15` → `tools/compose_v3.py` → `hyperframes render -q high` ×3 →
+`tools/finish_v3.sh` (limiter, two-pass loudnorm, mux) → `tools/webp_v3.sh` (README WebP, 1280 wide, 12 fps,
+captions burned in) → `tools/check_v3.sh`.
 
 ## Regenerating the generated media
 
-- Music and SFX (ElevenLabs): `tools/eleven_generate.sh` has the exact prompts for the one 50 s
-  music generation (`music-a.mp3`) and the eight effects. `tools/eleven.py` reads the API key at
-  runtime from `~/.claude.json` (`mcpServers.elevenlabs.env.ELEVENLABS_API_KEY`) and never prints or
-  stores it.
-- Backdrop clips (Higgsfield, Kling 3.0 pro, 8 s, silent, ~14 credits each): `tools/hf_generate.py`
-  holds the prompts; `tools/hf_fetch.py` downloads finished jobs. The clips used here are jobs
-  `a5358fbd-a7cb-4245-854f-56ed492c3958` (ribbons 16:9), `7d8a2be8-9b1e-4b28-bc51-d26458ef50c0`
-  (circuit 16:9), `a421ebb1-152b-4bcc-94f9-8df2c6157a27` (monoliths 16:9) and
-  `965c59e0-294a-488d-8836-d09ae7d81fb0` (ribbons 9:16). They are graded and re-encoded with a
-  keyframe every second (`*-graded.mp4`) before use; the commands are in `tools/grade_ai.sh`.
-  The originals (10–15 MB each) live in the maintainer's working copy at
+- Music and SFX (ElevenLabs): `tools/music_v3.py` (music, composition plan in the file), `tools/eleven_generate_v3.sh`
+  (the eight v3 effects) and `tools/eleven_generate.sh` (the v2 effects that are reused). `tools/eleven.py` and
+  `tools/vo.py` read the API key at runtime from `~/.claude.json` (`mcpServers.elevenlabs.env.ELEVENLABS_API_KEY`)
+  and never print or store it.
+- Backdrop clips (Higgsfield, Kling 3.0 pro, 8 s, silent, 14 credits each): `tools/hf_generate.py` (v2: ribbons,
+  circuit, monoliths) and `tools/hf_generate_v3.py` (v3: light-speed tunnel `8aa1b924-811b-403c-b5ee-0d4c53e3253e`,
+  shockwave `a01f6f8b-be3e-4a08-b885-dcaa2602de76`); `tools/hf_fetch.py` downloads the jobs listed in it. They are
+  graded and re-encoded with a keyframe every second (`*-graded.mp4`, 9:16 versions are centre crops) by
+  `tools/grade_ai.sh`. The originals (10–36 MB each) live in the maintainer's working copy at
   `marketing/promo-video/assets/ai/` and are not committed.

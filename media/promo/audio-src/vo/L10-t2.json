@@ -1,0 +1,24 @@
+{
+ "text": "[energetic] All running. [pause]",
+ "voice": "dXtC3XhB9GtPusIpNtQx",
+ "model": "eleven_v3",
+ "settings": {
+  "stability": 0.5,
+  "similarity_boost": 0.8,
+  "style": 0.45,
+  "use_speaker_boost": true
+ },
+ "seed": 1102,
+ "words": [
+  [
+   "All",
+   0.34,
+   0.4
+  ],
+  [
+   "running.",
+   0.48,
+   1.12
+  ]
+ ]
+}

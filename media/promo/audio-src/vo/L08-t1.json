@@ -1,0 +1,49 @@
+{
+ "text": "Every project gets its own dot test. [pause]",
+ "voice": "dXtC3XhB9GtPusIpNtQx",
+ "model": "eleven_v3",
+ "settings": {
+  "stability": 0.5,
+  "similarity_boost": 0.8,
+  "style": 0.45,
+  "use_speaker_boost": true
+ },
+ "seed": 1081,
+ "words": [
+  [
+   "Every",
+   0.0,
+   0.24
+  ],
+  [
+   "project",
+   0.32,
+   0.88
+  ],
+  [
+   "gets",
+   0.96,
+   1.28
+  ],
+  [
+   "its",
+   1.34,
+   1.52
+  ],
+  [
+   "own",
+   1.62,
+   1.92
+  ],
+  [
+   "dot",
+   2.02,
+   2.32
+  ],
+  [
+   "test.",
+   2.4,
+   2.799
+  ]
+ ]
+}

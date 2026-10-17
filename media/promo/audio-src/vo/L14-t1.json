@@ -1,0 +1,29 @@
+{
+ "text": "[energetic] It's all here. [pause]",
+ "voice": "dXtC3XhB9GtPusIpNtQx",
+ "model": "eleven_v3",
+ "settings": {
+  "stability": 0.5,
+  "similarity_boost": 0.8,
+  "style": 0.45,
+  "use_speaker_boost": true
+ },
+ "seed": 1141,
+ "words": [
+  [
+   "It's",
+   0.208,
+   0.36
+  ],
+  [
+   "all",
+   0.39,
+   0.48
+  ],
+  [
+   "here.",
+   0.56,
+   1.52
+  ]
+ ]
+}

@@ -1,0 +1,76 @@
+/* EnvKit promo v3 — additions on top of promo.css (v2 look: near-black, one mint light source). */
+:root { --red: #ff4d5e; }
+#world { position: absolute; inset: 0; }
+.scene { position: absolute; inset: 0; opacity: 0; visibility: hidden; }
+.scene.stage { perspective: 2200px; perspective-origin: 50% 45%; }
+.flash { position: absolute; inset: 0; background: #eafff8; opacity: 0; mix-blend-mode: screen; pointer-events: none; }
+.flash.mint { background: radial-gradient(closest-side, rgba(45, 212, 170, 0.95), rgba(13, 148, 136, 0.5) 60%, rgba(6, 9, 13, 0)); }
+.blackout { position: absolute; inset: 0; background: #030507; opacity: 0; }
+.vid { opacity: 0; }
+
+/* ── Hook ─────────────────────────────────────────────────── */
+.pain { position: absolute; left: 0; right: 0; text-align: center; font-weight: 760; letter-spacing: -0.05em; line-height: 1; white-space: nowrap; opacity: 0; }
+.pain .w { display: inline-block; opacity: 0; margin-right: 0.12em; }
+.pain .w:last-of-type { margin-right: 0; }
+.pain .txt { position: relative; display: inline-block; }
+.pain .strike { position: absolute; left: -3%; right: -3%; top: 52%; height: 0.11em; margin-top: -0.055em; border-radius: 0.06em; background: var(--red);
+  box-shadow: 0 0 0.25em rgba(255, 77, 94, 0.75), 0 0 0 0.02em rgba(45, 212, 170, 0.6); }
+.pain .ghost { position: absolute; inset: 0; opacity: 0; mix-blend-mode: screen; pointer-events: none; }
+.pain .ghost.r { color: #ff3b54; }
+.pain .ghost.c { color: #2de1c2; }
+.nod { position: absolute; opacity: 0; filter: blur(5px); }
+.dlg { position: absolute; width: 520px; border-radius: 16px; background: rgba(22, 28, 36, 0.92); border: 1px solid rgba(148, 163, 184, 0.25);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6); padding: 28px 30px; font-size: 24px; color: var(--ink-2); }
+.dlg b { display: block; font-size: 30px; color: var(--ink); margin-bottom: 10px; font-weight: 650; }
+.dlg .row { display: flex; gap: 12px; justify-content: flex-end; margin-top: 24px; }
+.dlg .row span { padding: 10px 18px; border-radius: 10px; border: 1px solid rgba(148, 163, 184, 0.3); font-size: 21px; }
+.dlg .row span.p { background: #3b4250; color: var(--ink); }
+.lockchip { position: absolute; display: inline-flex; align-items: center; gap: 14px; padding: 16px 26px; border-radius: 999px; font-family: var(--mono); font-size: 34px;
+  color: var(--ink-2); background: rgba(16, 23, 31, 0.9); border: 1px solid rgba(148, 163, 184, 0.3); }
+.lockchip svg { width: 30px; height: 30px; }
+.lockchip em { font-style: normal; font-size: 22px; color: var(--muted); border: 1px solid rgba(148, 163, 184, 0.3); padding: 4px 10px; border-radius: 8px; }
+.ram { position: absolute; width: 760px; padding: 28px 32px; border-radius: 18px; background: rgba(16, 23, 31, 0.92); border: 1px solid rgba(148, 163, 184, 0.25); }
+.ram .lbl { display: flex; justify-content: space-between; font-family: var(--mono); font-size: 26px; color: var(--ink-2); }
+.ram .bar { margin-top: 18px; height: 26px; border-radius: 13px; background: rgba(148, 163, 184, 0.15); overflow: hidden; }
+.ram .fill { height: 100%; width: 100%; transform-origin: 0 50%; transform: scaleX(0.3); background: linear-gradient(90deg, #2dd4aa, #f5b84a 60%, var(--red)); }
+.ram .rows { margin-top: 20px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+.ram .rows i { font-style: normal; font-family: var(--mono); font-size: 21px; color: var(--muted); padding: 10px 12px; border-radius: 10px; border: 1px solid rgba(148, 163, 184, 0.2); }
+.turn { position: absolute; left: 0; right: 0; text-align: center; font-weight: 520; letter-spacing: -0.03em; line-height: 1.12; color: var(--ink); }
+.turn .w { display: inline-block; opacity: 0; }
+.turn .w.k { font-weight: 720; color: var(--mint); }
+
+/* ── Logo slam ────────────────────────────────────────────── */
+.shock { position: absolute; left: 50%; top: 50%; width: 400px; height: 400px; margin: -200px 0 0 -200px; border-radius: 50%; border: 6px solid rgba(45, 212, 170, 0.9);
+  box-shadow: 0 0 60px rgba(45, 212, 170, 0.7), inset 0 0 40px rgba(45, 212, 170, 0.5); opacity: 0; }
+
+/* ── Stack chips / hero labels ────────────────────────────── */
+.chiprow { position: absolute; left: 0; right: 0; display: flex; justify-content: center; flex-wrap: wrap; gap: 16px; }
+.chiprow .chip { font-size: 30px; padding: 12px 22px; opacity: 0; }
+.big { position: absolute; font-weight: 760; letter-spacing: -0.05em; line-height: 1; white-space: nowrap; opacity: 0; color: var(--ink);
+  text-shadow: 0 10px 50px rgba(0, 0, 0, 0.7); }
+.big .dotm { color: var(--mint); }
+.tagchip { position: absolute; display: inline-flex; align-items: center; gap: 16px; padding: 18px 34px; border-radius: 999px; font-weight: 700; letter-spacing: -0.03em;
+  background: rgba(8, 12, 17, 0.88); border: 1px solid rgba(45, 212, 170, 0.5); box-shadow: 0 0 0 6px rgba(45, 212, 170, 0.08), 0 20px 60px rgba(0, 0, 0, 0.6); opacity: 0; white-space: nowrap; }
+.tagchip i { width: 16px; height: 16px; border-radius: 50%; background: var(--mint); box-shadow: 0 0 16px rgba(45, 212, 170, 0.9); }
+.toast { position: absolute; display: flex; align-items: center; gap: 16px; padding: 20px 28px; border-radius: 14px; background: rgba(30, 12, 16, 0.94);
+  border: 1px solid rgba(255, 77, 94, 0.55); box-shadow: 0 0 0 6px rgba(255, 77, 94, 0.1), 0 30px 80px rgba(0, 0, 0, 0.6); font-size: 32px; font-weight: 600; opacity: 0; white-space: nowrap; }
+.toast i { width: 14px; height: 14px; border-radius: 50%; background: var(--red); box-shadow: 0 0 14px rgba(255, 77, 94, 0.9); }
+.toast span { font-family: var(--mono); font-weight: 400; font-size: 26px; color: #f3a1aa; }
+.ring.red { border-color: var(--red); box-shadow: 0 0 0 5px rgba(255, 77, 94, 0.15), 0 0 30px rgba(255, 77, 94, 0.3); }
+.tile { position: absolute; overflow: hidden; border-radius: 12px; border: 1px solid rgba(148, 163, 184, 0.22); background: var(--bg); box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6); opacity: 0; }
+.tile img { position: absolute; left: 0; top: 0; width: 100%; height: 100%; object-fit: cover; object-position: 0 0; }
+.freebig { position: absolute; left: 0; right: 0; text-align: center; font-weight: 800; letter-spacing: -0.06em; line-height: 1; white-space: nowrap; }
+.freebig .w { display: inline-block; opacity: 0; }
+.freebig .w.k { color: var(--mint); text-shadow: 0 0 60px rgba(45, 212, 170, 0.45); }
+.bestq { position: absolute; left: 0; right: 0; text-align: center; font-weight: 560; letter-spacing: -0.03em; color: var(--ink-2); }
+.bestq .w { display: inline-block; opacity: 0; }
+.endurl { position: absolute; left: 0; right: 0; text-align: center; font-family: var(--mono); color: var(--mint); letter-spacing: 0.02em; opacity: 0; }
+
+/* ── Captions ─────────────────────────────────────────────── */
+#caps { position: absolute; inset: 0; pointer-events: none; }
+#caps .scrim { position: absolute; left: 0; right: 0; bottom: 0; height: 300px; opacity: 0;
+  background: linear-gradient(to top, rgba(3, 5, 7, 0.82), rgba(3, 5, 7, 0.45) 45%, transparent); }
+.capline { position: absolute; left: 0; right: 0; text-align: center; font-weight: 720; letter-spacing: -0.02em; color: #f4f8fb; opacity: 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9), 0 6px 24px rgba(0, 0, 0, 0.75); white-space: nowrap; }
+.capline .w { display: inline-block; }
+.capline .w.on { color: var(--mint); }

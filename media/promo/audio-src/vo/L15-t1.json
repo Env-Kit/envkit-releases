@@ -1,0 +1,34 @@
+{
+ "text": "[conspiratorial] And the best part? [pause]",
+ "voice": "dXtC3XhB9GtPusIpNtQx",
+ "model": "eleven_v3",
+ "settings": {
+  "stability": 0.5,
+  "similarity_boost": 0.8,
+  "style": 0.45,
+  "use_speaker_boost": true
+ },
+ "seed": 1151,
+ "words": [
+  [
+   "And",
+   0.14,
+   0.16
+  ],
+  [
+   "the",
+   0.18,
+   0.24
+  ],
+  [
+   "best",
+   0.288,
+   0.48
+  ],
+  [
+   "part?",
+   0.544,
+   0.84
+  ]
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "text": "Pick a project... [pause]",
+ "voice": "dXtC3XhB9GtPusIpNtQx",
+ "model": "eleven_v3",
+ "settings": {
+  "stability": 0.5,
+  "similarity_boost": 0.8,
+  "style": 0.45,
+  "use_speaker_boost": true
+ },
+ "seed": 1052,
+ "words": [
+  [
+   "Pick",
+   0.0,
+   0.24
+  ],
+  [
+   "a",
+   0.28,
+   0.32
+  ],
+  [
+   "project...",
+   0.4,
+   1.04
+  ]
+ ]
+}
