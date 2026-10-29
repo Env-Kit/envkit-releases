@@ -180,7 +180,7 @@ Run the same command again any time to update.
 curl -fsSL https://raw.githubusercontent.com/Env-Kit/envkit-releases/main/install.sh | bash
 ```
 
-Downloads the latest Mac build, clears the Gatekeeper quarantine and opens it. Run it again
+Downloads the latest Mac build and opens it. Run it again
 to update, or add `-s -- --uninstall` to remove EnvKit. macOS 12 or later on an M-series
 Mac; Intel Macs are not supported.
 
@@ -197,12 +197,8 @@ brew install --cask env-kit/tap/envkit
 <summary>Install from the DMG instead</summary>
 
 [Download the DMG](https://stats.envkit.net/d/mac?c=gh-readme), open it and drag
-**EnvKit** to Applications. The app is Developer ID signed but not notarized yet, so macOS
-may block the first launch. Any one of these gets past it:
-
-- open it once, then click **Open Anyway** in System Settings → Privacy & Security;
-- use the `curl` one-liner above, which clears the quarantine for you;
-- run `xattr -dr com.apple.quarantine /Applications/EnvKit.app`.
+**EnvKit** to Applications. The app is signed and notarized by Apple, so it opens like any
+other Mac app.
 
 Windows and macOS builds are released separately, so the very latest release is sometimes
 Windows-only. The installer script and the in-app updater pick the newest Mac build
@@ -295,9 +291,9 @@ PHP versions, MCP, `envkit.json`, custom versions and translating the app.
 ## Support EnvKit
 
 EnvKit is free. If it saves you time, you can support it on
-[Ko-fi](https://ko-fi.com/envkit). The current goal is $350 for a real Windows
-code-signing certificate, so installing no longer shows "Windows protected your PC", and an
-Apple Developer membership, so the Mac app opens without a warning. Receipts go up on
+[Ko-fi](https://ko-fi.com/envkit). The current goal is a real Windows code-signing
+certificate, so installing no longer shows "Windows protected your PC". (The Mac app is
+already notarized and opens without a warning.) Receipts go up on
 [Discord](https://discord.gg/2ArBwMX8pV) once they're bought.
 
 Free ways to help that matter just as much: star this repo, like EnvKit and write a short
