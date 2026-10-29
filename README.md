@@ -24,6 +24,10 @@ A Laragon, XAMPP and Herd alternative.
 [Docs](https://envkit.net/docs) ·
 [Changelog](https://envkit.net/changelog)
 
+<sub>🇮🇩 🇲🇾 Gratis, tanpa akun, tampilan dalam Bahasa Indonesia. Pengganti Laragon dan XAMPP:
+<a href="https://stats.envkit.net/d/win?c=gh-readme-id">unduh untuk Windows</a> ·
+<a href="https://envkit.net/id/alternatif-laragon">baca selengkapnya</a></sub>
+
 <a href="art/envkit-demo.mp4"><img src="art/envkit-demo.webp" alt="EnvKit in action: first-run site, sites, services, databases, the AI (MCP) assistant, cron, logs and tools" width="880" /></a>
 
 </div>
@@ -221,10 +225,10 @@ Upgrading? Your sites, databases, certificates and settings carry over automatic
 
 ## What's new
 
-0.33.0-beta.44 ([full notes](https://github.com/Env-Kit/envkit-releases/releases/latest)):
-first-run setup ends with a working site, Bahasa Indonesia, automatic port moves for
-memcached and extra PHP versions, and a MySQL guard that never re-initializes a data folder
-holding your databases.
+Latest release ([full notes](https://github.com/Env-Kit/envkit-releases/releases/latest)):
+a Light, Dark or System theme, `php` and `composer` on PATH in the fish shell too, and a
+round of macOS fixes (apps outside /Applications are found, files open in your default
+app). Every release: [envkit.net/changelog](https://envkit.net/changelog).
 
 ## Screenshots
 
@@ -296,8 +300,10 @@ code-signing certificate, so installing no longer shows "Windows protected your 
 Apple Developer membership, so the Mac app opens without a warning. Receipts go up on
 [Discord](https://discord.gg/2ArBwMX8pV) once they're bought.
 
-Starring this repo and leaving a review on
-[Trustpilot](https://www.trustpilot.com/evaluate/envkit.net) helps too.
+Free ways to help that matter just as much: star this repo, like EnvKit and write a short
+review on [AlternativeTo](https://alternativeto.net/software/envkit/about/) (that's where
+many people searching for a Laragon or XAMPP alternative find us), or leave a review on
+[Trustpilot](https://www.trustpilot.com/evaluate/envkit.net).
 
 ## Team
 
