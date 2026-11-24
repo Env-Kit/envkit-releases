@@ -84,20 +84,30 @@ latest_version() {
 # ── Newest macOS arm64 asset, even when /releases/latest is a Windows-only build ──
 # We cut Windows and macOS releases independently — a Windows-only release becomes
 # /releases/latest with NO mac zip, so resolving the download from there 404s for
-# Mac users. Instead, ask the API for the releases list (newest first) and take the
-# first EnvKit-<ver>-arm64.zip we see. Mirrors the app's prepareFeedForPlatform().
-# Drafts are hidden from the unauthenticated API; prereleases (betas) are included.
+# Mac users. Instead, ask the API for the releases list and take the EnvKit-<ver>-arm64.zip
+# with the HIGHEST version. The list is not in version order (every release shares one
+# created_at, so GitHub sorts by tag text: 0.34.0-beta.9 before 0.34.0-beta.14), so the
+# first zip in it is not the newest. The highest version is the new EnvKit, which is what
+# a fresh install should get. Drafts are hidden from the unauthenticated API; betas count.
 latest_mac_zip_url() {
-  local api="https://api.github.com/repos/${REPO}/releases?per_page=30" json
+  local api="https://api.github.com/repos/${REPO}/releases?per_page=100" json
   case "$(_dl)" in
     curl) json="$(curl -fsSL -H 'User-Agent: envkit-installer' -H 'Accept: application/vnd.github+json' "$api" 2>/dev/null || true)" ;;
     wget) json="$(wget -qO- --header 'User-Agent: envkit-installer' --header 'Accept: application/vnd.github+json' "$api" 2>/dev/null || true)" ;;
   esac
   [ -n "$json" ] || return 0
+  # One "<sort key> <url>" line per zip; the key is major.minor.patch then the beta number
+  # (a release without -beta.N sorts above every beta of the same version).
   echo "$json" \
-    | grep -oE '"browser_download_url"[[:space:]]*:[[:space:]]*"[^"]*EnvKit-[^"]*-arm64\.zip"' \
-    | sed -E 's/.*"(https[^"]+)"$/\1/' \
-    | head -n1 | tr -d '\r'
+    | grep -oE '"browser_download_url"[[:space:]]*:[[:space:]]*"[^"]*/EnvKit-[0-9]+\.[0-9]+\.[0-9]+(-beta\.[0-9]+)?-arm64\.zip"' \
+    | sed -E 's/.*"(https[^"]+)"$/\1/' | tr -d '\r' \
+    | awk '{
+        v = $0; sub(/.*\/EnvKit-/, "", v); sub(/-arm64\.zip$/, "", v)
+        b = 99999; if (match(v, /-beta\.[0-9]+$/)) { b = substr(v, RSTART + 6) + 0; v = substr(v, 1, RSTART - 1) }
+        split(v, p, ".")
+        printf "%06d%06d%06d%06d %s\n", p[1], p[2], p[3], b, $0
+      }' \
+    | sort -r | head -n1 | cut -d' ' -f2
 }
 
 installed_version() {
